@@ -1,65 +1,43 @@
 package com.parkosa.dao;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
+import com.parkosa.connection.DBConnection;
+import com.parkosa.vo.AccountVO;
 
 
 public class AccountDAO {
 	
-	private String phoneNumber;
-	private String password;
-	private String name;
-	private String eMail;
-	private LocalDate registerDate;
-	
-	//생성자
-	public AccountDAO(String phoneNumber, String password,
-			String name, String eMail, LocalDate registerDate) {
-		this.phoneNumber = phoneNumber;
-		this.password = password;
-		this.name = name;
-		this.eMail = eMail;
-		this.registerDate = registerDate;
-	}
+	public void insertAccount(AccountVO accountVO) {
+		
+		String proc = "{ call account_pack.account_insert(?, ?, ?, ?, ?) }";
 
-	//Getters and Setters
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String geteMail() {
-		return eMail;
-	}
-
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
-	}
-
-	public LocalDate getRegisterDate() {
-		return registerDate;
-	}
-
-	public void setRegisterDate(LocalDate registerDate) {
-		this.registerDate = registerDate;
+		try {
+			Connection conn = DBConnection.getConnection();
+			CallableStatement callableStatement = conn.prepareCall(proc);
+			
+			//변수 할당
+			callableStatement.setString(1, accountVO.getPhoneNumber());
+			callableStatement.setString(2, accountVO.getPassword());
+			callableStatement.setString(3, accountVO.getName());
+			callableStatement.setString(4, accountVO.getEMail());
+			callableStatement.setDate(5, Date.valueOf(accountVO.getRegisterDate()));
+			
+			callableStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		
 	}
 	
 }
