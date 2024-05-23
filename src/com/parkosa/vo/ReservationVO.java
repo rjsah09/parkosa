@@ -1,77 +1,85 @@
 package com.parkosa.vo;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class ReservationVO {
+	
     private String id;
-    private String startTime;
-    private String endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private int totalAmount;
+    private String carCode;
     private int parkingSpaceId;
-    private int parikingSpaceId;
     private int ParkingLotId;
+    
+	public ReservationVO(String id, LocalDateTime startTime, LocalDateTime endTime, int totalAmount, String carCode,
+			int parkingSpaceId, int parkingLotId) {
+		this.id = id;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.totalAmount = totalAmount;
+		this.carCode = carCode;
+		this.parkingSpaceId = parkingSpaceId;
+		ParkingLotId = parkingLotId;
+	}
 
-    public ReservationVO(String id, String startTime, String endTime, int totalAmount, int parkingSpaceId, int parikingSpaceId, int parkingLotId) {
-        this.id = id;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.totalAmount = totalAmount;
-        this.parkingSpaceId = parkingSpaceId;
-        this.parikingSpaceId = parikingSpaceId;
-        ParkingLotId = parkingLotId;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public LocalDateTime getStartTime() {
+		return startTime;
+	}
 
-    public String getStartTime() {
-        return startTime;
-    }
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
+	}
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
+	public LocalDateTime getEndTime() {
+		return endTime;
+	}
 
-    public String getEndTime() {
-        return endTime;
-    }
+	public void setEndTime(LocalDateTime endTime) {
+		this.endTime = endTime;
+	}
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
+	public int getTotalAmount() {
+		return totalAmount;
+	}
 
-    public int getTotalAmount() {
-        return totalAmount;
-    }
+	public void setTotalAmount(int totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 
-    public void setTotalAmount(int totalAmount) {
-        this.totalAmount = totalAmount;
-    }
+	public String getCarCode() {
+		return carCode;
+	}
 
-    public int getParkingSpaceId() {
-        return parkingSpaceId;
-    }
+	public void setCarCode(String carCode) {
+		this.carCode = carCode;
+	}
 
-    public void setParkingSpaceId(int parkingSpaceId) {
-        this.parkingSpaceId = parkingSpaceId;
-    }
+	public int getParkingSpaceId() {
+		return parkingSpaceId;
+	}
 
-    public int getParikingSpaceId() {
-        return parikingSpaceId;
-    }
+	public void setParkingSpaceId(int parkingSpaceId) {
+		this.parkingSpaceId = parkingSpaceId;
+	}
 
-    public void setParikingSpaceId(int parikingSpaceId) {
-        this.parikingSpaceId = parikingSpaceId;
-    }
+	public int getParkingLotId() {
+		return ParkingLotId;
+	}
 
-    public int getParkingLotId() {
-        return ParkingLotId;
-    }
+	public void setParkingLotId(int parkingLotId) {
+		ParkingLotId = parkingLotId;
+	}
 
-    public void setParkingLotId(int parkingLotId) {
-        ParkingLotId = parkingLotId;
-    }
+    
+    
 }
