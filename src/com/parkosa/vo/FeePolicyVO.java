@@ -6,24 +6,19 @@ public class FeePolicyVO {
 	private int increaseMinute;
 	private int increaseFee;
 	private int maximumTime;
-	private int cartypeId;
-	private int parkinglotId;
+	private int carTypeId;
+	private int parkingLotId;
 	
-	public FeePolicyVO(int id, 
-						int increaseMinute,
-						int increaseFee,
-						int maximumTime,
-						int cartypeId,
-						int parkinglotId){
+	public FeePolicyVO(int id, int increaseMinute, int increaseFee, int maximumTime, int carTypeId, int parkingLotId) {
+		super();
 		this.id = id;
 		this.increaseMinute = increaseMinute;
 		this.increaseFee = increaseFee;
 		this.maximumTime = maximumTime;
-		this.cartypeId = cartypeId;
-		this.parkinglotId = parkinglotId;
-		
+		this.carTypeId = carTypeId;
+		this.parkingLotId = parkingLotId;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -32,44 +27,46 @@ public class FeePolicyVO {
 		this.id = id;
 	}
 
-	public int getincreaseMinute() {
+	public int getIncreaseMinute() {
 		return increaseMinute;
 	}
 
-	public void setincreaseMinute(int increaseMinute) {
+	public void setIncreaseMinute(int increaseMinute) {
 		this.increaseMinute = increaseMinute;
 	}
-	
-	public int getincreaseFee() {
+
+	public int getIncreaseFee() {
 		return increaseFee;
 	}
 
-	public void setincreaseFee(int increaseFee) {
+	public void setIncreaseFee(int increaseFee) {
 		this.increaseFee = increaseFee;
 	}
-	
-	public int getmaximumTime() {
+
+	public int getMaximumTime() {
 		return maximumTime;
 	}
 
-	public void setmaximumTime(int maximumTime) {
+	public void setMaximumTime(int maximumTime) {
 		this.maximumTime = maximumTime;
 	}
-	
-	public int getcartypeId() {
-		return cartypeId;
+
+	public int getCarTypeId() {
+		return carTypeId;
 	}
 
-	public void setcartypeId(int cartypeId) {
-		this.cartypeId = cartypeId;
-	}
-	
-	public int getparkinglotId() {
-		return parkinglotId;
+	public void setCarTypeId(int carTypeId) {
+		this.carTypeId = carTypeId;
 	}
 
-	public void setparkinglotId(int parkinglotId) {
-		this.parkinglotId = parkinglotId;
+	public int getParkingLotId() {
+		return parkingLotId;
 	}
+
+	public void setParkingLotId(int parkingLotId) {
+		this.parkingLotId = parkingLotId;
+	}
+	
+	
 }
 

@@ -3,21 +3,18 @@ package com.parkosa.vo;
 public class ParkingSpaceVO {
 	
 	private int id;
-	private int parkinglotId;
-	private String decription;
-	private int feepolicyId;
-
+	private int parkingLotId;
+	private String description;
+	private int feePolicyId;
 	
-	public ParkingSpaceVO(int id, 
-						int parkinglotId,
-						String decription,
-						int feepolicyId){
+	public ParkingSpaceVO(int id, int parkingLotId, String description, int feePolicyId) {
+		super();
 		this.id = id;
-		this.parkinglotId = parkinglotId;
-		this.decription = decription;
-		this.feepolicyId = feepolicyId;
+		this.parkingLotId = parkingLotId;
+		this.description = description;
+		this.feePolicyId = feePolicyId;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -26,28 +23,28 @@ public class ParkingSpaceVO {
 		this.id = id;
 	}
 
-	public int getparkinglotId() {
-		return parkinglotId;
+	public int getParkingLotId() {
+		return parkingLotId;
 	}
 
-	public void setparkinglotId(int parkinglotId) {
-		this.parkinglotId = parkinglotId;
+	public void setParkingLotId(int parkingLotId) {
+		this.parkingLotId = parkingLotId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getFeePolicyId() {
+		return feePolicyId;
+	}
+
+	public void setFeePolicyId(int feePolicyId) {
+		this.feePolicyId = feePolicyId;
 	}
 	
-	public int getdecription() {
-		return decription;
-	}
-
-	public void setdecription(String decription) {
-		this.decription = decription;
-	}
-	
-	public int getfeepolicyId() {
-		return feepolicyId;
-	}
-
-	public void setfeepolicyId(int feepolicyId) {
-		this.feepolicyId = feepolicyId;
-	}
-
 }
