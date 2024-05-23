@@ -2,9 +2,9 @@ package com.parkosa.vo;
 
 public class CarVO {
 	
-	String code;
-	String accountPhoneNumber;
-	String carTypeId;
+	private String code;
+	private String accountPhoneNumber;
+	private String carTypeId;
 	
 	public CarVO(String code, String accountPhoneNumber, String carTypeId) {
 		this.code = code;
