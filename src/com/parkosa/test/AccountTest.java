@@ -8,7 +8,8 @@ import com.parkosa.vo.AccountVO;
 public class AccountTest {
 	
 	public static void main(String[] args) {
-		accountTest();
+		//accountTest();
+		dupTest();
 	}
 	
 	public static void accountTest() {
@@ -18,6 +19,14 @@ public class AccountTest {
 		AccountDAO accountDAO = new AccountDAO();
 		accountDAO.insertAccount(man1);
 		accountDAO.insertAccount(man2);
+	}
+	
+	public static void dupTest() {
+		AccountDAO accountDAO = new AccountDAO();
+		boolean dup1 = accountDAO.checkPhoneNumberDuplicated("01000000000");
+		System.out.println(dup1);
+		boolean dup2 = accountDAO.checkPhoneNumberDuplicated("01000");
+		System.out.println(dup2);
 	}
 	
 }
