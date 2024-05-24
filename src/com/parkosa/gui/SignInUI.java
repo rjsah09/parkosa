@@ -11,10 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.parkosa.dao.AccountDAO;
+import com.parkosa.dto.SignInDTO;
 import com.parkosa.sign.SignedAccount;
 import com.parkosa.vo.AccountVO;
-
-import dto.SignInDTO;
 
 public class SignInUI {
 	public static void placeComponents(JPanel panel) {

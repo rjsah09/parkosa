@@ -1,4 +1,4 @@
-package dto;
+package com.parkosa.dto;
 
 public class SignInDTO {
 	private String phoneNumber;
