@@ -4,9 +4,9 @@ public class CarVO {
 	
 	private String code;
 	private String accountPhoneNumber;
-	private String carTypeId;
+	private int carTypeId;
 	
-	public CarVO(String code, String accountPhoneNumber, String carTypeId) {
+	public CarVO(String code, String accountPhoneNumber, int carTypeId) {
 		this.code = code;
 		this.accountPhoneNumber = accountPhoneNumber;
 		this.carTypeId = carTypeId;
@@ -28,11 +28,11 @@ public class CarVO {
 		this.accountPhoneNumber = accountPhoneNumber;
 	}
 
-	public String getCarTypeId() {
+	public int getCarTypeId() {
 		return carTypeId;
 	}
 
-	public void setCarTypeId(String carTypeId) {
+	public void setCarTypeId(int carTypeId) {
 		this.carTypeId = carTypeId;
 	}
 	
