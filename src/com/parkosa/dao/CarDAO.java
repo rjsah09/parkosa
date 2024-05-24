@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class CarDAO {
         public void insertCar(CarVO CarVO){
-            String proc = "{ call CAR_PACK.CAR_INSERT(?,?,?) }";
+            String proc = "{ call car_pack.car_insert(?,?,?) }";
 
             try{
                 Connection conn = DBConnection.getConnection();
