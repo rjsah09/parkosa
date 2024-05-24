@@ -1,12 +1,9 @@
 package com.parkosa.dao;
 
-import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 import com.parkosa.connection.DBConnection;
 import com.parkosa.vo.AccountVO;
@@ -38,6 +35,31 @@ public class AccountDAO {
 		} finally {
 		}
 		
+	}
+	
+	public boolean checkPhoneNumberDuplicated(String phoneNumber) {
+
+		String proc = "{ ? = call account_pack.fn_number_duplicate_check(?) }";
+
+		try {
+			Connection conn = DBConnection.getConnection();
+			CallableStatement callableStatement = conn.prepareCall(proc);
+			
+			//변수 할당
+			callableStatement.registerOutParameter(1, java.sql.Types.BOOLEAN);
+			callableStatement.setString(2, phoneNumber);
+			
+			boolean duplicated = callableStatement.getBoolean(1);
+			return duplicated;
+		} catch (SQLException e) {
+			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		
+		return true;
 	}
 	
 }
