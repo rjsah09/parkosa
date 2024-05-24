@@ -125,14 +125,23 @@ public class ParkKosaUI extends JFrame {
             }
         });
 
-        // 창 크기 조절 이벤트 추가
-        addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                adjustLayout(mainPanel, titleLabel, noticePanel);
+        signupButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+       
+            	
+                
+            }
+        });
+
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+             
+                
             }
         });
     }
+    
 
     private void setInitialLayout(JPanel mainPanel, JLabel titleLabel, JPanel noticePanel) {
         int frameWidth = getWidth();
