@@ -67,12 +67,12 @@ public class SignInUI {
                 	 signInDTO.setPassword(passwordField.getText());
             	
                 	 AccountDAO accountDAO = new AccountDAO();
-                	 //String result = accountDAO.signIn(signInDTO));
-                	 String result = "0000";
+                	 String result = accountDAO.signIn(signInDTO);
                 	 if (result == null || result.equals("12")) {
                 		 JOptionPane.showMessageDialog(null, "일치하는 회원 정보가 없습니다.");
                 	 } else {
                 		 SignedAccount.getInstance().signIn(result);
+                		 System.out.println(SignedAccount.getPhoneNumber());
                 	 }
                 	 
                 }

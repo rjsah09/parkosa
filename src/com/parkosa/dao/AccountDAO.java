@@ -69,14 +69,14 @@ public class AccountDAO {
 	
 	public String signIn(SignInDTO signInDTO) {
 		
-		String function = "{ ? = call account_pack.FUNCTION FN_NUMBER_PW_CHECK(?,?) }";
+		String function = "{ ? = call account_pack.fn_number_pw_check(?,?) }";
 		
 		try {
 			Connection conn = DBConnection.getConnection();
 			CallableStatement callableStatement = conn.prepareCall(function);
 			
 			//변수 할당
-			callableStatement.registerOutParameter(1, java.sql.Types.NUMERIC);
+			callableStatement.registerOutParameter(1, java.sql.Types.VARCHAR);
 			callableStatement.setString(2, signInDTO.getPhoneNumber());
 			callableStatement.setString(3, signInDTO.getPassword());
 			callableStatement.executeUpdate();
