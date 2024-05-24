@@ -6,19 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class SignupUI {
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("회원가입");
-        frame.setSize(400, 600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel panel = new JPanel();
-        frame.add(panel);
-        placeComponents(panel);
-
-        frame.setVisible(true);
-    }
-
-    private static void placeComponents(JPanel panel) {
+    public static void placeComponents(JPanel panel) {
         panel.setLayout(null);
 
         JLabel phoneNumberLabel = new JLabel("전화번호");
@@ -65,14 +54,13 @@ public class SignupUI {
         emailField.setBounds(40, 320, 295, 25);
         panel.add(emailField);
 
-        JButton cancelButton = new JButton("예약 취소");
+        JButton cancelButton = new JButton("뒤로가기");
         cancelButton.setBounds(215, 350, 100, 25);
         panel.add(cancelButton);
 
-        JButton reserveButton = new JButton("예약하기");
+        JButton reserveButton = new JButton("회원가입");
         reserveButton.setBounds(60, 350, 100, 25);
         panel.add(reserveButton);
-
 
     }
 }
