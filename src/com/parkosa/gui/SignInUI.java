@@ -11,7 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.parkosa.dao.AccountDAO;
+import com.parkosa.sign.SignedAccount;
 import com.parkosa.vo.AccountVO;
+
+import dto.SignInDTO;
 
 public class SignInUI {
 	public static void placeComponents(JPanel panel) {
@@ -51,7 +54,7 @@ public class SignInUI {
         });
         
         //회원가입 버튼 이벤트
-        /*signInButton.addActionListener(new ActionListener() {
+        signInButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	
             	if (phoneNumberField == null || phoneNumberField.getText().equals("")) {
@@ -60,17 +63,22 @@ public class SignInUI {
                 	JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요.");
                 } else { 
             	
-                	 AccountVO accountVO = new AccountVO(phoneNumberField.getText()
-                			 , passwordField.getText()
-                			 , nameField.getText()
-                			 , emailField.getText()
-                			 , LocalDate.now());
+                	 SignInDTO signInDTO = new SignInDTO();
+                	 signInDTO.setPhoneNumber(phoneNumberField.getText());
+                	 signInDTO.setPassword(passwordField.getText());
             	
                 	 AccountDAO accountDAO = new AccountDAO();
-                	 accountDAO.insertAccount(accountVO);
+                	 //String result = accountDAO.signIn(signInDTO));
+                	 String result = "0000";
+                	 if (result == null || result.equals("12")) {
+                		 JOptionPane.showMessageDialog(null, "일치하는 회원 정보가 없습니다.");
+                	 } else {
+                		 SignedAccount.getInstance().signIn(result);
+                	 }
+                	 
                 }
             }
-        });*/
+        });
         
     }
 }
