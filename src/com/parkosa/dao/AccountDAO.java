@@ -39,18 +39,21 @@ public class AccountDAO {
 	
 	public boolean checkPhoneNumberDuplicated(String phoneNumber) {
 
-		String proc = "{ ? = call account_pack.fn_number_duplicate_check(?) }";
+		String function = "{ ? = call account_pack.fn_number_duplicate_check(?) }";
 
 		try {
 			Connection conn = DBConnection.getConnection();
-			CallableStatement callableStatement = conn.prepareCall(proc);
+			CallableStatement callableStatement = conn.prepareCall(function);
 			
 			//변수 할당
-			callableStatement.registerOutParameter(1, java.sql.Types.BOOLEAN);
+			callableStatement.registerOutParameter(1, java.sql.Types.NUMERIC);
 			callableStatement.setString(2, phoneNumber);
+			callableStatement.executeUpdate();
 			
-			boolean duplicated = callableStatement.getBoolean(1);
-			return duplicated;
+			int duplicated = callableStatement.getInt(1);
+			boolean result = duplicated == 1 ? true : false;
+			
+			return result;
 		} catch (SQLException e) {
 			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
 			e.printStackTrace();
