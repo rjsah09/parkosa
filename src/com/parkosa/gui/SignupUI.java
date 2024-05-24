@@ -16,7 +16,7 @@ import com.parkosa.vo.AccountVO;
 
 public class SignupUI {
 
-    public static void placeComponents(JPanel panel) {
+	public static void placeComponents(JPanel panel) {
         panel.setLayout(null);
 
         //-- 버튼, 입력 칸 생성 --//
@@ -28,6 +28,10 @@ public class SignupUI {
         phoneNumberField.setBounds(40, 50, 295, 25);
         panel.add(phoneNumberField);
         
+        JButton phoneNumberValidateButton = new JButton("중복확인");
+        phoneNumberValidateButton.setBounds(40, 80, 295, 25);
+        panel.add(phoneNumberValidateButton);
+        
         JLabel passwordLabel = new JLabel("비밀번호");
         passwordLabel.setBounds(40, 110, 80, 25);
         panel.add(passwordLabel);
@@ -36,20 +40,43 @@ public class SignupUI {
         passwordField.setBounds(40, 140, 295, 25);
         panel.add(passwordField);
         
+        JLabel checkPasswordLabel = new JLabel("비밀번호 확인");
+        checkPasswordLabel.setBounds(40, 170, 80, 25);
+        panel.add(checkPasswordLabel);
+        
+        JTextField checkPasswordField = new JTextField();
+        checkPasswordField.setBounds(40, 200, 295, 25);
+        panel.add(checkPasswordField);
+
+        JLabel nameLabel = new JLabel("이름");
+        nameLabel.setBounds(40, 230, 80, 25);
+        panel.add(nameLabel);
+
+        JTextField nameField = new JTextField();
+        nameField.setBounds(40, 260, 295, 25);
+        panel.add(nameField);
+
+        JLabel emailLabel = new JLabel("이메일");
+        emailLabel.setBounds(40, 290, 80, 25);
+        panel.add(emailLabel);
+
+        JTextField emailField = new JTextField();
+        emailField.setBounds(40, 320, 295, 25);
+        panel.add(emailField);
+
         JButton cancelButton = new JButton("뒤로가기");
         cancelButton.setBounds(215, 350, 100, 25);
         panel.add(cancelButton);
 
-        JButton signInButton = new JButton("로그인");
-        signInButton.setBounds(60, 350, 100, 25);
-        panel.add(signInButton);
+        JButton reserveButton = new JButton("회원가입");
+        reserveButton.setBounds(60, 350, 100, 25);
+        panel.add(reserveButton);
         
         //-- 이벤트 발생 --//
         
         //취소 버튼 이벤트
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	
             }
         });
         
