@@ -11,7 +11,7 @@ public class AccountVO {
 	
 	//생성자
 	public AccountVO(String phoneNumber, String password,
-			String name, String eMail, LocalDate registerDate) {
+		String name, String eMail, LocalDate registerDate) {
 		this.phoneNumber = phoneNumber;
 		this.password = password;
 		this.name = name;

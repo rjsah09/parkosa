@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43b43bea-ce0f-434a-8548-32293257c0f1" name="변경" comment="" />
+    <list default="true" id="43b43bea-ce0f-434a-8548-32293257c0f1" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parkosa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/parkosa.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/parkosa/dao/CarDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/dao/CarDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/parkosa/dao/CarTypeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/dao/CarTypeDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/parkosa/vo/CarTypeVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/vo/CarTypeVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/parkosa/vo/CarVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/vo/CarVO.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,12 +51,12 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2gr63uSDhIEjgWWDOF04ZA4jHXW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -67,10 +74,11 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "모듈",
+    "project.structure.last.edited": "라이브러리",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true",
+    "애플리케이션.CarDAO.executor": "Run",
     "애플리케이션.Main.executor": "Run"
   }
 }]]></component>
@@ -104,6 +112,7 @@
       <option name="presentableId" value="Default" />
       <updated>1716443153267</updated>
       <workItem from="1716443154350" duration="3049000" />
+      <workItem from="1716533506733" duration="540000" />
     </task>
     <servers />
   </component>

@@ -8,16 +8,10 @@ public class GUIController {
         JFrame frame = new JFrame("Parkosa");
         frame.setSize(400, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-//        JPanel signUpPanel = new JPanel();
-//        frame.add(signUpPanel);
-//        SignupUI.placeComponents(signUpPanel);
         
-        
-        /*
-         * [SAVE 금지]
-         * 
-         * */
+        /*JPanel signUpPanel = new JPanel();
+        frame.add(signUpPanel);
+        SignupUI.placeComponents(signUpPanel);*/
         
         JPanel signInPanel = new JPanel();
         frame.add(signInPanel);

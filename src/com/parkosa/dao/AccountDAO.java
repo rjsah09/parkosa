@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 
 import com.parkosa.connection.DBConnection;
+import com.parkosa.dto.SignInDTO;
 import com.parkosa.vo.AccountVO;
 
 
@@ -33,6 +34,7 @@ public class AccountDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			
 		}
 		
 	}
@@ -63,6 +65,35 @@ public class AccountDAO {
 		}
 		
 		return true;
+	}
+	
+	public String signIn(SignInDTO signInDTO) {
+		
+		String function = "{ ? = call account_pack.fn_number_pw_check(?,?) }";
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+			CallableStatement callableStatement = conn.prepareCall(function);
+			
+			//변수 할당
+			callableStatement.registerOutParameter(1, java.sql.Types.VARCHAR);
+			callableStatement.setString(2, signInDTO.getPhoneNumber());
+			callableStatement.setString(3, signInDTO.getPassword());
+			callableStatement.executeUpdate();
+			
+			String phoneNumber = callableStatement.getString(1);
+			
+			return phoneNumber;
+			
+		} catch (SQLException e) {
+			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		
+		return null;
 	}
 	
 }
