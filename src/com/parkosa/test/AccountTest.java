@@ -13,8 +13,8 @@ public class AccountTest {
 	}
 	
 	public static void accountTest() {
-		AccountVO man1 = new AccountVO("01012345678", "12345", "홍길동", "abcd@naver.com", LocalDate.now());
-		AccountVO man2 = new AccountVO("01012345679", "0000", "임꺽정", "ad@naver.com", LocalDate.now());
+		AccountVO man1 = new AccountVO("01012345678", "12345", "aaa", "abcd@naver.com", LocalDate.now());
+		AccountVO man2 = new AccountVO("01012345679", "0000", "bbb", "ad@naver.com", LocalDate.now());
 		
 		AccountDAO accountDAO = new AccountDAO();
 		accountDAO.insertAccount(man1);
