@@ -1,7 +1,6 @@
 package com.parkosa.gui;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class GUIController {
 	public void drawScreen() {
@@ -9,14 +8,10 @@ public class GUIController {
         frame.setSize(400, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        /*JPanel signUpPanel = new JPanel();
-        frame.add(signUpPanel);
-        SignupUI.placeComponents(signUpPanel);*/
+        UI parkKosaUI = new ParkKosaUI();
+        frame.add(parkKosaUI);
+        parkKosaUI.placeComponents();
         
-        JPanel signInPanel = new JPanel();
-        frame.add(signInPanel);
-        SignInUI.placeComponents(signInPanel);
-
         frame.setVisible(true);
     }
 }
