@@ -20,8 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class ParkKosaUI extends UI {
-	
-	UI ui = this;
 
     public void placeComponents() {
         // JPanel에 기본적인 레이아웃 설정
@@ -131,13 +129,14 @@ public class ParkKosaUI extends UI {
         signupButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // 회원가입 버튼 클릭 시 동작 정의
-            	GUIController.changeUI(ui, new SignInUI());
+            	GUIController.changeUI(ui, new SignUpUI());
             }
         });
 
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // 로그인 버튼 클릭 시 동작 정의
+            	GUIController.changeUI(ui, new SignInUI());
             }
         });
     }

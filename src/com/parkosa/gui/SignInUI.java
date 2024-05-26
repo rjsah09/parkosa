@@ -46,6 +46,7 @@ public class SignInUI extends UI {
         //취소 버튼 이벤트
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	GUIController.changeUI(ui, new ParkKosaUI());
             }
         });
         
