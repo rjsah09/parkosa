@@ -63,11 +63,11 @@ public class SignUpUI extends UI {
         add(emailField);
 
         JButton cancelButton = new JButton("뒤로가기");
-        cancelButton.setBounds(215, 350, 100, 25);
+        cancelButton.setBounds(60, 350, 100, 25);
         add(cancelButton);
 
         JButton reserveButton = new JButton("회원가입");
-        reserveButton.setBounds(60, 350, 100, 25);
+        reserveButton.setBounds(215, 350, 100, 25);
         add(reserveButton);
         
         //-- 이벤트 발생 --//
@@ -115,21 +115,27 @@ public class SignUpUI extends UI {
         phoneNumberValidateButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	AccountDAO accountDAO = new AccountDAO();
-            	boolean duplicated = accountDAO.checkPhoneNumberDuplicated(phoneNumberField.getText());
+            	if (phoneNumberField.isEditable()==false) {
+            		phoneNumberField.setEditable(true);            		
+            		phoneNumberField.setText("");
+            	} else if (phoneNumberField.isEditable()&!(phoneNumberField.getText().equals(""))) {	
+            		boolean duplicated = accountDAO.checkPhoneNumberDuplicated(phoneNumberField.getText());
+	            	
+	            	if (phoneNumberField == null || phoneNumberField.getText().equals("")) {
+	            		JOptionPane.showMessageDialog(null, "전화번호를 입력해주세요.");
+	            		return;
+	            	}
+	            	String result = !duplicated ? "사용 가능한 전화번호입니다." : "사용 불가능한 번호입니다.";
+	            	
+	            	JOptionPane.showMessageDialog(null, result);
+	            	if (!duplicated) {
+	            		phoneNumberField.setEditable(false);
+	            	}
             	
-            	if (phoneNumberField == null || phoneNumberField.getText().equals("")) {
-            		JOptionPane.showMessageDialog(null, "전화번호를 입력해주세요.");
-            		return;
-            	}
-            	
-            	String result = !duplicated ? "사용 가능한 전화번호입니다." : "사용 불가능한 번호입니다.";
-            	
-            	JOptionPane.showMessageDialog(null, result);
-            	if (!duplicated) {
-            		phoneNumberField.setEditable(false);
             	}
             }
         });
+
     }
         
 }
