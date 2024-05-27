@@ -55,13 +55,18 @@ public class MainScreenUI extends UI {
 
         
         //-- 이벤트 발생 --//
-        
+
         //취소 버튼 이벤트
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	SignedAccount.signOut();
             	GUIController.changeUI(ui, new ParkKosaUI());
             }
+        });
+        carModify.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                        GUIController.changeUI(ui, new RegisterCarUI());
+                }
         });
         
 	}

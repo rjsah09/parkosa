@@ -6,7 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import com.parkosa.dao.CarDAO;
-import com.parkosa.dto.SignInDTO;
+import com.parkosa.dao.CarTypeDAO;
+import com.parkosa.vo.CarTypeVO;
 import com.parkosa.vo.CarVO;
 import com.parkosa.sign.SignedAccount;
 public class RegisterCarUI extends UI{
@@ -15,12 +16,12 @@ public class RegisterCarUI extends UI{
     public void placeComponents() {
         setLayout(null);
         //-- 버튼, 입력 칸 생성 --//
-        SignInDTO signInDTO = new SignInDTO();
+        String signedAccount = SignedAccount.getPhoneNumber();
         JLabel userlLabel = new JLabel("Id: ");
         userlLabel.setBounds(40, 0, 50, 25);
         add(userlLabel);
 
-        JLabel userPhoneNumberLabel = new JLabel(signInDTO.getPhoneNumber());
+        JLabel userPhoneNumberLabel = new JLabel(signedAccount);
         userPhoneNumberLabel.setBounds(40, 0, 100, 25);
         add(userPhoneNumberLabel);
 
@@ -101,21 +102,16 @@ public class RegisterCarUI extends UI{
                     JOptionPane.showMessageDialog(null, "로그인 에러 발생");
                 }
                 else {
-                    int carType = 0;
                     String selectedItem = (String) comboSelectCarBox.getSelectedItem();
-                    if(selectedItem.equals("경차")){
-                        carType = 1;
-                    }else if(selectedItem.equals("승용차")){
-                        carType = 2;
-                    }else if(selectedItem.equals("전기차")){
-                        carType = 3;
-                    }
-
+                    int carId = 0;
+                    CarTypeDAO carTypeDAO = new CarTypeDAO();
+                    carId = carTypeDAO.selectCarNo(selectedItem);
+                    System.out.println("ResgisterUI :" +carId);
 
                     CarVO CarVO = new CarVO(
                             carNumberField.getText(),
                             userPhoneNumberLabel.getText(),
-                            carType
+                            carId
                             );
 
 
