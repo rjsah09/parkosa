@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import com.parkosa.dao.AccountDAO;
@@ -34,16 +34,18 @@ public class SignUpUI extends UI {
         passwordLabel.setBounds(40, 110, 80, 25);
         add(passwordLabel);
         
-        JTextField passwordField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
         passwordField.setBounds(40, 140, 295, 25);
+        passwordField.setEchoChar('*');
         add(passwordField);
         
         JLabel checkPasswordLabel = new JLabel("비밀번호 확인");
         checkPasswordLabel.setBounds(40, 170, 80, 25);
         add(checkPasswordLabel);
         
-        JTextField checkPasswordField = new JTextField();
+        JPasswordField checkPasswordField = new JPasswordField();
         checkPasswordField.setBounds(40, 200, 295, 25);
+        passwordField.setEchoChar('*');
         add(checkPasswordField);
 
         JLabel nameLabel = new JLabel("이름");
@@ -118,7 +120,7 @@ public class SignUpUI extends UI {
             public void actionPerformed(ActionEvent e) {
             	AccountDAO accountDAO = new AccountDAO();
             	if (phoneNumberField.isEditable()==false) {
-            		phoneNumberField.setEditable(true);            		
+            		phoneNumberField.setEditable(true);
             		phoneNumberField.setText("");
             	} else if (phoneNumberField.isEditable()&!(phoneNumberField.getText().equals(""))) {	
             		boolean duplicated = accountDAO.checkPhoneNumberDuplicated(phoneNumberField.getText());
@@ -128,10 +130,12 @@ public class SignUpUI extends UI {
 	            		return;
 	            	}
 	            	String result = !duplicated ? "사용 가능한 전화번호입니다." : "사용 불가능한 번호입니다.";
-	            	
+
 	            	JOptionPane.showMessageDialog(null, result);
 	            	if (!duplicated) {
 	            		phoneNumberField.setEditable(false);
+	            		phoneNumberValidateButton.setText("다시 입력하려면 클릭해주세요.");
+
 	            	}
             	
             	}

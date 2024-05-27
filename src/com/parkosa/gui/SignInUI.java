@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import com.parkosa.dao.AccountDAO;
@@ -28,8 +29,9 @@ public class SignInUI extends UI {
         passwordLabel.setBounds(40, 110, 80, 25);
         add(passwordLabel);
         
-        JTextField passwordField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
         passwordField.setBounds(40, 140, 295, 25);
+        passwordField.setEchoChar('*');
         add(passwordField);
         
         JButton cancelButton = new JButton("뒤로가기");
