@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.parkosa.dao.AccountDAO;
+import com.parkosa.sign.SignedAccount;
 import com.parkosa.vo.AccountVO;
 
 public class MainScreenUI extends UI {
@@ -32,7 +33,7 @@ public class MainScreenUI extends UI {
         carModify.setBounds(40, 320, 295, 25);
         add(carModify);
 
-        JButton cancelButton = new JButton("뒤로가기");
+        JButton cancelButton = new JButton("로그아웃");
         cancelButton.setBounds(40, 380, 295, 25);
         add(cancelButton);
 
@@ -42,6 +43,7 @@ public class MainScreenUI extends UI {
         //취소 버튼 이벤트
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	SignedAccount.signOut();
             	GUIController.changeUI(ui, new ParkKosaUI());
             }
         });
