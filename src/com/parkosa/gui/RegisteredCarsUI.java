@@ -26,7 +26,7 @@ public class RegisteredCarsUI extends UI {
         
     	CarDAO carDAO = new CarDAO();
     	List <RegisteredCarDTO> registeredCars = carDAO.getRegisteredCars();
-    	String[] items = new String[carDAO.getRegisteredCars().size()];
+    	
     	for (int i = 0 ; i < registeredCars.size() ; i++) {
     		JTextField carList = new JTextField();
     		carList.setText(registeredCars.get(i).getCarCode()+" "+

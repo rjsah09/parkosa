@@ -1,18 +1,13 @@
 package com.parkosa.gui;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 import com.parkosa.dao.AccountDAO;
 import com.parkosa.sign.SignedAccount;
-import com.parkosa.vo.AccountVO;
 
 public class MainScreenUI extends UI {
 	public void placeComponents() {
@@ -20,11 +15,6 @@ public class MainScreenUI extends UI {
         
         AccountDAO accountDAO = new AccountDAO();
         String name = accountDAO.getName();
-        
-		/*
-		 * if (name.equals("") || name == null) { JOptionPane.showMessageDialog(null,
-		 * "문제가 발생했습니다"); GUIController.changeUI(ui, new ParkKosaUI()); }
-		 */
         
         JLabel nameLabel  = new JLabel(name + "님", JLabel.CENTER);
         nameLabel.setHorizontalTextPosition(JLabel.CENTER);
