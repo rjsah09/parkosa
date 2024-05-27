@@ -59,7 +59,7 @@ public class RegisterCarUI extends UI{
         cancelButton.setBounds(215, 350, 100, 25);
         add(cancelButton);
 
-        JButton reserveButton = new JButton("차량입력완료");
+        JButton reserveButton = new JButton("차량등록");
         reserveButton.setBounds(60, 350, 100, 25);
         add(reserveButton);
 
