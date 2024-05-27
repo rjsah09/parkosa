@@ -1,10 +1,13 @@
 package com.parkosa.dao;
 
-import com.parkosa.connection.DBConnection;
-import com.parkosa.vo.CarVO;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.parkosa.connection.DBConnection;
+import com.parkosa.dto.RegisteredCarDTO;
+import com.parkosa.vo.CarVO;
 
 public class CarDAO {
         public void insertCar(CarVO CarVO){
@@ -55,6 +58,10 @@ public class CarDAO {
         }
 
         return true;
+    }
+    
+    public ArrayList<RegisteredCarDTO> getRegisteredCars() {
+    	return null;
     }
 
 }
