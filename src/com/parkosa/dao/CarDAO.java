@@ -98,4 +98,33 @@ public class CarDAO {
         return registeredCars;
 	}
 
+	public boolean deleteCar(String carCode) {
+		List <RegisteredCarDTO> registeredCars = new ArrayList<>();
+        String sql = "{ ? = call car_pack.delete_car(?) }";
+        
+        try {
+            Connection conn = DBConnection.getConnection();
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            //변수 할당
+            callableStatement.registerOutParameter(1, java.sql.Types.NUMERIC);
+            callableStatement.setString(2, carCode);
+            callableStatement.executeUpdate();
+            
+            int succeed = callableStatement.getInt(1);
+			boolean result = succeed == 1 ? true : false;
+			
+			return result;
+
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        	
+        }
+        
+        return false;
+	}
+
 }
