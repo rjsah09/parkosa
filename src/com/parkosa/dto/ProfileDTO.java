@@ -10,11 +10,11 @@ public class ProfileDTO {
 		this.carCode = carCode;
 	}
 
-	private String getName() {
+	public String getName() {
 		return name;
 	}
 	
-	private String getCarCode() {
+	public String getCarCode() {
 		return carCode;
 	}
 

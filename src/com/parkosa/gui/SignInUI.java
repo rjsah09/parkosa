@@ -42,12 +42,6 @@ public class SignInUI extends UI {
         
         //-- 이벤트 발생 --//
         
-        signInButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	GUIController.changeUI(ui, new MainScreenUI());
-            }
-        });
-        
         //취소 버튼 이벤트
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -55,7 +49,7 @@ public class SignInUI extends UI {
             }
         });
         
-        //회원가입 버튼 이벤트
+        //로그인 버튼 이벤트
         signInButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	
@@ -74,8 +68,9 @@ public class SignInUI extends UI {
                 	 if (result == null || result.equals("12")) {
                 		 JOptionPane.showMessageDialog(null, "일치하는 회원 정보가 없습니다.");
                 	 } else {
-                		 SignedAccount.getInstance().signIn(result);
+                		 SignedAccount.signIn(result);
                 		 System.out.println(SignedAccount.getPhoneNumber());
+                		 GUIController.changeUI(ui, new MainScreenUI());
                 	 }
                 	 
                 }

@@ -6,8 +6,12 @@ import java.sql.Date;
 import java.sql.SQLException;
 
 import com.parkosa.connection.DBConnection;
+import com.parkosa.dto.ProfileDTO;
 import com.parkosa.dto.SignInDTO;
+import com.parkosa.sign.SignedAccount;
 import com.parkosa.vo.AccountVO;
+
+import oracle.jdbc.OracleTypes;
 
 
 public class AccountDAO {
@@ -94,6 +98,37 @@ public class AccountDAO {
 		}
 		
 		return null;
+	}
+	
+	public ProfileDTO getProfileDTO() {
+		
+//		String function = "{ ? = call account_pack.fn_get_profile(?) }";
+//		
+//		try {
+//			Connection conn = DBConnection.getConnection();
+//			CallableStatement callableStatement = conn.prepareCall(function);
+//			
+//			//변수 할당
+//			callableStatement.registerOutParameter(1, OracleTypes.CURSOR);
+//			callableStatement.setString(2, SignedAccount.getPhoneNumber());
+//			callableStatement.executeUpdate();
+//			
+//			//ProfileDTO profileDTO = (ProfileDTO) callableStatement.getObject(1);
+//			ProfileDTO profileDTO = new ProfileDTO("양건모",  "35더7236");
+//			
+//			
+//			
+//			return profileDTO;
+//			
+//		} catch (SQLException e) {
+//			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+//			e.printStackTrace();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//		}
+		
+		return new ProfileDTO("양건모",  "35더7236");
 	}
 	
 }

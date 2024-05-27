@@ -142,21 +142,16 @@ public class ParkKosaUI extends UI {
     }
 
     private static void showImage(int index, JLabel imageLabel) {
-        String[] images = {
-            "resources/iamges/main2.png", 
-            "resources/iamges/main2.png", 
-            "resources/iamges/main3.png", 
-            "resources/iamges/main4.png", 
-            "resources/iamges/main5.png"
-        };
-        try {
-            BufferedImage img = ImageIO.read(new File(images[index]));
-            Image scaledImage = img.getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH);
-            imageLabel.setIcon(new ImageIcon(scaledImage));
-        } catch (IOException e) {
-            e.printStackTrace();
-            imageLabel.setText("Image not found");
-        }
+		/*
+		 * String[] images = { "resources/iamges/main2.png",
+		 * "resources/iamges/main2.png", "resources/iamges/main3.png",
+		 * "resources/iamges/main4.png", "resources/iamges/main5.png" }; try {
+		 * BufferedImage img = ImageIO.read(new File(images[index])); Image scaledImage
+		 * = img.getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(),
+		 * Image.SCALE_SMOOTH); imageLabel.setIcon(new ImageIcon(scaledImage)); } catch
+		 * (IOException e) { e.printStackTrace(); imageLabel.setText("Image not found");
+		 * }
+		 */
     }
 
     private static void resetTimer() {
