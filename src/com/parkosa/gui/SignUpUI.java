@@ -107,6 +107,8 @@ public class SignUpUI extends UI {
             	
                 	 AccountDAO accountDAO = new AccountDAO();
                 	 accountDAO.insertAccount(accountVO);
+                	 
+                	 GUIController.changeUI(ui, new ParkKosaUI());
                 }
             }
         });
