@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.SQLType;
 
 import com.parkosa.connection.DBConnection;
-import com.parkosa.dto.ProfileDTO;
 import com.parkosa.dto.SignInDTO;
 import com.parkosa.sign.SignedAccount;
 import com.parkosa.vo.AccountVO;
