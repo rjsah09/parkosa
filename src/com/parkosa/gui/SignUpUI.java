@@ -122,6 +122,7 @@ public class SignUpUI extends UI {
             	if (phoneNumberField.isEditable()==false) {
             		phoneNumberField.setEditable(true);
             		phoneNumberField.setText("");
+            		phoneNumberValidateButton.setText("중복확인");
             	} else if (phoneNumberField.isEditable()&!(phoneNumberField.getText().equals(""))) {	
             		boolean duplicated = accountDAO.checkPhoneNumberDuplicated(phoneNumberField.getText());
 	            	

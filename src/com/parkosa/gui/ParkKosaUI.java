@@ -41,12 +41,12 @@ public class ParkKosaUI extends UI {
         add(imageLabel);
 
         // 공지사항 패널
-        JPanel noticePanel = new JPanel();
-        noticePanel.setBackground(Color.GRAY);
+        JLabel jLabel = new JLabel();
+        jLabel.setBackground(Color.GRAY);
         JLabel noticeLabel = new JLabel("공지 사항 / 광고 / 요금 관련 안내", JLabel.CENTER);
         noticeLabel.setForeground(Color.WHITE);
-        noticePanel.add(noticeLabel);
-        add(noticePanel);
+        jLabel.add(noticeLabel);
+        add(jLabel);
 
         // 버튼 패널
         JButton signupButton = new JButton("회원가입");
@@ -120,12 +120,13 @@ public class ParkKosaUI extends UI {
 
     private static void showImage(int index, JLabel imageLabel) {
         String[] images = {
-            "C:\\Users\\KOSA\\eclipse-workspace\\y\\img\\image1.jpg", 
-            "C:\\Users\\KOSA\\eclipse-workspace\\y\\img\\image2.jpg", 
-            "C:\\Users\\KOSA\\eclipse-workspace\\y\\img\\image3.jpg", 
-            "C:\\Users\\KOSA\\eclipse-workspace\\y\\img\\image4.jpg", 
-            "C:\\Users\\KOSA\\eclipse-workspace\\y\\img\\image5.jpg"
+            ".\\resources\\images\\image1.jpg", 
+            ".\\resources\\images\\image2.jpg", 
+            ".\\resources\\images\\image3.PNG", 
+            ".\\resources\\images\\image4.jpg", 
+            ".\\resources\\images\\image5.jpg"
         };
+        
         try {
             BufferedImage img = ImageIO.read(new File(images[index]));
             ImageIcon imageIcon = new ImageIcon(img);
