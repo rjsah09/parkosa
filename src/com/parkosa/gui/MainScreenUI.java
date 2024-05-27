@@ -22,15 +22,15 @@ public class MainScreenUI extends UI {
         AccountDAO accountDAO = new AccountDAO();
         ProfileDTO profileDTO = accountDAO.getProfileDTO();
         
-        JLabel nameLabel  = new JLabel(profileDTO.getName() + "님", JLabel.CENTER);
-        nameLabel.setHorizontalTextPosition(JLabel.CENTER);
-        nameLabel.setBounds(100, 10, 200, 50);
-        add(nameLabel);
-        
-        JLabel carCodeLabel  = new JLabel(profileDTO.getCarCode(), JLabel.CENTER);
-        carCodeLabel.setHorizontalTextPosition(JLabel.CENTER);
-        carCodeLabel.setBounds(100, 50, 200, 90);
-        add(carCodeLabel);
+//        JLabel nameLabel  = new JLabel(profileDTO.getName() + "님", JLabel.CENTER);
+//        nameLabel.setHorizontalTextPosition(JLabel.CENTER);
+//        nameLabel.setBounds(100, 10, 200, 50);
+//        add(nameLabel);
+//        
+//        JLabel carCodeLabel  = new JLabel(profileDTO.getCarCode(), JLabel.CENTER);
+//        carCodeLabel.setHorizontalTextPosition(JLabel.CENTER);
+//        carCodeLabel.setBounds(100, 50, 200, 90);
+//        add(carCodeLabel);
         
 
         JButton parkingReserve = new JButton("주차 예약");

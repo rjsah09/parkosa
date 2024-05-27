@@ -38,11 +38,18 @@ public class RegisterCarUI extends UI{
         carNumberValidateButton.setBounds(40, 80, 295, 25);
         add(carNumberValidateButton);
 
+
+
         JLabel carSelectBox = new JLabel("자동차 종류를 선택하세요");
         carSelectBox.setBounds(40, 110, 150, 25);
         add(carSelectBox);
 
-        String[] items = {"경차", "승용차", "전기차"};
+        CarTypeDAO carTypeDAO = new CarTypeDAO();
+        String[] items = new String[carTypeDAO.carTypeList().size()];
+        for (int i =0; i< carTypeDAO.carTypeList().size(); i++) {
+            items[i] = carTypeDAO.carTypeList().get(i).getName();
+        }
+
         JComboBox<String> comboSelectCarBox = new JComboBox<>(items);
         comboSelectCarBox.setBounds(40, 140, 295, 25);
         add(comboSelectCarBox);
@@ -91,7 +98,7 @@ public class RegisterCarUI extends UI{
         });
 
 
-      //회원가입 버튼 이벤트
+      //차량 등록 버튼 이벤트
         reserveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -116,7 +123,9 @@ public class RegisterCarUI extends UI{
 
 
                    CarDAO CarDAO = new CarDAO();
-                    CarDAO.insertCar(CarVO);
+                   CarDAO.insertCar(CarVO);
+                   
+                   GUIController.changeUI(ui, new MainScreenUI());
                 }
             }
         });

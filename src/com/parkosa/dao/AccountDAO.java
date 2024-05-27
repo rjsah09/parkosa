@@ -3,6 +3,7 @@ package com.parkosa.dao;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.parkosa.connection.DBConnection;
@@ -111,12 +112,10 @@ public class AccountDAO {
 //			//변수 할당
 //			callableStatement.registerOutParameter(1, OracleTypes.CURSOR);
 //			callableStatement.setString(2, SignedAccount.getPhoneNumber());
-//			callableStatement.executeUpdate();
+//			callableStatement.executeQuery();
 //			
-//			//ProfileDTO profileDTO = (ProfileDTO) callableStatement.getObject(1);
-//			ProfileDTO profileDTO = new ProfileDTO("양건모",  "35더7236");
-//			
-//			
+//			ResultSet resultSet = (ResultSet) callableStatement.getObject(1);
+//			ProfileDTO profileDTO = new ProfileDTO(resultSet.getString(1),  resultSet.getString(2));
 //			
 //			return profileDTO;
 //			
@@ -128,7 +127,7 @@ public class AccountDAO {
 //		} finally {
 //		}
 		
-		return new ProfileDTO("양건모",  "35더7236");
+		return null;
 	}
 	
 }
