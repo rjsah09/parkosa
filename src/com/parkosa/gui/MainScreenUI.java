@@ -72,6 +72,12 @@ public class MainScreenUI extends UI {
                 }
         });
         
+        carList.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                    GUIController.changeUI(ui, new RegisteredCarsUI());
+            }
+    });
+        
 	}
 }
 
