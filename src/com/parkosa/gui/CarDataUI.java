@@ -10,11 +10,6 @@ import java.time.LocalDate;
 
 public class CarDataUI {
 
-    public static void main(String[] args) {
-        CarDataUI ui = new CarDataUI();
-        GUIController guiController = new GUIController();
-        guiController.drawScreen();
-    }
 
 
 

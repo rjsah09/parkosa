@@ -26,5 +26,36 @@ public class CarDAO {
                 e.printStackTrace();
             }
         }
+
+    public boolean checkCarCodeDuplicated(String code) {
+
+        String function = "{ ? = call car_pack.fn_code_check(?) }";
+
+        try {
+            Connection conn = DBConnection.getConnection();
+            CallableStatement callableStatement = conn.prepareCall(function);
+
+            //변수 할당
+            callableStatement.registerOutParameter(1, java.sql.Types.NUMERIC);
+            callableStatement.setString(2, code);
+            callableStatement.executeUpdate();
+
+            int duplicated = callableStatement.getInt(1);
+            System.out.println(duplicated);
+
+            boolean result = duplicated == 1 ? true : false;
+
+            return result;
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        }
+
+        return true;
     }
+
+}
 

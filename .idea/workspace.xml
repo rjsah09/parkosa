@@ -5,13 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43b43bea-ce0f-434a-8548-32293257c0f1" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/src/com/parkosa/gui/RegisterCarUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/parkosa/dao/CarDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/dao/CarDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/parkosa/gui/CarDataUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/gui/CarDataUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/parkosa/gui/GUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/gui/GUIController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <excluded-from-favorite>
@@ -58,28 +68,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;gaeng&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/gaeng/Documents/KOSA/parkosa&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;라이브러리&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
-    &quot;애플리케이션.CarDAO.executor&quot;: &quot;Run&quot;,
-    &quot;애플리케이션.CarDataUI.executor&quot;: &quot;Run&quot;,
-    &quot;애플리케이션.Main.executor&quot;: &quot;Run&quot;,
-    &quot;애플리케이션.ParkKosaUI.executor&quot;: &quot;Run&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "gaeng",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/gaeng/Documents/KOSA/parkosa",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "라이브러리",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true",
+    "애플리케이션.CarDAO.executor": "Run",
+    "애플리케이션.CarDataUI.executor": "Run",
+    "애플리케이션.Main.executor": "Run",
+    "애플리케이션.ParkKosaUI.executor": "Run",
+    "애플리케이션.Test.executor": "Run"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.parkosa.gui" />
@@ -117,6 +128,7 @@
       <workItem from="1716443154350" duration="3049000" />
       <workItem from="1716533506733" duration="540000" />
       <workItem from="1716541402733" duration="23000" />
+      <workItem from="1716768070646" duration="8198000" />
     </task>
     <servers />
   </component>
