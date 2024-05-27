@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 
 public class CarTypeDAO {
-
+ //수정
     public int selectCarNo(String carTypeName) {
 
         String function = "{ ? = call car_type_pack.fn_selectcarno(?) }";
