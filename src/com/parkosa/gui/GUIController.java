@@ -13,10 +13,12 @@ public class GUIController {
         frame.add(signUpPanel);
         SignupUI.placeComponents(signUpPanel);*/
         
-        JPanel signInPanel = new JPanel();
-        frame.add(signInPanel);
-        SignInUI.placeComponents(signInPanel);
-
+//        JPanel signInPanel = new JPanel();
+//        frame.add(signInPanel);
+//        SignInUI.placeComponents(signInPanel);
+        JPanel CarDataPannel = new JPanel();
+        frame.add(CarDataPannel);
+        CarDataUI.placeComponents(CarDataPannel);
         frame.setVisible(true);
     }
 }
