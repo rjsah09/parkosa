@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLType;
 
 import com.parkosa.connection.DBConnection;
 import com.parkosa.dto.ProfileDTO;
@@ -101,31 +102,28 @@ public class AccountDAO {
 		return null;
 	}
 	
-	public ProfileDTO getProfileDTO() {
+	public String getName() {
 		
-//		String function = "{ ? = call account_pack.fn_get_profile(?) }";
-//		
-//		try {
-//			Connection conn = DBConnection.getConnection();
-//			CallableStatement callableStatement = conn.prepareCall(function);
-//			
-//			//변수 할당
-//			callableStatement.registerOutParameter(1, OracleTypes.CURSOR);
-//			callableStatement.setString(2, SignedAccount.getPhoneNumber());
-//			callableStatement.executeQuery();
-//			
-//			ResultSet resultSet = (ResultSet) callableStatement.getObject(1);
-//			ProfileDTO profileDTO = new ProfileDTO(resultSet.getString(1),  resultSet.getString(2));
-//			
-//			return profileDTO;
-//			
-//		} catch (SQLException e) {
-//			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
-//			e.printStackTrace();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//		}
+		String function = "{ ? = call account_pack.fn_get_name(?) }";
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+			CallableStatement callableStatement = conn.prepareCall(function);
+			
+			//변수 할당
+			callableStatement.registerOutParameter(1, java.sql.Types.VARCHAR);
+			callableStatement.setString(2, SignedAccount.getPhoneNumber());
+			callableStatement.executeQuery();
+			
+			return callableStatement.getString(1);
+			
+		} catch (SQLException e) {
+			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
 		
 		return null;
 	}
