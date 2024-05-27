@@ -41,13 +41,6 @@ public class SignInUI extends UI {
         add(signInButton);
         
         //-- 이벤트 발생 --//
-        
-        signInButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	GUIController.changeUI(ui, new MainScreenUI());
-            }
-        });
-        
         //취소 버튼 이벤트
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -70,12 +63,16 @@ public class SignInUI extends UI {
                 	 signInDTO.setPassword(passwordField.getText());
             	
                 	 AccountDAO accountDAO = new AccountDAO();
+                	 boolean duplicated = accountDAO.checkPhoneNumberDuplicated(phoneNumberField.getText());
                 	 String result = accountDAO.signIn(signInDTO);
-                	 if (result == null || result.equals("12")) {
+                	 if (!duplicated){
                 		 JOptionPane.showMessageDialog(null, "일치하는 회원 정보가 없습니다.");
+                	 } else if (result == null || result.equals("12")) {
+                		 JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
                 	 } else {
                 		 SignedAccount.getInstance().signIn(result);
                 		 System.out.println(SignedAccount.getPhoneNumber());
+                		 GUIController.changeUI(ui, new MainScreenUI());
                 	 }
                 	 
                 }
