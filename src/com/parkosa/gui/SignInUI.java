@@ -15,8 +15,7 @@ import com.parkosa.sign.SignedAccount;
 public class SignInUI extends UI {
 	public void placeComponents() {
         setLayout(null);
-
-        //-- 버튼, 입력 칸 생성 --//
+      //-- 버튼, 입력 칸 생성 --//
         JLabel phoneNumberLabel = new JLabel("전화번호");
         phoneNumberLabel.setBounds(40, 20, 80, 25);
         add(phoneNumberLabel);
@@ -34,14 +33,20 @@ public class SignInUI extends UI {
         add(passwordField);
         
         JButton cancelButton = new JButton("뒤로가기");
-        cancelButton.setBounds(215, 350, 100, 25);
+        cancelButton.setBounds(60, 350, 100, 25);
         add(cancelButton);
 
         JButton signInButton = new JButton("로그인");
-        signInButton.setBounds(60, 350, 100, 25);
+        signInButton.setBounds(215, 350, 100, 25);
         add(signInButton);
         
         //-- 이벤트 발생 --//
+        
+        signInButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	GUIController.changeUI(ui, new MainScreenUI());
+            }
+        });
         
         //취소 버튼 이벤트
         cancelButton.addActionListener(new ActionListener() {
@@ -76,6 +81,7 @@ public class SignInUI extends UI {
                 }
             }
         });
+
         
     }
 }
