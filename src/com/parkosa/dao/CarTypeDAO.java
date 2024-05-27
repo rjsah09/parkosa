@@ -51,7 +51,7 @@ public class CarTypeDAO {
 
     public List<CarTypeVO> carTypeList(){
         List <CarTypeVO> carTypeList = new ArrayList<>();
-        String sql = "{ call car_type_list(?) }";
+        String sql = "{ call car_type_pack.car_type_list(?) }";
         try {
             Connection conn = DBConnection.getConnection();
             CallableStatement callableStatement = conn.prepareCall(sql);
