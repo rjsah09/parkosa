@@ -23,11 +23,6 @@ public class RegisteredCarsUI extends UI {
         AccountDAO accountDAO = new AccountDAO();
         String name = accountDAO.getName();
         
-        JLabel nameLabel  = new JLabel(name + "님", JLabel.CENTER);
-        nameLabel.setHorizontalTextPosition(JLabel.CENTER);
-        nameLabel.setBounds(100, 10, 200, 50);
-        add(nameLabel);
-        
         JButton cancelButton = new JButton("뒤로가기");
         cancelButton.setBounds(40, 40, 295, 25);
         add(cancelButton);
@@ -35,7 +30,7 @@ public class RegisteredCarsUI extends UI {
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	SignedAccount.signOut();
-            	GUIController.changeUI(ui, new ParkKosaUI());
+            	GUIController.changeUI(ui, new MainScreenUI());
             }
         });
         
@@ -49,7 +44,7 @@ public class RegisteredCarsUI extends UI {
     		carList.setBounds(60, 100+(i*40), 240, 30);
     		add(carList);
     		JButton deleteButton = new JButton("삭제");
-    		carList.setBounds(330, 100+(i*40), 40, 30);
+    		deleteButton.setBounds(330, 100+(i*40), 40, 30);
     		add(deleteButton);
     	}
     	
