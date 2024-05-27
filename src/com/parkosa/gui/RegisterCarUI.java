@@ -59,7 +59,7 @@ public class RegisterCarUI extends UI{
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                GUIController.changeUI(ui, new ParkKosaUI());
+                GUIController.changeUI(ui, new MainScreenUI());
             }
         });
 
