@@ -19,12 +19,17 @@ public class MainScreenUI extends UI {
         setLayout(null);
         
         AccountDAO accountDAO = new AccountDAO();
-//        String name = accountDAO.getName();
-//        
-//        JLabel nameLabel  = new JLabel(name + "님", JLabel.CENTER);
-//        nameLabel.setHorizontalTextPosition(JLabel.CENTER);
-//        nameLabel.setBounds(100, 10, 200, 50);
-//        add(nameLabel);
+        String name = accountDAO.getName();
+        
+		/*
+		 * if (name.equals("") || name == null) { JOptionPane.showMessageDialog(null,
+		 * "문제가 발생했습니다"); GUIController.changeUI(ui, new ParkKosaUI()); }
+		 */
+        
+        JLabel nameLabel  = new JLabel(name + "님", JLabel.CENTER);
+        nameLabel.setHorizontalTextPosition(JLabel.CENTER);
+        nameLabel.setBounds(100, 10, 200, 50);
+        add(nameLabel);
 
         JButton parkingReserve = new JButton("주차 예약");
         parkingReserve.setBounds(40, 140, 295, 25);
@@ -38,12 +43,16 @@ public class MainScreenUI extends UI {
         accountModify.setBounds(40, 260, 295, 25);
         add(accountModify);
 
-        JButton carModify = new JButton("차량 등록/수정");
+        JButton carModify = new JButton("차량 등록");
         carModify.setBounds(40, 320, 295, 25);
         add(carModify);
+        
+        JButton carList = new JButton("등록 차량 관리");
+        carList.setBounds(40, 380, 295, 25);
+        add(carList);
 
         JButton cancelButton = new JButton("로그아웃");
-        cancelButton.setBounds(40, 380, 295, 25);
+        cancelButton.setBounds(40, 440, 295, 25);
         add(cancelButton);
 
         

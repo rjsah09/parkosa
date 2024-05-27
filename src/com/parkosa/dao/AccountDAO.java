@@ -115,7 +115,6 @@ public class AccountDAO {
 			callableStatement.executeQuery();
 			
 			return callableStatement.getString(1);
-			
 		} catch (SQLException e) {
 			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
 			e.printStackTrace();
