@@ -31,7 +31,7 @@ public class RegisteredCarsUI extends UI {
     		JTextField carList = new JTextField();
     		carList.setText(registeredCars.get(i).getCarCode()+" "+
     						registeredCars.get(i).getCarTypeName());
-    		carList.setBounds(60, 100+(i*30), 100, 25);
+    		carList.setBounds(60, 100+(i*30), 295, 30);
     		add(carList);
     	}
     	
