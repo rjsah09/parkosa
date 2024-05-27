@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.parkosa.connection.DBConnection;
 import com.parkosa.dto.RegisteredCarDTO;
+import com.parkosa.sign.SignedAccount;
 import com.parkosa.vo.CarTypeVO;
 import com.parkosa.vo.CarVO;
 
@@ -67,19 +68,22 @@ public class CarDAO {
 
 	public List<RegisteredCarDTO> getRegisteredCars() {
 		List <RegisteredCarDTO> registeredCars = new ArrayList<>();
-        String sql = "{ call car_type_pack.user_car_data_list(?) }";
+        String sql = "{ call car_pack.user_car_data_list(?, ?) }";
         
         try {
             Connection conn = DBConnection.getConnection();
             CallableStatement callableStatement = conn.prepareCall(sql);
             //변수 할당
-            callableStatement.registerOutParameter(1, OracleTypes.CURSOR);
+            callableStatement.setString(1, SignedAccount.getPhoneNumber());
+            callableStatement.registerOutParameter(2, OracleTypes.CURSOR);
             callableStatement.execute();
 
-            ResultSet rs = (ResultSet) callableStatement.getObject(1);
+            ResultSet rs = (ResultSet) callableStatement.getObject(2);
+            
             while(rs.next()){
-                String carCode = rs.getString("carCode");
-                String carTypeName = rs.getString("carTypeName");
+                String carCode = rs.getString("car_code");
+                String carTypeName = rs.getString("car_type_name");
+                System.out.println(carCode + ", " + carTypeName);
                 registeredCars.add(new RegisteredCarDTO(carCode, carTypeName));
             }
 
