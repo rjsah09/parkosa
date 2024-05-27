@@ -16,11 +16,14 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class ParkKosaUI extends UI {
-
+    
+	int currentIndex = 0;
+    
     public void placeComponents() {
         // JPanel에 기본적인 레이아웃 설정
         setLayout(null);
@@ -32,13 +35,10 @@ public class ParkKosaUI extends UI {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 25));
         titleLabel.setBounds(100, 10, 200, 50);
         add(titleLabel);
-
-        // 이미지 슬라이드 공간 패널
-        JPanel imagePanel = new JPanel();
+        
         JLabel imageLabel = new JLabel();
-        imagePanel.add(imageLabel);
-        imagePanel.setBackground(Color.WHITE);
-        add(imagePanel);
+        imageLabel.setBounds(50, 70, 300, 400);
+        add(imageLabel);
 
         // 공지사항 패널
         JPanel noticePanel = new JPanel();
@@ -47,29 +47,6 @@ public class ParkKosaUI extends UI {
         noticeLabel.setForeground(Color.WHITE);
         noticePanel.add(noticeLabel);
         add(noticePanel);
-
-        // 하단 이미지 인덱스 패널
-        JPanel indexPanel = new JPanel();
-        indexPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
-        indexPanel.setBackground(Color.WHITE);
-
-        JLabel[] dots = new JLabel[5]; // 5개 이미지로 가정
-        for (int i = 0; i < dots.length; i++) {
-            dots[i] = new JLabel("●");
-            dots[i].setFont(new Font("Arial", Font.PLAIN, 24));
-            dots[i].setForeground(i == 0 ? Color.BLACK : Color.LIGHT_GRAY); // 첫 번째 이미지는 활성화 상태로 설정
-            final int index = i;
-            dots[i].addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    // 이미지 인덱스를 클릭하면 해당 이미지 표시
-                    showImage(index, imageLabel);
-                    resetTimer();
-                }
-            });
-            indexPanel.add(dots[i]);
-        }
-        add(indexPanel);
 
         // 버튼 패널
         JButton signupButton = new JButton("회원가입");
@@ -88,8 +65,7 @@ public class ParkKosaUI extends UI {
         showImage(0, imageLabel);
 
         // 이미지 전환 타이머 설정
-        Timer timer = new Timer(3000, new ActionListener() {
-            int currentIndex = 0;
+        Timer timer = new Timer(5000, new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -99,9 +75,9 @@ public class ParkKosaUI extends UI {
         });
         timer.start();
 
-        /*
+      
         // 마우스 드래그 이벤트 추가
-        imagePanel.addMouseListener(new MouseAdapter() {
+        imageLabel.addMouseListener(new MouseAdapter() {
             int mouseX;
 
             @Override
@@ -120,12 +96,13 @@ public class ParkKosaUI extends UI {
                     // 왼쪽으로 드래그 - 다음 이미지
                     int newIndex = (currentIndex + 1) % 5; // 5개 이미지로 가정
                     showImage(newIndex, imageLabel);
+                    
                 }
-                resetTimer();
+                timer.restart();
             }
-        });*/
+        });
 
-        // 버튼 이벤트 처리
+        // 버튼 이벤트 처리*/
         signupButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // 회원가입 버튼 클릭 시 동작 정의
@@ -143,15 +120,16 @@ public class ParkKosaUI extends UI {
 
     private static void showImage(int index, JLabel imageLabel) {
         String[] images = {
-            "resources/iamges/main2.png", 
-            "resources/iamges/main2.png", 
-            "resources/iamges/main3.png", 
-            "resources/iamges/main4.png", 
-            "resources/iamges/main5.png"
+            "C:\\Users\\KOSA\\eclipse-workspace\\y\\img\\image1.jpg", 
+            "C:\\Users\\KOSA\\eclipse-workspace\\y\\img\\image2.jpg", 
+            "C:\\Users\\KOSA\\eclipse-workspace\\y\\img\\image3.jpg", 
+            "C:\\Users\\KOSA\\eclipse-workspace\\y\\img\\image4.jpg", 
+            "C:\\Users\\KOSA\\eclipse-workspace\\y\\img\\image5.jpg"
         };
         try {
             BufferedImage img = ImageIO.read(new File(images[index]));
-            Image scaledImage = img.getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(img);
+            Image scaledImage = imageIcon.getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), Image.SCALE_SMOOTH);
             imageLabel.setIcon(new ImageIcon(scaledImage));
         } catch (IOException e) {
             e.printStackTrace();
@@ -159,7 +137,4 @@ public class ParkKosaUI extends UI {
         }
     }
 
-    private static void resetTimer() {
-        // 타이머 리셋 메서드
-    }
 }
