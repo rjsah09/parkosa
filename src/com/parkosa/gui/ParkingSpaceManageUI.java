@@ -71,7 +71,7 @@ public class ParkingSpaceManageUI extends UI {
         parkingLotIdfield.setBounds(100,390,275,25);
         add(parkingLotIdfield);
         
-        JLabel descriptionLabel= new JLabel("주차장ID");
+        JLabel descriptionLabel= new JLabel("주차구역");
         descriptionLabel.setBounds(10,430,60,25);
         add(descriptionLabel);
         
@@ -79,7 +79,7 @@ public class ParkingSpaceManageUI extends UI {
         descriptionfield.setBounds(100,430,275,25);
         add(descriptionfield);
         
-        JLabel feePolicyIdLabel= new JLabel("주차장ID");
+        JLabel feePolicyIdLabel= new JLabel("요금정책");
         feePolicyIdLabel.setBounds(10,470,60,25);
         add(feePolicyIdLabel);
         
