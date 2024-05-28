@@ -2,6 +2,7 @@ package com.parkosa.dao;
 
 import com.parkosa.connection.DBConnection;
 import com.parkosa.dto.InsertParkingLotDTO;
+import com.parkosa.image.ImageSaver;
 import com.parkosa.sign.SignedAccount;
 import com.parkosa.vo.CarTypeVO;
 import com.parkosa.vo.FeePolicyVO;
@@ -24,6 +25,8 @@ public class ParkingLotDAO {
         try {
             Connection conn = DBConnection.getConnection();
             CallableStatement callableStatement = conn.prepareCall(proc);
+            
+            String newImageLink = ImageSaver.saveImage(insertParkingLotDTO.getImageLink());
 
             //변수 할당
             callableStatement.registerOutParameter(1, java.sql.Types.NUMERIC);
@@ -31,7 +34,7 @@ public class ParkingLotDAO {
             callableStatement.setString(3, insertParkingLotDTO.getName());
             callableStatement.setString(4, insertParkingLotDTO.getAddress());
             callableStatement.setInt(5, insertParkingLotDTO.getLocationId());
-            callableStatement.setString(6, insertParkingLotDTO.getImageLink());
+            callableStatement.setString(6, newImageLink);
 
             callableStatement.executeUpdate();
             
