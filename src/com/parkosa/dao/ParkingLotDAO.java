@@ -19,21 +19,24 @@ public class ParkingLotDAO {
 
     public void insertParkLot(InsertParkingLotDTO insertParkingLotDTO) {
 
-        String proc = "{ call parking_lot_pack.insert_parking_lot(?, ?, ?, ?, ?) }";
+        String proc = "{ ? = call parking_lot_pack.insert_parking_lot(?, ?, ?, ?, ?) }";
 
         try {
             Connection conn = DBConnection.getConnection();
             CallableStatement callableStatement = conn.prepareCall(proc);
 
             //변수 할당
-            callableStatement.setString(1, insertParkingLotDTO.getTelNumber());
-            callableStatement.setString(2, insertParkingLotDTO.getName());
-            callableStatement.setString(3, insertParkingLotDTO.getAddress());
-            callableStatement.setInt(4, insertParkingLotDTO.getLocationId());
-            callableStatement.setString(5, insertParkingLotDTO.getImageLink());
-
+            callableStatement.registerOutParameter(1, java.sql.Types.NUMERIC);
+            callableStatement.setString(2, insertParkingLotDTO.getTelNumber());
+            callableStatement.setString(3, insertParkingLotDTO.getName());
+            callableStatement.setString(4, insertParkingLotDTO.getAddress());
+            callableStatement.setInt(5, insertParkingLotDTO.getLocationId());
+            callableStatement.setString(6, insertParkingLotDTO.getImageLink());
 
             callableStatement.executeUpdate();
+            
+            int result = callableStatement.getInt(1);
+            System.out.println("결과 = " + result);
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
             e.printStackTrace();
