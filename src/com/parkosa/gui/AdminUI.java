@@ -63,11 +63,11 @@ public class AdminUI extends UI{
             }
         });
 
-        policyManage.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                GUIController.changeUI(ui, new FeePolicyManageUI());
-            }
-        });
+		/*
+		 * policyManage.addActionListener(new ActionListener() { public void
+		 * actionPerformed(ActionEvent e) { GUIController.changeUI(ui, new
+		 * FeePolicyManageUI()); } });
+		 */
 
     }
 

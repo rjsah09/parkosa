@@ -20,6 +20,13 @@ import com.parkosa.dto.RegisteredCarDTO;
 
 public class FeePolicyManageUI extends UI {
 	
+	int parkingLotId;
+	
+	public FeePolicyManageUI(int parkingLotId) {
+		this.parkingLotId = parkingLotId;
+	}
+	
+	
     public void placeComponents() {
         setLayout(null);
         
