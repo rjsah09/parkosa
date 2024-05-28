@@ -49,7 +49,6 @@ public class CarTypeDAO {
         try {
             Connection conn = DBConnection.getConnection();
             CallableStatement callableStatement = conn.prepareCall(sql);
-            //변수 할당
             callableStatement.registerOutParameter(1, OracleTypes.CURSOR);
             callableStatement.execute();
 
