@@ -49,7 +49,7 @@ public class ParkingLotManageUI extends UI {
         ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
         List<RegisteredParkingLotDTO> registeredparkingLots = parkingLotDAO.listParkingLot();
         
-        DefaultTableModel model = new DefaultTableModel(new String[] {"주차장 id", "주차장명", "주소", "요금정책", "주차구역"}, 0) {
+        DefaultTableModel model = new DefaultTableModel(new String[] {"주차장id", "주차장명", "주소", "", ""}, 0) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -61,7 +61,6 @@ public class ParkingLotManageUI extends UI {
 		innerTable.setRowHeight(20);
 		innerTable.setShowVerticalLines(false);
 		innerTable.setShowHorizontalLines(false);
-		innerTable.setTableHeader(null);
 
 		JScrollPane jsp = new JScrollPane(innerTable, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -271,7 +270,7 @@ public class ParkingLotManageUI extends UI {
 			if (col == 3) {
 				GUIController.changeUI(ui, new FeePolicyManageUI(parkingLotId));
 			} else if (col == 4) {
-
+				GUIController.changeUI(ui, new ParkingSpaceManageUI(parkingLotId));
 			}
 		}
 

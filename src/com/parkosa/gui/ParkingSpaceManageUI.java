@@ -46,7 +46,6 @@ public class ParkingSpaceManageUI extends UI {
         innerTable.setRowHeight(20);
         innerTable.setShowVerticalLines(false);
         innerTable.setShowHorizontalLines(false);
-        innerTable.setTableHeader(null);
 
         JScrollPane jsp = new JScrollPane(innerTable,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,

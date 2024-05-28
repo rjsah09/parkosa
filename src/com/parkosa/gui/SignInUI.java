@@ -77,7 +77,6 @@ public class SignInUI extends UI {
                 		 JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
                 	 } else {
                 		 SignedAccount.signIn(result);
-                		 System.out.println(SignedAccount.getPhoneNumber());
                 		 GUIController.changeUI(ui, new MainScreenUI());
                 	 }
                 	 

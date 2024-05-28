@@ -33,7 +33,7 @@ public class RegisteredCarsUI extends UI {
     	CarDAO carDAO = new CarDAO();
     	List <RegisteredCarDTO> registeredCars = carDAO.getRegisteredCars();
     	
-    	DefaultTableModel model = new DefaultTableModel(new String[] {"차량 번호", "차종", "삭제"}, 0) {
+    	DefaultTableModel model = new DefaultTableModel(new String[] {"차량 번호", "차종", ""}, 0) {
     		public boolean isCellEditable(int row, int column) {
     			return false;
     		};
@@ -45,7 +45,6 @@ public class RegisteredCarsUI extends UI {
     	innerTable.setRowHeight(20);
     	innerTable.setShowVerticalLines(false);
     	innerTable.setShowHorizontalLines(false);
-    	innerTable.setTableHeader(null);
     	
         JScrollPane jsp = new JScrollPane(innerTable,
         JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -80,7 +79,6 @@ class TableMouseAdaptor implements MouseListener {
 		
 		if (col == 2) {
 			String carCode = (String) table.getValueAt(row, 0);
-			System.out.println(carCode);
 			int result = JOptionPane.showConfirmDialog(null, "등록한 차량을 삭제하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
 			if (result == JOptionPane.YES_NO_OPTION) {
 				CarDAO carDAO = new CarDAO();

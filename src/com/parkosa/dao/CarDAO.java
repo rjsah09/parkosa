@@ -50,8 +50,6 @@ public class CarDAO {
 			callableStatement.executeUpdate();
 
 			int duplicated = callableStatement.getInt(1);
-			System.out.println(duplicated);
-
 			boolean result = duplicated == 1 ? true : false;
 
 			return result;
@@ -83,7 +81,6 @@ public class CarDAO {
             while(rs.next()){
                 String carCode = rs.getString("car_code");
                 String carTypeName = rs.getString("car_type_name");
-                System.out.println(carCode + ", " + carTypeName);
                 registeredCars.add(new RegisteredCarDTO(carCode, carTypeName));
             }
 

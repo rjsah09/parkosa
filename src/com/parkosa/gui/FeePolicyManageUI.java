@@ -49,14 +49,12 @@ public class FeePolicyManageUI extends UI {
         innerTable.setRowHeight(20);
         innerTable.setShowVerticalLines(false);
         innerTable.setShowHorizontalLines(false);
-        innerTable.setTableHeader(null);
 
         JScrollPane jsp = new JScrollPane(innerTable,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jsp.setBounds(10, 50, 365, 250);
         add(jsp);
-
 
         JLabel increaseMinuteLabel = new JLabel("기본 증가시간");
         increaseMinuteLabel.setBounds(10, 310, 100, 25);
@@ -86,33 +84,27 @@ public class FeePolicyManageUI extends UI {
         carTypeIdLabel.setBounds(10, 430, 100, 25);
         add(carTypeIdLabel);
 
-
         CarTypeDAO carTypeDAO = new CarTypeDAO();
         List<CarTypeVO> list = carTypeDAO.carTypeList();
         String[] items = new String[list.size() + 1];
+        
         for (int i = 0; i < list.size(); i++) {
             items[i] = list.get(i).getName();
         }
+        
         items[list.size()] = "모든 차종";
 
         JComboBox<String> comboSelectCarBox = new JComboBox<>(items);
         comboSelectCarBox.setBounds(120, 430, 255, 25);
         add(comboSelectCarBox);
 
-        
         JComboBox<String> comboBox = new JComboBox<>();
         comboBox.setBounds(40, 140, 295, 25);
         add(comboBox);
         
-
         JButton insertButton = new JButton("생성");
         insertButton.setBounds(10, 510, 100, 30);
         add(insertButton);
-
-
-        JButton previousButton = new JButton("뒤로가기");
-        previousButton.setBounds(275, 510, 100, 30);
-        add(previousButton);
 
         //"단위시간(분)", "최대시간", "증가액", "차종"
         for (int i = 0; i < dtos.size(); i++) {
@@ -139,8 +131,7 @@ public class FeePolicyManageUI extends UI {
                 } else {
                     carTypeId = carTypeDAO.selectCarNo(str);
                 }
-                
-                //int increaseMinute, int increaseFee, int maximumTime, int carTypeId, int parkingLotId
+             
                 InsertFeePolicyDTO insertFeePolicyDTO = new InsertFeePolicyDTO(Integer.valueOf(increaseMinuteField.getText()),
                         Integer.valueOf(increaseFeeField.getText()),
                         Integer.valueOf(maximumTimeField.getText()),
@@ -166,13 +157,6 @@ public class FeePolicyManageUI extends UI {
 		            }
 		            model.addRow(row);
 		        }
-            }
-        });
-
-
-        previousButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
             }
         });
 
