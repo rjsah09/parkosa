@@ -20,12 +20,14 @@ public class FeePolicyVO {
 	}
 
 	public FeePolicyVO(int increaseMinute, int increaseFee, int maximumTime, int carTypeId, int parkingLotId) {
+		super();
 		this.increaseMinute = increaseMinute;
 		this.increaseFee = increaseFee;
 		this.maximumTime = maximumTime;
 		this.carTypeId = carTypeId;
 		this.parkingLotId = parkingLotId;
 	}
+
 
 	public int getId() {
 		return id;

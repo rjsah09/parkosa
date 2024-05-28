@@ -7,7 +7,6 @@ import com.parkosa.vo.FeePolicyVO;
 import java.sql.*;
 
 public class FeePolicyDAO {
-
     public void insertFeePolicy(FeePolicyVO feePolicyVO) {
 
         String proc = "{ call fee_policy_pack.insert_fee_policy(?, ?, ?, ?, ?) }";
@@ -36,5 +35,9 @@ public class FeePolicyDAO {
         } finally {
 
         }
+
     }
+
+
+
 }
