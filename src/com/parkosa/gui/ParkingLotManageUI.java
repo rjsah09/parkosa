@@ -35,25 +35,25 @@ public class ParkingLotManageUI extends UI {
 	JComboBox<String> townBox;
 	JTable innerTable;
 
-	public void placeComponents() {
-
-		setLayout(null);
-
-		AccountDAO accountDAO = new AccountDAO();
-		String name = accountDAO.getName();
-
-		JButton cancelButton = new JButton("뒤로가기");
-		cancelButton.setBounds(10, 10, 100, 25);
-		add(cancelButton);
-
-		ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
-		List<RegisteredParkingLotDTO> registeredparkingLots = parkingLotDAO.listParkingLot();
-
-		DefaultTableModel model = new DefaultTableModel(new String[] { "주차장 id", "주차장 명", "주소", "요금정책", "주차구역" }, 0) {
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
+    public void placeComponents() {
+    	
+        setLayout(null);
+        
+        AccountDAO accountDAO = new AccountDAO();
+        String name = accountDAO.getName();
+        
+        JButton cancelButton = new JButton("뒤로가기");
+        cancelButton.setBounds(10, 10, 100, 25);
+        add(cancelButton);
+     
+        ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
+        List<RegisteredParkingLotDTO> registeredparkingLots = parkingLotDAO.listParkingLot();
+        
+        DefaultTableModel model = new DefaultTableModel(new String[] {"주차장 id", "주차장명", "주소", "요금정책", "주차구역"}, 0) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
 		innerTable = new JTable(model);
 		innerTable.addMouseListener(new ParkingLotTableAdaptor());

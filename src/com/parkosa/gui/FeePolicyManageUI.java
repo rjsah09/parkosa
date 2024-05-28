@@ -6,6 +6,7 @@ import com.parkosa.dao.CarTypeDAO;
 import com.parkosa.dao.FeePolicyDAO;
 import com.parkosa.dto.InsertFeePolicyDTO;
 import com.parkosa.dto.RegisteredCarDTO;
+import com.parkosa.dto.RegisteredParkingLotDTO;
 import com.parkosa.vo.CarTypeVO;
 
 import javax.swing.*;
@@ -148,6 +149,23 @@ public class FeePolicyManageUI extends UI {
                 
                 FeePolicyDAO feePolicyDAO = new FeePolicyDAO();
                 feePolicyDAO.insertFeePolicy(insertFeePolicyDTO);
+                
+                //새로고침 코드
+                JOptionPane.showMessageDialog(null, "등록되었습니다.");
+                model.setNumRows(0);
+				List<InsertFeePolicyDTO> dtos = feePolicyDAO.getListFeePolicy(parkingLotId);
+				for (int i = 0; i < dtos.size(); i++) {
+		            String[] row = new String[4];
+		            row[0] = Integer.toString(dtos.get(i).getIncreaseMinute());
+		            row[1] = Integer.toString(dtos.get(i).getMaximumTime());
+		            row[2] = Integer.toString(dtos.get(i).getIncreaseFee());
+		            if (dtos.get(i).getCarTypeName() == null) {
+		            	row[3] = "모든 차종";            	
+		            } else {
+		            	row[3] = dtos.get(i).getCarTypeName();
+		            }
+		            model.addRow(row);
+		        }
             }
         });
 
