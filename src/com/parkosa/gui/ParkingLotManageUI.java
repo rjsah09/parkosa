@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -26,12 +27,14 @@ import com.parkosa.dto.getLocationDTO;
 import com.parkosa.image.ImageSaver;
 
 public class ParkingLotManageUI extends UI {
-    
+    int provinceId;
+    int cityId;
+    int townId;
+    JComboBox<String> provinceBox;
+    JComboBox<String> cityBox;
+    JComboBox<String> townBox;
+
     public void placeComponents() {
-    	
-    	int provinceId;
-    	int cityId;
-    	int townId;
     	
         setLayout(null);
         
@@ -109,26 +112,24 @@ public class ParkingLotManageUI extends UI {
         locationIdLabel.setBounds(10,470,60,25);
         add(locationIdLabel);
         
-        JComboBox<String> provinceBox = new JComboBox<>();
+        LocationDAO locationDAO = new LocationDAO();
+        List<getLocationDTO> provinceList = locationDAO.getLocations(null);
+        String[] provinceItems = new String[provinceList.size()];
+        for (int i = 0; i < provinceList.size(); i++) {
+            provinceItems[i] = provinceList.get(i).getName();
+        }
+        
+        provinceBox = new JComboBox<>(provinceItems);
         provinceBox.setBounds(100, 470, 92, 25);
         add(provinceBox);
         
-        JComboBox<String> cityBox = new JComboBox<>();
+        cityBox = new JComboBox<>();
         cityBox.setBounds(192, 470, 92, 25);
         add(cityBox);
-
-        LocationDAO locationDAO = new LocationDAO();
-        List<getLocationDTO> list = locationDAO.getLocations(0);
-        String[] items = new String[list.size()];
-        for (int i =0; i< list.size(); i++) {
-        	System.out.println(items[i]);
-            items[i] = list.get(i).getName();
-        }
         
-        JComboBox<String> townBox = new JComboBox<>();
+        townBox = new JComboBox<>();
         townBox.setBounds(284, 470, 92, 25);
         add(townBox);
-        
         
         JButton insertButton = new JButton("생성");
         insertButton.setBounds(10,510,100,30);
@@ -153,22 +154,72 @@ public class ParkingLotManageUI extends UI {
         //시 버튼 선택 액션
         provinceBox.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		int index = ((JComboBox)e.getSource()).getSelectedIndex();
-        		int id = list.get(index).getId();	
+        		cityId = 0;
+        		townId = 0;
+        		
+        		int index = ((JComboBox) e.getSource()).getSelectedIndex();
+        		provinceId = provinceList.get(index).getId();
+        		
+                List<getLocationDTO> cityList = locationDAO.getLocations(provinceId);
+                cityBox.removeAllItems();
+                for (getLocationDTO city : cityList) {
+                    cityBox.addItem(city.getName());
+                }
         	}
         });
         
+        cityBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	townId = 0;
+            	
+                if (cityBox.getSelectedItem() != null) {
+                    int index = cityBox.getSelectedIndex();
+                    if (index >= 0) {
+                        List<getLocationDTO> cityList = locationDAO.getLocations(provinceId);
+                        cityId = cityList.get(index).getId();
+                        List<getLocationDTO> townList = locationDAO.getLocations(cityId);
+                        townBox.removeAllItems();
+                        for (getLocationDTO town : townList) {
+                            townBox.addItem(town.getName());
+                        }
+                    }
+                }
+            }
+        });
+        
+        townBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (townBox.getSelectedItem() != null) {
+                    int index = townBox.getSelectedIndex();
+                    if (index >= 0) {
+                        List<getLocationDTO> cityList = locationDAO.getLocations(provinceId);
+                        townId = cityList.get(index).getId();
+                    }
+                }
+            }
+        });
+        
+        //등록 버튼
         insertButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
                 InsertParkingLotDTO insertParkingLotDTO = new InsertParkingLotDTO(nameField.getText(),
                 											telNumberField.getText(),
-                											0, // locationField return타입 변환 메소드 구현해야됨
+                											townId, // locationField return타입 변환 메소드 구현해야됨
                 											addressField.getText(),
                 											imageFilePathField.getText());
                 
+                System.out.println(nameField.getText() + " " +
+						telNumberField.getText() + " " +
+						townId + " " +// locationField return타입 변환 메소드 구현해야됨
+						addressField.getText() + " " + 
+						imageFilePathField.getText());
+                
                 ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
-                parkingLotDAO.insertParkLot(insertParkingLotDTO);
+                int result = parkingLotDAO.insertParkLot(insertParkingLotDTO);
+                String output = result == 1 ? "등록되었습니다" : "등록에 실패했습니다";
+                JOptionPane.showMessageDialog(null, output);
+                ui.revalidate();
             }
         });
         

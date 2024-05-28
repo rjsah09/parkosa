@@ -27,11 +27,10 @@ public class LocationDAO {
 			callableStatement.execute();
 			ResultSet rs = (ResultSet) callableStatement.getObject(2);
 			
-			while(rs.next()){
+			while(rs.next()) {
 				int id = rs.getInt("ID");
 				String name = rs.getString("NAME");
 				locationList.add(new getLocationDTO(id, name));
-				System.out.println("----id : " + id + "  name : " + name);
 			}
 			
 			return  locationList;

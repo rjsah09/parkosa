@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ParkingLotDAO {
 
-    public void insertParkLot(InsertParkingLotDTO insertParkingLotDTO) {
+    public int insertParkLot(InsertParkingLotDTO insertParkingLotDTO) {
 
         String proc = "{ ? = call parking_lot_pack.insert_parking_lot(?, ?, ?, ?, ?) }";
 
@@ -38,8 +38,8 @@ public class ParkingLotDAO {
 
             callableStatement.executeUpdate();
             
-            int result = callableStatement.getInt(1);
-            System.out.println("결과 = " + result);
+            return callableStatement.getInt(1);
+            //System.out.println("결과 = " + result);
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
             e.printStackTrace();
@@ -48,7 +48,8 @@ public class ParkingLotDAO {
         } finally {
 
         }
-
+        
+        return 0;
     }
 
 
