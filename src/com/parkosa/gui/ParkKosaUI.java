@@ -37,14 +37,6 @@ public class ParkKosaUI extends UI {
         imageLabel.setBounds(50, 70, 300, 400);
         add(imageLabel);
 
-        // 공지사항 패널
-        JLabel jLabel = new JLabel();
-        jLabel.setBackground(Color.GRAY);
-        JLabel noticeLabel = new JLabel("공지 사항 / 광고 / 요금 관련 안내", JLabel.CENTER);
-        noticeLabel.setForeground(Color.WHITE);
-        jLabel.add(noticeLabel);
-        add(jLabel);
-
         // 버튼 패널
         JButton signupButton = new JButton("회원가입");
         JButton loginButton = new JButton("로그인");
