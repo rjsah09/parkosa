@@ -3,6 +3,8 @@ package com.parkosa.gui;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,7 @@ import com.parkosa.dao.LocationDAO;
 import com.parkosa.dao.ParkingLotDAO;
 import com.parkosa.dto.InsertParkingLotDTO;
 import com.parkosa.dto.RegisteredCarDTO;
+import com.parkosa.dto.RegisteredParkingLotDTO;
 import com.parkosa.dto.getLocationDTO;
 import com.parkosa.image.ImageSaver;
 
@@ -33,6 +36,7 @@ public class ParkingLotManageUI extends UI {
     JComboBox<String> provinceBox;
     JComboBox<String> cityBox;
     JComboBox<String> townBox;
+    JTable innerTable;
 
     public void placeComponents() {
     	
@@ -45,17 +49,20 @@ public class ParkingLotManageUI extends UI {
         cancelButton.setBounds(10, 10, 100, 25);
         add(cancelButton);
      
-        CarDAO carDAO = new CarDAO();
-        List<RegisteredCarDTO> registeredCars = carDAO.getRegisteredCars();
+        ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
+        List<RegisteredParkingLotDTO> registeredparkingLots = parkingLotDAO.listParkingLot();
+//        for (int i = 0; i < registeredparkingLots.size(); i++) {
+//        	System.out.println(registeredparkingLots.get(i).getName());
+//        }
         
-        DefaultTableModel model = new DefaultTableModel(new String[] {"차량 번호", "차종", "삭제"}, 0) {
+        DefaultTableModel model = new DefaultTableModel(new String[] {"주차장 id", "주차장 명", "주소", "요금정책", "주차구역"}, 0) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
-        JTable innerTable = new JTable(model);
-        innerTable.addMouseListener(new TableMouseAdaptor());
+        innerTable = new JTable(model);
+        innerTable.addMouseListener(new ParkingLotTableAdaptor());
         innerTable.setFont(new Font("NanumGothic", Font.PLAIN, 16));
         innerTable.setRowHeight(20);
         innerTable.setShowVerticalLines(false);
@@ -143,15 +150,17 @@ public class ParkingLotManageUI extends UI {
         deleteButton.setBounds(275,510,100,30);
         add(deleteButton);
         
-        for (int i = 0; i < registeredCars.size(); i++) {
-            String[] row = new String[3];
-            row[0] = registeredCars.get(i).getCarCode();
-            row[1] = registeredCars.get(i).getCarTypeName();
-            row[2] = "삭제";
+        for (int i = 0; i < registeredparkingLots.size(); i++) {
+            String[] row = new String[5];
+            row[0] = Integer.toString(registeredparkingLots.get(i).getId());
+            row[1] = registeredparkingLots.get(i).getName();
+            row[2] = registeredparkingLots.get(i).getAddress();
+            row[3] = "요금정책";
+            row[4] = "주차구역";
             model.addRow(row);
         }
         
-        //시 버튼 선택 액션
+        //도/시버튼 이벤트
         provinceBox.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		cityId = 0;
@@ -168,6 +177,7 @@ public class ParkingLotManageUI extends UI {
         	}
         });
         
+        //시/군/구 버튼 이벤트
         cityBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	townId = 0;
@@ -187,6 +197,7 @@ public class ParkingLotManageUI extends UI {
             }
         });
         
+        //읍/면/동 버튼 이벤트
         townBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (townBox.getSelectedItem() != null) {
@@ -219,7 +230,19 @@ public class ParkingLotManageUI extends UI {
                 int result = parkingLotDAO.insertParkLot(insertParkingLotDTO);
                 String output = result == 1 ? "등록되었습니다" : "등록에 실패했습니다";
                 JOptionPane.showMessageDialog(null, output);
-                ui.revalidate();
+                if (result == 1) {
+                	model.setNumRows(0);
+                    List<RegisteredParkingLotDTO> registeredparkingLots = parkingLotDAO.listParkingLot();
+                    for (int i = 0; i < registeredparkingLots.size(); i++) {
+                        String[] row = new String[5];
+                        row[0] = Integer.toString(registeredparkingLots.get(i).getId());
+                        row[1] = registeredparkingLots.get(i).getName();
+                        row[2] = registeredparkingLots.get(i).getAddress();
+                        row[3] = "요금정책";
+                        row[4] = "주차구역";
+                        model.addRow(row);
+                    }
+                }
             }
         });
         
@@ -248,6 +271,42 @@ public class ParkingLotManageUI extends UI {
             }
         });
 
+    }
+    
+    class ParkingLotTableAdaptor implements MouseListener {
+    	public void mouseClicked(MouseEvent e) {
+    		JTable table = (JTable) e.getSource();
+    		int row = table.getSelectedRow();
+    		int col = table.getSelectedColumn();
+    		int parkingLotId = Integer.parseInt((String) table.getValueAt(row, 0));
+    		System.out.println(parkingLotId);
+    		
+    		if (col == 3) {
+    			GUIController.changeUI(ui, new FeePolicyManageUI(parkingLotId));
+    		} else if (col == 4) {
+    			
+    		}
+    	}
+
+    	@Override
+    	public void mousePressed(MouseEvent e) {
+    	// TODO Auto-generated method stub
+    	}
+
+    	@Override
+    	public void mouseReleased(MouseEvent e) {
+    	// TODO Auto-generated method stub
+    	}
+
+    	@Override
+    	public void mouseEntered(MouseEvent e) {
+    	// TODO Auto-generated method stub
+    	}
+
+    	@Override
+    	public void mouseExited(MouseEvent e) {
+    	// TODO Auto-generated method stub
+    	}
     }
     
 }

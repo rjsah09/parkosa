@@ -89,7 +89,6 @@ public class RegisterCarUI extends UI{
             }
         });
 
-
       //차량 등록 버튼 이벤트
         reserveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -117,7 +116,6 @@ public class RegisterCarUI extends UI{
                 }
             }
         });
-
 
     }
 }
