@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -16,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.parkosa.dao.AccountDAO;
 import com.parkosa.dao.CarDAO;
+import com.parkosa.dao.LocationDAO;
 import com.parkosa.dao.ParkingLotDAO;
 import com.parkosa.dto.InsertParkingLotDTO;
 import com.parkosa.dto.RegisteredCarDTO;
@@ -56,28 +58,36 @@ public class ParkingLotManageUI extends UI {
         add(jsp);
         
         JLabel nameLabel= new JLabel("이름");
-        nameLabel.setBounds(10,310,60,25);
+        nameLabel.setBounds(10,270,60,25);
         add(nameLabel);
         
         JTextField nameField = new JTextField();
-        nameField.setBounds(100,310,275,25);
+        nameField.setBounds(100,270,275,25);
         add(nameField);
         
         JLabel telNumberLabel= new JLabel("번호");
-        telNumberLabel.setBounds(10,350,60,25);
+        telNumberLabel.setBounds(10,310,60,25);
         add(telNumberLabel);
         
         JTextField telNumberField = new JTextField();
-        telNumberField.setBounds(100,350,275,25);
+        telNumberField.setBounds(100,310,275,25);
         add(telNumberField);
         
         JLabel imageFileLabel= new JLabel("이미지 파일");
-        imageFileLabel.setBounds(10,390,80,25);
+        imageFileLabel.setBounds(10,350,80,25);
         add(imageFileLabel);
         
         JButton imageFileField = new JButton("파일 열기");
-        imageFileField.setBounds(100,390,275,25);
+        imageFileField.setBounds(100,350,275,25);
         add(imageFileField);
+        
+        JLabel imageFilePathLabel= new JLabel("파일 경로");
+        imageFilePathLabel.setBounds(10,390,80,25);
+        add(imageFilePathLabel);
+        
+        JTextField imageFilePathField = new JTextField();
+        imageFilePathField.setBounds(100,390,275,25);
+        add(imageFilePathField);        
         
         JLabel addressLabel= new JLabel("주소");
         addressLabel.setBounds(10,430,60,25);
@@ -91,9 +101,24 @@ public class ParkingLotManageUI extends UI {
         locationIdLabel.setBounds(10,470,60,25);
         add(locationIdLabel);
         
-        JTextField locationIdField= new JTextField();
-        locationIdField.setBounds(100,470,275,25);
-        add(locationIdField);
+        /*LocationDAO locationDAO = new LocationDAO();
+        String[] items = new String[];
+        for (int i =0; i< .size(); i++) {
+            items[i] = .get(i).getName();
+        }*/
+        
+        JComboBox<String> locationId1Box = new JComboBox<>();
+        locationId1Box.setBounds(100, 470, 92, 25);
+        add(locationId1Box);
+        
+        JComboBox<String> locationId2Box = new JComboBox<>();
+        locationId2Box.setBounds(192, 470, 92, 25);
+        add(locationId2Box);
+        
+        JComboBox<String> locationId3Box = new JComboBox<>();
+        locationId3Box.setBounds(284, 470, 92, 25);
+        add(locationId3Box);
+        
         
         JButton insertButton = new JButton("생성");
         insertButton.setBounds(10,510,100,30);
@@ -123,9 +148,9 @@ public class ParkingLotManageUI extends UI {
                 
                 InsertParkingLotDTO insertParkingLotDTO = new InsertParkingLotDTO(nameField.getText(),
                 											telNumberField.getText(),
-                											Integer.valueOf(locationIdField.getText()),
+                											Integer.valueOf(locationIdField.getText()), // locationField return타입 변환 메소드 구현해야됨
                 											addressField.getText(),
-                											"asdasd");
+                											imageFilePathField.getText());
                 
                 ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
                 parkingLotDAO.insertParkLot(insertParkingLotDTO);
@@ -141,10 +166,8 @@ public class ParkingLotManageUI extends UI {
                 int returnVal = fileChooser.showOpenDialog(getParent());
                 
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
-                	JLabel imagePathLabel = new JLabel();
-                	imagePathLabel.setText(fileChooser.getSelectedFile().getPath());
-                	imagePathLabel.setBounds(100,390,275,25);
-                	add(imagePathLabel);
+                	imageFilePathField.setText(fileChooser.getSelectedFile().getPath());
+                	imageFilePathField.setEditable(false);
                 }
             }
         });
