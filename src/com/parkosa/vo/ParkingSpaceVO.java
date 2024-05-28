@@ -8,7 +8,6 @@ public class ParkingSpaceVO {
 	private int feePolicyId;
 	
 	public ParkingSpaceVO(int id, int parkingLotId, String description, int feePolicyId) {
-		super();
 		this.id = id;
 		this.parkingLotId = parkingLotId;
 		this.description = description;
@@ -16,8 +15,6 @@ public class ParkingSpaceVO {
 	}
 
 	public ParkingSpaceVO(int parkingLotId, String description, int feePolicyId) {
-		super();
-		this.id = id;
 		this.parkingLotId = parkingLotId;
 		this.description = description;
 		this.feePolicyId = feePolicyId;
