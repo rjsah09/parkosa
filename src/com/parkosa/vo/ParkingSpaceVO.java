@@ -15,6 +15,14 @@ public class ParkingSpaceVO {
 		this.feePolicyId = feePolicyId;
 	}
 
+	public ParkingSpaceVO(int parkingLotId, String description, int feePolicyId) {
+		super();
+		this.id = id;
+		this.parkingLotId = parkingLotId;
+		this.description = description;
+		this.feePolicyId = feePolicyId;
+	}
+
 	public int getId() {
 		return id;
 	}

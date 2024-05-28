@@ -9,7 +9,7 @@ import java.sql.*;
 public class FeePolicyDAO {
     public void insertFeePolicy(FeePolicyVO feePolicyVO) {
 
-        String proc = "{ call insert_fee_policy(?, ?, ?, ?, ?) }";
+        String proc = "{ call fee_policy_pack.insert_fee_policy(?, ?, ?, ?, ?) }";
 
         try {
             Connection conn = DBConnection.getConnection();
