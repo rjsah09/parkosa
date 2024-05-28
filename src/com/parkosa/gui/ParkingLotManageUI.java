@@ -148,9 +148,9 @@ public class ParkingLotManageUI extends UI {
                 
                 InsertParkingLotDTO insertParkingLotDTO = new InsertParkingLotDTO(nameField.getText(),
                 											telNumberField.getText(),
-                											Integer.valueOf(locationIdField.getText()),
+                											Integer.valueOf(locationIdField.getText()), // locationField return타입 변환 메소드 구현해야됨
                 											addressField.getText(),
-                											"asdasd");
+                											imageFilePathField.getText());
                 
                 ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
                 parkingLotDAO.insertParkLot(insertParkingLotDTO);
