@@ -18,7 +18,7 @@ public class FeePolicyVO {
 		this.carTypeId = carTypeId;
 		this.parkingLotId = parkingLotId;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
