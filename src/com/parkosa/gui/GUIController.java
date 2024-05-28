@@ -15,8 +15,6 @@ public class GUIController {
         frame.add(parkKosaUI);
         parkKosaUI.placeComponents();
 
-
-
         frame.setVisible(true);
     }
 
