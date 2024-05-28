@@ -42,14 +42,12 @@ public class ParkingLotDAO {
             callableStatement.executeUpdate();
             
             return callableStatement.getInt(1);
-            //System.out.println("결과 = " + result);
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-
         }
         
         return 0;
