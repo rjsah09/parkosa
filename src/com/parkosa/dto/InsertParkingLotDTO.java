@@ -1,14 +1,16 @@
 package com.parkosa.dto;
 
 public class InsertParkingLotDTO {
-	private String telNumber;
 	private String name;
+	private String telNumber;
 	private int locationId;
+	private String address;
 	
-	public InsertParkingLotDTO(String telNumber, String name, int locationId) {
+	public InsertParkingLotDTO(String name, String telNumber, int locationId, String address) {
 		this.telNumber = telNumber;
 		this.name = name;
 		this.locationId = locationId;
+		this.address = address;
 	}
 	
 	public String getTelNumber() {
@@ -21,6 +23,10 @@ public class InsertParkingLotDTO {
 	
 	public int getLocationId() {
 		return locationId;
+	}
+	
+	public String getAddress() {
+		return address;
 	}
 	
 }
