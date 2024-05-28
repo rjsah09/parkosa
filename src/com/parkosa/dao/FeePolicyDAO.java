@@ -4,15 +4,19 @@ import com.parkosa.connection.DBConnection;
 import com.parkosa.vo.AccountVO;
 import com.parkosa.vo.FeePolicyVO;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class FeePolicyDAO {
+    public static void main(String[] args) {
+        FeePolicyDAO dao = new FeePolicyDAO();
+        FeePolicyVO vo = new FeePolicyVO(10, 100, 360, 0,5);
+        dao.insertFeePolicy(vo);
+    }
     public void insertFeePolicy(FeePolicyVO feePolicyVO) {
+        //execute insert_fee_policy(10, 300, 300, null, 3);
+        ;
 
-        String proc = "{ call fee_policy_pack.insert_fee_policy(?, ?, ?, ?, ?) }";
+        String proc = "{ call insert_fee_policy(?, ?, ?, ?, ?) }";
 
         try {
             Connection conn = DBConnection.getConnection();
@@ -22,7 +26,11 @@ public class FeePolicyDAO {
             callableStatement.setInt(1, feePolicyVO.getIncreaseMinute());
             callableStatement.setInt(2, feePolicyVO.getIncreaseFee());
             callableStatement.setInt(3, feePolicyVO.getMaximumTime());
-            callableStatement.setInt(4, feePolicyVO.getCarTypeId());
+            if(feePolicyVO.getCarTypeId() == 0){
+                callableStatement.setNull(4, Types.INTEGER);
+            }else {
+                callableStatement.setInt(4, feePolicyVO.getCarTypeId());
+            }
             callableStatement.setInt(5, feePolicyVO.getParkingLotId());
 
             callableStatement.executeUpdate();
