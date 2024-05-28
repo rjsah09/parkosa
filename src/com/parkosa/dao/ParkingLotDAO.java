@@ -1,20 +1,17 @@
 package com.parkosa.dao;
 
-import com.parkosa.connection.DBConnection;
-import com.parkosa.dto.InsertParkingLotDTO;
-import com.parkosa.image.ImageSaver;
-import com.parkosa.sign.SignedAccount;
-import com.parkosa.vo.CarTypeVO;
-import com.parkosa.vo.FeePolicyVO;
-import com.parkosa.vo.ParkingLotVO;
-import oracle.jdbc.OracleTypes;
-
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+
+import com.parkosa.connection.DBConnection;
+import com.parkosa.dto.InsertParkingLotDTO;
+import com.parkosa.dto.RegisteredParkingLotDTO;
+import com.parkosa.image.ImageSaver;
+
+import oracle.jdbc.OracleTypes;
 
 public class ParkingLotDAO {
 
@@ -52,28 +49,27 @@ public class ParkingLotDAO {
         return 0;
     }
 
+    public ArrayList<RegisteredParkingLotDTO> listParkingLot(int locationId) {
+        ArrayList<RegisteredParkingLotDTO> listParkingLot = new ArrayList<>();
+        String sql = "{call parking_lot_pack.list_parking_lot(?, ?)}";
 
-  /*  //주차장리스트 조회
-    public List<ParkingLotVO> parkingLotList(){
-        List <ParkingLotVO> carTypeList = new ArrayList<>();
-        String sql = "{ call parking_lot_pack.list_parking_lot(?, ?) }";
-        int locationId = 0;
         try {
             Connection conn = DBConnection.getConnection();
             CallableStatement callableStatement = conn.prepareCall(sql);
+            //변수 할당
             callableStatement.setInt(1, locationId);
             callableStatement.registerOutParameter(2, OracleTypes.CURSOR);
             callableStatement.execute();
 
-            ResultSet rs = (ResultSet) callableStatement.getObject(1);
-            while(rs.next()){
-                String name = rs.getString("name");
-                String telNumber = rs.getString("telNumber");
-                String address = rs.getString("telNumber");
+            ResultSet rs = (ResultSet) callableStatement.getObject(2);
 
-                System.out.println(id+" "+name);
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String address = rs.getString("address");
+                listParkingLot.add(new RegisteredParkingLotDTO(id, name, address));
             }
-            System.out.println();
+
 
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
@@ -83,9 +79,7 @@ public class ParkingLotDAO {
         } finally {
         }
 
-        return carTypeList;
-    }*/
-
-
+        return listParkingLot;
+    }
 
 }
