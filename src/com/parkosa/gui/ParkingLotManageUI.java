@@ -3,6 +3,7 @@ package com.parkosa.gui;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -17,14 +18,21 @@ import javax.swing.table.DefaultTableModel;
 
 import com.parkosa.dao.AccountDAO;
 import com.parkosa.dao.CarDAO;
+import com.parkosa.dao.LocationDAO;
 import com.parkosa.dao.ParkingLotDAO;
 import com.parkosa.dto.InsertParkingLotDTO;
 import com.parkosa.dto.RegisteredCarDTO;
+import com.parkosa.dto.getLocationDTO;
 import com.parkosa.image.ImageSaver;
 
 public class ParkingLotManageUI extends UI {
     
     public void placeComponents() {
+    	
+    	int provinceId;
+    	int cityId;
+    	int townId;
+    	
         setLayout(null);
         
         AccountDAO accountDAO = new AccountDAO();
@@ -108,6 +116,14 @@ public class ParkingLotManageUI extends UI {
         JComboBox<String> cityBox = new JComboBox<>();
         cityBox.setBounds(192, 470, 92, 25);
         add(cityBox);
+
+        LocationDAO locationDAO = new LocationDAO();
+        List<getLocationDTO> list = locationDAO.getLocations(0);
+        String[] items = new String[list.size()];
+        for (int i =0; i< list.size(); i++) {
+        	System.out.println(items[i]);
+            items[i] = list.get(i).getName();
+        }
         
         JComboBox<String> townBox = new JComboBox<>();
         townBox.setBounds(284, 470, 92, 25);
@@ -125,8 +141,6 @@ public class ParkingLotManageUI extends UI {
         JButton deleteButton = new JButton("삭제");
         deleteButton.setBounds(275,510,100,30);
         add(deleteButton);
-
-   
         
         for (int i = 0; i < registeredCars.size(); i++) {
             String[] row = new String[3];
@@ -136,7 +150,14 @@ public class ParkingLotManageUI extends UI {
             model.addRow(row);
         }
         
-        // Event listener for the cancel button
+        //시 버튼 선택 액션
+        provinceBox.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		int index = ((JComboBox)e.getSource()).getSelectedIndex();
+        		int id = list.get(index).getId();	
+        	}
+        });
+        
         insertButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
@@ -169,17 +190,6 @@ public class ParkingLotManageUI extends UI {
             }
         });
         
-        modifyButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-        
-        deleteButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-               
-            }
-        });
         
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

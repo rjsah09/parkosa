@@ -22,15 +22,18 @@ public class LocationDAO {
 			}else {
 				callableStatement.setInt(1, upperId);
 			}
+			
 			callableStatement.registerOutParameter(2, OracleTypes.CURSOR);
 			callableStatement.execute();
 			ResultSet rs = (ResultSet) callableStatement.getObject(2);
+			
 			while(rs.next()){
 				int id = rs.getInt("ID");
 				String name = rs.getString("NAME");
 				locationList.add(new getLocationDTO(id, name));
-				System.out.println("id : "+id+"  name : "+name);
+				System.out.println("----id : " + id + "  name : " + name);
 			}
+			
 			return  locationList;
 		}catch (SQLException e) {
 			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());

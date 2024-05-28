@@ -124,7 +124,7 @@ public class ParkKosaUI extends UI {
             ".\\resources\\images\\image2.jpg", 
             ".\\resources\\images\\image3.PNG", 
             ".\\resources\\images\\image4.jpg", 
-            ".\\resources\\images\\image5.jpg"
+            ".\\resources\\images\\iamge5.jpg"
         };
         
         try {
