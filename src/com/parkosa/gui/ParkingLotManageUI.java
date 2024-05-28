@@ -3,12 +3,15 @@ package com.parkosa.gui;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -16,15 +19,24 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 import com.parkosa.dao.AccountDAO;
-import com.parkosa.dao.CarDAO;
 import com.parkosa.dao.LocationDAO;
 import com.parkosa.dao.ParkingLotDAO;
 import com.parkosa.dto.InsertParkingLotDTO;
-import com.parkosa.dto.RegisteredCarDTO;
+import com.parkosa.dto.RegisteredParkingLotDTO;
+import com.parkosa.dto.getLocationDTO;
+import com.parkosa.image.ImageSaver;
 
 public class ParkingLotManageUI extends UI {
-    
+    int provinceId;
+    int cityId;
+    int townId;
+    JComboBox<String> provinceBox;
+    JComboBox<String> cityBox;
+    JComboBox<String> townBox;
+    JTable innerTable;
+
     public void placeComponents() {
+    	
         setLayout(null);
         
         AccountDAO accountDAO = new AccountDAO();
@@ -34,17 +46,17 @@ public class ParkingLotManageUI extends UI {
         cancelButton.setBounds(10, 10, 100, 25);
         add(cancelButton);
      
-        CarDAO carDAO = new CarDAO();
-        List<RegisteredCarDTO> registeredCars = carDAO.getRegisteredCars();
+        ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
+        List<RegisteredParkingLotDTO> registeredparkingLots = parkingLotDAO.listParkingLot();
         
-        DefaultTableModel model = new DefaultTableModel(new String[] {"차량 번호", "차종", "삭제"}, 0) {
+        DefaultTableModel model = new DefaultTableModel(new String[] {"주차장 id", "주차장 명", "주소", "요금정책", "주차구역"}, 0) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
-        JTable innerTable = new JTable(model);
-        innerTable.addMouseListener(new TableMouseAdaptor());
+        innerTable = new JTable(model);
+        innerTable.addMouseListener(new ParkingLotTableAdaptor());
         innerTable.setFont(new Font("NanumGothic", Font.PLAIN, 16));
         innerTable.setRowHeight(20);
         innerTable.setShowVerticalLines(false);
@@ -57,7 +69,7 @@ public class ParkingLotManageUI extends UI {
         jsp.setBounds(10, 50, 365, 200);
         add(jsp);
         
-        JLabel nameLabel= new JLabel("이름");
+        JLabel nameLabel= new JLabel("주차장 명");
         nameLabel.setBounds(10,270,60,25);
         add(nameLabel);
         
@@ -65,7 +77,7 @@ public class ParkingLotManageUI extends UI {
         nameField.setBounds(100,270,275,25);
         add(nameField);
         
-        JLabel telNumberLabel= new JLabel("번호");
+        JLabel telNumberLabel= new JLabel("연락처");
         telNumberLabel.setBounds(10,310,60,25);
         add(telNumberLabel);
         
@@ -73,11 +85,11 @@ public class ParkingLotManageUI extends UI {
         telNumberField.setBounds(100,310,275,25);
         add(telNumberField);
         
-        JLabel imageFileLabel= new JLabel("이미지 파일");
+        JLabel imageFileLabel= new JLabel("주자창 배치도");
         imageFileLabel.setBounds(10,350,80,25);
         add(imageFileLabel);
         
-        JButton imageFileField = new JButton("파일 열기");
+        JButton imageFileField = new JButton("파일 찾기");
         imageFileField.setBounds(100,350,275,25);
         add(imageFileField);
         
@@ -89,7 +101,7 @@ public class ParkingLotManageUI extends UI {
         imageFilePathField.setBounds(100,390,275,25);
         add(imageFilePathField);        
         
-        JLabel addressLabel= new JLabel("주소");
+        JLabel addressLabel= new JLabel("실제 주소");
         addressLabel.setBounds(10,430,60,25);
         add(addressLabel);
         
@@ -97,28 +109,28 @@ public class ParkingLotManageUI extends UI {
         addressField.setBounds(100,430,275,25);
         add(addressField);
         
-        JLabel locationIdLabel= new JLabel("주소id");
+        JLabel locationIdLabel= new JLabel("단위 주소");
         locationIdLabel.setBounds(10,470,60,25);
         add(locationIdLabel);
         
-        /*LocationDAO locationDAO = new LocationDAO();
-        String[] items = new String[];
-        for (int i =0; i< .size(); i++) {
-            items[i] = .get(i).getName();
-        }*/
+        LocationDAO locationDAO = new LocationDAO();
+        List<getLocationDTO> provinceList = locationDAO.getLocations(null);
+        String[] provinceItems = new String[provinceList.size()];
+        for (int i = 0; i < provinceList.size(); i++) {
+            provinceItems[i] = provinceList.get(i).getName();
+        }
         
-        JComboBox<String> locationId1Box = new JComboBox<>();
-        locationId1Box.setBounds(100, 470, 92, 25);
-        add(locationId1Box);
+        provinceBox = new JComboBox<>(provinceItems);
+        provinceBox.setBounds(100, 470, 92, 25);
+        add(provinceBox);
         
-        JComboBox<String> locationId2Box = new JComboBox<>();
-        locationId2Box.setBounds(192, 470, 92, 25);
-        add(locationId2Box);
+        cityBox = new JComboBox<>();
+        cityBox.setBounds(192, 470, 92, 25);
+        add(cityBox);
         
-        JComboBox<String> locationId3Box = new JComboBox<>();
-        locationId3Box.setBounds(284, 470, 92, 25);
-        add(locationId3Box);
-        
+        townBox = new JComboBox<>();
+        townBox.setBounds(284, 470, 92, 25);
+        add(townBox);
         
         JButton insertButton = new JButton("생성");
         insertButton.setBounds(10,510,100,30);
@@ -131,29 +143,95 @@ public class ParkingLotManageUI extends UI {
         JButton deleteButton = new JButton("삭제");
         deleteButton.setBounds(275,510,100,30);
         add(deleteButton);
-
-   
         
-        for (int i = 0; i < registeredCars.size(); i++) {
-            String[] row = new String[3];
-            row[0] = registeredCars.get(i).getCarCode();
-            row[1] = registeredCars.get(i).getCarTypeName();
-            row[2] = "삭제";
+        for (int i = 0; i < registeredparkingLots.size(); i++) {
+            String[] row = new String[5];
+            row[0] = Integer.toString(registeredparkingLots.get(i).getId());
+            row[1] = registeredparkingLots.get(i).getName();
+            row[2] = registeredparkingLots.get(i).getAddress();
+            row[3] = "요금정책";
+            row[4] = "주차구역";
             model.addRow(row);
         }
         
-        // Event listener for the cancel button
+        //도/시버튼 이벤트
+        provinceBox.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		cityId = 0;
+        		townId = 0;
+        		
+        		int index = ((JComboBox) e.getSource()).getSelectedIndex();
+        		provinceId = provinceList.get(index).getId();
+        		
+                List<getLocationDTO> cityList = locationDAO.getLocations(provinceId);
+                cityBox.removeAllItems();
+                for (getLocationDTO city : cityList) {
+                    cityBox.addItem(city.getName());
+                }
+        	}
+        });
+        
+        //시/군/구 버튼 이벤트
+        cityBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	townId = 0;
+            	
+                if (cityBox.getSelectedItem() != null) {
+                    int index = cityBox.getSelectedIndex();
+                    if (index >= 0) {
+                        List<getLocationDTO> cityList = locationDAO.getLocations(provinceId);
+                        cityId = cityList.get(index).getId();
+                        List<getLocationDTO> townList = locationDAO.getLocations(cityId);
+                        townBox.removeAllItems();
+                        for (getLocationDTO town : townList) {
+                            townBox.addItem(town.getName());
+                        }
+                    }
+                }
+            }
+        });
+        
+        //읍/면/동 버튼 이벤트
+        townBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (townBox.getSelectedItem() != null) {
+                    int index = townBox.getSelectedIndex();
+                    if (index >= 0) {
+                        List<getLocationDTO> cityList = locationDAO.getLocations(provinceId);
+                        townId = cityList.get(index).getId();
+                    }
+                }
+            }
+        });
+        
+        //등록 버튼
         insertButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
                 InsertParkingLotDTO insertParkingLotDTO = new InsertParkingLotDTO(nameField.getText(),
-                											telNumberField.getText(),
-                											0, // locationField return타입 변환 메소드 구현해야됨
-                											addressField.getText(),
-                											imageFilePathField.getText());
+                		telNumberField.getText(),
+                		townId,
+                		addressField.getText(),
+                		imageFilePathField.getText()
+                		);
                 
                 ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
-                parkingLotDAO.insertParkLot(insertParkingLotDTO);
+                int result = parkingLotDAO.insertParkLot(insertParkingLotDTO);
+                String output = result == 1 ? "등록되었습니다" : "등록에 실패했습니다";
+                JOptionPane.showMessageDialog(null, output);
+                if (result == 1) {
+                	model.setNumRows(0);
+                    List<RegisteredParkingLotDTO> registeredparkingLots = parkingLotDAO.listParkingLot();
+                    for (int i = 0; i < registeredparkingLots.size(); i++) {
+                        String[] row = new String[5];
+                        row[0] = Integer.toString(registeredparkingLots.get(i).getId());
+                        row[1] = registeredparkingLots.get(i).getName();
+                        row[2] = registeredparkingLots.get(i).getAddress();
+                        row[3] = "요금정책";
+                        row[4] = "주차구역";
+                        model.addRow(row);
+                    }
+                }
             }
         });
         
@@ -168,19 +246,9 @@ public class ParkingLotManageUI extends UI {
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                 	imageFilePathField.setText(fileChooser.getSelectedFile().getPath());
                 	imageFilePathField.setEditable(false);
+                	String path = fileChooser.getSelectedFile().getPath();
+                	ImageSaver.saveImage(path);
                 }
-            }
-        });
-        
-        modifyButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-        
-        deleteButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-               
             }
         });
         
@@ -190,6 +258,41 @@ public class ParkingLotManageUI extends UI {
             }
         });
 
+    }
+    
+    class ParkingLotTableAdaptor implements MouseListener {
+    	public void mouseClicked(MouseEvent e) {
+    		JTable table = (JTable) e.getSource();
+    		int row = table.getSelectedRow();
+    		int col = table.getSelectedColumn();
+    		int parkingLotId = Integer.parseInt((String) table.getValueAt(row, 0));
+    		
+    		if (col == 3) {
+    			GUIController.changeUI(ui, new FeePolicyManageUI(parkingLotId));
+    		} else if (col == 4) {
+    			
+    		}
+    	}
+
+    	@Override
+    	public void mousePressed(MouseEvent e) {
+    	// TODO Auto-generated method stub
+    	}
+
+    	@Override
+    	public void mouseReleased(MouseEvent e) {
+    	// TODO Auto-generated method stub
+    	}
+
+    	@Override
+    	public void mouseEntered(MouseEvent e) {
+    	// TODO Auto-generated method stub
+    	}
+
+    	@Override
+    	public void mouseExited(MouseEvent e) {
+    	// TODO Auto-generated method stub
+    	}
     }
     
 }

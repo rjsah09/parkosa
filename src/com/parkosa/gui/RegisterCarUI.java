@@ -19,12 +19,6 @@ public class RegisterCarUI extends UI{
     @Override
     public void placeComponents() {
         setLayout(null);
-        //-- 버튼, 입력 칸 생성 --//
-        
-
-//        JLabel userPhoneNumberLabel = new JLabel(signedAccount);
-//        userPhoneNumberLabel.setBounds(40, 0, 100, 25);
-//        add(userPhoneNumberLabel);
 
         //-- 버튼, 입력 칸 생성 --//
         JLabel carNumberLabel = new JLabel("자동차 번호를 입력하세요");
@@ -38,8 +32,6 @@ public class RegisterCarUI extends UI{
         JButton carNumberValidateButton = new JButton("중복확인");
         carNumberValidateButton.setBounds(40, 80, 295, 25);
         add(carNumberValidateButton);
-
-
 
         JLabel carSelectBox = new JLabel("자동차 종류를 선택하세요");
         carSelectBox.setBounds(40, 110, 150, 25);
@@ -97,7 +89,6 @@ public class RegisterCarUI extends UI{
             }
         });
 
-
       //차량 등록 버튼 이벤트
         reserveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -125,7 +116,6 @@ public class RegisterCarUI extends UI{
                 }
             }
         });
-
 
     }
 }

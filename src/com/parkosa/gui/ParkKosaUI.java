@@ -105,11 +105,11 @@ public class ParkKosaUI extends UI {
 
     private static void showImage(int index, JLabel imageLabel) {
         String[] images = {
-            "resources/images/image1.jpg",
-            "resources/images/image2.jpg",
-            "resources/images/image3.png",
-            "resources/images/image4.jpg",
-            "resources/images/iamge5.jpg" 
+            ".\\resources\\images\\image1.jpg", 
+            ".\\resources\\images\\image2.jpg", 
+            ".\\resources\\images\\image3.PNG", 
+            ".\\resources\\images\\image4.jpg", 
+            ".\\resources\\images\\iamge5.jpg"
         };
 
         // 파일의 절대 경로를 얻기 위해 상대 경로를 절대 경로로 변환

@@ -54,9 +54,6 @@ public class ParkingSpaceManageUI extends UI {
         jsp.setBounds(10, 50, 365, 330);
         add(jsp);
         
-        
-
-        
         JLabel parkingLotIdLabel= new JLabel("주차장ID");
         parkingLotIdLabel.setBounds(10,390,60,25);
         add(parkingLotIdLabel);
