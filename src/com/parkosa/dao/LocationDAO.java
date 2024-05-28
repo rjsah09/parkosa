@@ -1,5 +1,12 @@
 package com.parkosa.dao;
 
-public class LocationDAO {
+import java.util.List;
 
+import com.parkosa.dto.getLocationDTO;
+
+public class LocationDAO {
+	public List<getLocationDTO> getLocations(int locationId) {
+		
+		return null;
+	}
 }
