@@ -3,13 +3,10 @@ package com.parkosa.gui;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -17,6 +14,9 @@ import javax.swing.table.DefaultTableModel;
 
 import com.parkosa.dao.AccountDAO;
 import com.parkosa.dao.CarDAO;
+import com.parkosa.dao.ParkingLotDAO;
+import com.parkosa.dao.ParkingSpaceDAO;
+import com.parkosa.dto.InsertParkingSpaceDTO;
 import com.parkosa.dto.RegisteredCarDTO;
 
 public class ParkingSpaceManageUI extends UI {
@@ -51,17 +51,11 @@ public class ParkingSpaceManageUI extends UI {
         JScrollPane jsp = new JScrollPane(innerTable,
         JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
         JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        jsp.setBounds(10, 50, 365, 280);
+        jsp.setBounds(10, 50, 365, 330);
         add(jsp);
         
         
-        JLabel idLabel= new JLabel("ID");
-        idLabel.setBounds(10,350,60,25);
-        add(idLabel);
-        
-        JTextField idField = new JTextField();
-        idField.setBounds(100,350,275,25);
-        add(idField);
+
         
         JLabel parkingLotIdLabel= new JLabel("주차장ID");
         parkingLotIdLabel.setBounds(10,390,60,25);
@@ -111,8 +105,10 @@ public class ParkingSpaceManageUI extends UI {
         
         // Event listener for the cancel button
         insertButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                
+            public void actionPerformed(ActionEvent e) { 
+            	InsertParkingSpaceDTO insertParkingSpaceDTO = new InsertParkingSpaceDTO(Integer.valueOf(parkingLotIdfield.getText()),descriptionfield.getText(),Integer.valueOf(feePolicyIdfield.getText()));
+            	ParkingSpaceDAO parkingSpaceDAO = new ParkingSpaceDAO();
+            	parkingSpaceDAO.insertFeePolicy(insertParkingSpaceDTO);
             }
         });
         
