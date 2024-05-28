@@ -118,7 +118,7 @@ public class ParkingSpaceManageUI extends UI {
 
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                GUIController.changeUI(ui, new AdminUI());
+                GUIController.changeUI(ui, new ParkingLotManageUI());
             }
         });
 

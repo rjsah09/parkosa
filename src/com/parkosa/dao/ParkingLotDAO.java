@@ -33,8 +33,8 @@ public class ParkingLotDAO {
 
             //변수 할당
             callableStatement.registerOutParameter(1, java.sql.Types.NUMERIC);
-            callableStatement.setString(2, insertParkingLotDTO.getTelNumber());
-            callableStatement.setString(3, insertParkingLotDTO.getName());
+            callableStatement.setString(2, insertParkingLotDTO.getName());
+            callableStatement.setString(3, insertParkingLotDTO.getTelNumber());
             callableStatement.setString(4, insertParkingLotDTO.getAddress());
             callableStatement.setInt(5, insertParkingLotDTO.getLocationId());
             callableStatement.setString(6, newImageLink);

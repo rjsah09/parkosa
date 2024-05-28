@@ -88,7 +88,7 @@ public class SignInUI extends UI {
         //관리자 버튼 이벤트
         adminButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	GUIController.changeUI(ui, new AdminUI());
+            	GUIController.changeUI(ui, new ParkingLotManageUI());
             }
         });
         

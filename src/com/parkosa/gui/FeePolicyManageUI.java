@@ -6,6 +6,7 @@ import com.parkosa.dao.CarTypeDAO;
 import com.parkosa.dao.FeePolicyDAO;
 import com.parkosa.dto.InsertFeePolicyDTO;
 import com.parkosa.dto.RegisteredCarDTO;
+import com.parkosa.vo.CarTypeVO;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -22,7 +23,6 @@ public class FeePolicyManageUI extends UI {
         this.parkingLotId = parkingLotId;
     }
 
-
     public void placeComponents() {
         setLayout(null);
 
@@ -33,10 +33,10 @@ public class FeePolicyManageUI extends UI {
         cancelButton.setBounds(10, 10, 100, 25);
         add(cancelButton);
 
-        CarDAO carDAO = new CarDAO();
-        List<RegisteredCarDTO> registeredCars = carDAO.getRegisteredCars();
-
-        DefaultTableModel model = new DefaultTableModel(new String[]{"차량 번호", "차종", "삭제"}, 0) {
+        FeePolicyDAO dao = new FeePolicyDAO();
+        List<InsertFeePolicyDTO> dtos = dao.getListFeePolicy(parkingLotId);
+        
+        DefaultTableModel model = new DefaultTableModel(new String[]{"단위시간(분)", "최대시간", "증가액", "차종"}, 0) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -87,24 +87,22 @@ public class FeePolicyManageUI extends UI {
 
 
         CarTypeDAO carTypeDAO = new CarTypeDAO();
-        String[] items = new String[carTypeDAO.carTypeList().size() + 1];
-        for (int i = 0; i < carTypeDAO.carTypeList().size(); i++) {
-            items[i] = carTypeDAO.carTypeList().get(i).getName();
+        List<CarTypeVO> list = carTypeDAO.carTypeList();
+        String[] items = new String[list.size() + 1];
+        for (int i = 0; i < list.size(); i++) {
+            items[i] = list.get(i).getName();
         }
-        items[carTypeDAO.carTypeList().size()] = "모든 차종 가능";
+        items[list.size()] = "모든 차종";
 
         JComboBox<String> comboSelectCarBox = new JComboBox<>(items);
         comboSelectCarBox.setBounds(120, 430, 255, 25);
         add(comboSelectCarBox);
 
-
-        JLabel parkingLotIdLabel = new JLabel("주차장ID");
-        parkingLotIdLabel.setBounds(10, 470, 100, 25);
-        add(parkingLotIdLabel);
-
-        JTextField parkingLotIdField = new JTextField("1");
-        parkingLotIdField.setBounds(120, 470, 255, 25);
-        add(parkingLotIdField);
+        
+        JComboBox<String> comboBox = new JComboBox<>();
+        comboBox.setBounds(40, 140, 295, 25);
+        add(comboBox);
+        
 
         JButton insertButton = new JButton("생성");
         insertButton.setBounds(10, 510, 100, 30);
@@ -115,12 +113,17 @@ public class FeePolicyManageUI extends UI {
         previousButton.setBounds(275, 510, 100, 30);
         add(previousButton);
 
-
-        for (int i = 0; i < registeredCars.size(); i++) {
-            String[] row = new String[3];
-            row[0] = registeredCars.get(i).getCarCode();
-            row[1] = registeredCars.get(i).getCarTypeName();
-            row[2] = "삭제";
+        //"단위시간(분)", "최대시간", "증가액", "차종"
+        for (int i = 0; i < dtos.size(); i++) {
+            String[] row = new String[4];
+            row[0] = Integer.toString(dtos.get(i).getIncreaseMinute());
+            row[1] = Integer.toString(dtos.get(i).getMaximumTime());
+            row[2] = Integer.toString(dtos.get(i).getIncreaseFee());
+            if (dtos.get(i).getCarTypeName() == null) {
+            	row[3] = "모든 차종";            	
+            } else {
+            	row[3] = dtos.get(i).getCarTypeName();
+            }
             model.addRow(row);
         }
 
@@ -129,17 +132,20 @@ public class FeePolicyManageUI extends UI {
             public void actionPerformed(ActionEvent e) {
                 String str = (String)(comboSelectCarBox.getSelectedItem());
                 int carTypeId = 0;
+                
                 if(str.equals("모든 차종 가능")){
                     carTypeId = 0;
-                }else{
+                } else {
                     carTypeId = carTypeDAO.selectCarNo(str);
-
                 }
+                
+                //int increaseMinute, int increaseFee, int maximumTime, int carTypeId, int parkingLotId
                 InsertFeePolicyDTO insertFeePolicyDTO = new InsertFeePolicyDTO(Integer.valueOf(increaseMinuteField.getText()),
                         Integer.valueOf(increaseFeeField.getText()),
                         Integer.valueOf(maximumTimeField.getText()),
                         Integer.valueOf(carTypeId),
-                        Integer.valueOf(parkingLotIdField.getText()));
+                        parkingLotId);
+                
                 FeePolicyDAO feePolicyDAO = new FeePolicyDAO();
                 feePolicyDAO.insertFeePolicy(insertFeePolicyDTO);
             }
@@ -154,7 +160,7 @@ public class FeePolicyManageUI extends UI {
 
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                GUIController.changeUI(ui, new AdminUI());
+                GUIController.changeUI(ui, new ParkingLotManageUI());
             }
         });
 

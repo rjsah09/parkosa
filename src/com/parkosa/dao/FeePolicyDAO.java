@@ -73,7 +73,7 @@ public class FeePolicyDAO {
 
         }
 
-        return  null;
+        return new ArrayList<InsertFeePolicyDTO>();
     }
 }
 
