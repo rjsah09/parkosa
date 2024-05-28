@@ -3,13 +3,10 @@ package com.parkosa.gui;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -17,6 +14,8 @@ import javax.swing.table.DefaultTableModel;
 
 import com.parkosa.dao.AccountDAO;
 import com.parkosa.dao.CarDAO;
+import com.parkosa.dao.FeePolicyDAO;
+import com.parkosa.dto.InsertFeePolicyDTO;
 import com.parkosa.dto.RegisteredCarDTO;
 
 public class FeePolicyManageUI extends UI {
@@ -51,17 +50,9 @@ public class FeePolicyManageUI extends UI {
         JScrollPane jsp = new JScrollPane(innerTable,
         JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
         JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        jsp.setBounds(10, 50, 365, 200);
+        jsp.setBounds(10, 50, 365, 250);
         add(jsp);
-        
-        
-        JLabel idLabel= new JLabel("ID");
-        idLabel.setBounds(10,270,100,25);
-        add(idLabel);
-        
-        JTextField idField = new JTextField();
-        idField.setBounds(120,270,255,25);
-        add(idField);
+       
         
         JLabel increaseMinuteLabel= new JLabel("기본 증가시간");
         increaseMinuteLabel.setBounds(10,310,100,25);
@@ -128,7 +119,13 @@ public class FeePolicyManageUI extends UI {
         // Event listener for the cancel button
         insertButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
+                InsertFeePolicyDTO insertFeePolicyDTO = new InsertFeePolicyDTO(Integer.valueOf(increaseMinuteField.getText()),
+														                		Integer.valueOf(increaseFeeField.getText()),
+														                		Integer.valueOf(maximumTimeField.getText()),
+														                		Integer.valueOf(carTypeIdField.getText()),
+                																Integer.valueOf(parkingLotIdfield.getText()));
+                FeePolicyDAO feePolicyDAO = new FeePolicyDAO();
+                feePolicyDAO.insertFeePolicy(insertFeePolicyDTO);
             }
         });
         
