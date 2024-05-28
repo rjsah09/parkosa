@@ -4,12 +4,10 @@ import com.parkosa.connection.DBConnection;
 import com.parkosa.vo.AccountVO;
 import com.parkosa.vo.FeePolicyVO;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class FeePolicyDAO {
+
     public void insertFeePolicy(FeePolicyVO feePolicyVO) {
 
         String proc = "{ call fee_policy_pack.insert_fee_policy(?, ?, ?, ?, ?) }";
@@ -22,7 +20,11 @@ public class FeePolicyDAO {
             callableStatement.setInt(1, feePolicyVO.getIncreaseMinute());
             callableStatement.setInt(2, feePolicyVO.getIncreaseFee());
             callableStatement.setInt(3, feePolicyVO.getMaximumTime());
-            callableStatement.setInt(4, feePolicyVO.getCarTypeId());
+            if(feePolicyVO.getCarTypeId() == 0){
+                callableStatement.setNull(4, Types.INTEGER);
+            }else {
+                callableStatement.setInt(4, feePolicyVO.getCarTypeId());
+            }
             callableStatement.setInt(5, feePolicyVO.getParkingLotId());
 
             callableStatement.executeUpdate();
@@ -34,9 +36,5 @@ public class FeePolicyDAO {
         } finally {
 
         }
-
     }
-
-
-
 }
