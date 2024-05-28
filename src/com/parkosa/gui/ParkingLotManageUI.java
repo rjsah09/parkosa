@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -20,11 +19,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 import com.parkosa.dao.AccountDAO;
-import com.parkosa.dao.CarDAO;
 import com.parkosa.dao.LocationDAO;
 import com.parkosa.dao.ParkingLotDAO;
 import com.parkosa.dto.InsertParkingLotDTO;
-import com.parkosa.dto.RegisteredCarDTO;
 import com.parkosa.dto.RegisteredParkingLotDTO;
 import com.parkosa.dto.getLocationDTO;
 import com.parkosa.image.ImageSaver;
@@ -51,9 +48,6 @@ public class ParkingLotManageUI extends UI {
      
         ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
         List<RegisteredParkingLotDTO> registeredparkingLots = parkingLotDAO.listParkingLot();
-//        for (int i = 0; i < registeredparkingLots.size(); i++) {
-//        	System.out.println(registeredparkingLots.get(i).getName());
-//        }
         
         DefaultTableModel model = new DefaultTableModel(new String[] {"주차장 id", "주차장 명", "주소", "요금정책", "주차구역"}, 0) {
             public boolean isCellEditable(int row, int column) {
@@ -215,16 +209,11 @@ public class ParkingLotManageUI extends UI {
             public void actionPerformed(ActionEvent e) {
                 
                 InsertParkingLotDTO insertParkingLotDTO = new InsertParkingLotDTO(nameField.getText(),
-                											telNumberField.getText(),
-                											townId, // locationField return타입 변환 메소드 구현해야됨
-                											addressField.getText(),
-                											imageFilePathField.getText());
-                
-                System.out.println(nameField.getText() + " " +
-						telNumberField.getText() + " " +
-						townId + " " +// locationField return타입 변환 메소드 구현해야됨
-						addressField.getText() + " " + 
-						imageFilePathField.getText());
+                		telNumberField.getText(),
+                		townId,
+                		addressField.getText(),
+                		imageFilePathField.getText()
+                		);
                 
                 ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
                 int result = parkingLotDAO.insertParkLot(insertParkingLotDTO);
@@ -258,12 +247,10 @@ public class ParkingLotManageUI extends UI {
                 	imageFilePathField.setText(fileChooser.getSelectedFile().getPath());
                 	imageFilePathField.setEditable(false);
                 	String path = fileChooser.getSelectedFile().getPath();
-                	ImageSaver saver = new ImageSaver();
-                	saver.saveImage(path);
+                	ImageSaver.saveImage(path);
                 }
             }
         });
-        
         
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -279,7 +266,6 @@ public class ParkingLotManageUI extends UI {
     		int row = table.getSelectedRow();
     		int col = table.getSelectedColumn();
     		int parkingLotId = Integer.parseInt((String) table.getValueAt(row, 0));
-    		System.out.println(parkingLotId);
     		
     		if (col == 3) {
     			GUIController.changeUI(ui, new FeePolicyManageUI(parkingLotId));
