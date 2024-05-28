@@ -42,6 +42,10 @@ public class SignInUI extends UI {
         signInButton.setBounds(215, 350, 100, 25);
         add(signInButton);
         
+        JButton adminButton = new JButton("관리자");
+        adminButton.setBounds(310, 530, 70, 25);
+        add(adminButton);
+        
         //-- 이벤트 발생 --//
         //취소 버튼 이벤트
         cancelButton.addActionListener(new ActionListener() {
@@ -78,6 +82,13 @@ public class SignInUI extends UI {
                 	 }
                 	 
                 }
+            }
+        });
+        
+        //관리자 버튼 이벤트
+        adminButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	GUIController.changeUI(ui, new AdminUI());
             }
         });
         

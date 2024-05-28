@@ -8,13 +8,14 @@ public class InsertParkingLotDTO {
 	private String imageLink;
 	
 	public InsertParkingLotDTO(String name, String telNumber, int locationId, String address, String imageLink) {
-		this.telNumber = telNumber;
+		
 		this.name = name;
+		this.telNumber = telNumber;
 		this.locationId = locationId;
 		this.address = address;
 		this.imageLink = imageLink;
 	}
-	
+		
 	public String getTelNumber() {
 		return telNumber;
 	}
