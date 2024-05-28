@@ -12,7 +12,7 @@ import oracle.jdbc.oracore.OracleType;
 public class LocationDAO {
 	public List<getLocationDTO> getLocations(Integer upperId) {
 		ArrayList<getLocationDTO> locationList = new ArrayList<>();
-		String proc ="{call getLocations(?, ?)}";
+		String proc ="{call location_pack.getLocations(?, ?)}";
 		try{
 			Connection conn = DBConnection.getConnection();
 			CallableStatement callableStatement = conn.prepareCall(proc);
