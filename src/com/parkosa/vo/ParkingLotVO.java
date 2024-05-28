@@ -6,19 +6,8 @@ public class ParkingLotVO {
 	private String name;
 	private String phoneNumber;
 	private String addresss;
-	private boolean availablePark;
-	private String locationId;
-	
-	public ParkingLotVO(int id, String name, String phoneNumber, String addresss, boolean availablePark,
-			String locationId) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.phoneNumber = phoneNumber;
-		this.addresss = addresss;
-		this.availablePark = availablePark;
-		this.locationId = locationId;
-	}
+	private int availablePark;
+	private int locationId;
 
 	public int getId() {
 		return id;
@@ -52,20 +41,19 @@ public class ParkingLotVO {
 		this.addresss = addresss;
 	}
 
-	public boolean isAvailablePark() {
+	public int getAvailablePark() {
 		return availablePark;
 	}
 
-	public void setAvailablePark(boolean availablePark) {
+	public void setAvailablePark(int availablePark) {
 		this.availablePark = availablePark;
 	}
 
-	public String getLocationId() {
+	public int getLocationId() {
 		return locationId;
 	}
 
-	public void setLocationId(String locationId) {
+	public void setLocationId(int locationId) {
 		this.locationId = locationId;
 	}
-	
 }
