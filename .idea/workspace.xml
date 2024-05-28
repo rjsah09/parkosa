@@ -7,7 +7,6 @@
     <list default="true" id="43b43bea-ce0f-434a-8548-32293257c0f1" name="변경" comment="CarDataUi 삭제 &#10;삭제 이유. RegisterCarUI와 중복">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/parkosa/dao/FeePolicyDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/dao/FeePolicyDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/parkosa/vo/FeePolicyVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/vo/FeePolicyVO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

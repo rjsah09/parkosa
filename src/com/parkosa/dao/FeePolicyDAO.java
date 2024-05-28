@@ -7,16 +7,10 @@ import com.parkosa.vo.FeePolicyVO;
 import java.sql.*;
 
 public class FeePolicyDAO {
-    public static void main(String[] args) {
-        FeePolicyDAO dao = new FeePolicyDAO();
-        FeePolicyVO vo = new FeePolicyVO(10, 100, 360, 0,5);
-        dao.insertFeePolicy(vo);
-    }
-    public void insertFeePolicy(FeePolicyVO feePolicyVO) {
-        //execute insert_fee_policy(10, 300, 300, null, 3);
-        ;
 
-        String proc = "{ call insert_fee_policy(?, ?, ?, ?, ?) }";
+    public void insertFeePolicy(FeePolicyVO feePolicyVO) {
+
+        String proc = "{ call fee_policy_pack.insert_fee_policy(?, ?, ?, ?, ?) }";
 
         try {
             Connection conn = DBConnection.getConnection();
@@ -42,9 +36,5 @@ public class FeePolicyDAO {
         } finally {
 
         }
-
     }
-
-
-
 }
