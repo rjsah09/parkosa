@@ -19,7 +19,7 @@ import com.parkosa.dao.AccountDAO;
 import com.parkosa.dao.CarDAO;
 import com.parkosa.dto.RegisteredCarDTO;
 
-public class policyManageUI extends UI {
+public class FeePolicyManageUI extends UI {
 	
     public void placeComponents() {
         setLayout(null);

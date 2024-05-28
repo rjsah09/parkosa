@@ -53,19 +53,19 @@ public class AdminUI extends UI{
         
         parkinglotManage.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                GUIController.changeUI(ui, new parkinglotManageUI());
+                GUIController.changeUI(ui, new ParkingLotManageUI());
             }
         });
 
         parkingspaceManage.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                GUIController.changeUI(ui, new parkingspaceManageUI());
+                GUIController.changeUI(ui, new ParkingSpaceManageUI());
             }
         });
 
         policyManage.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                GUIController.changeUI(ui, new policyManageUI());
+                GUIController.changeUI(ui, new FeePolicyManageUI());
             }
         });
 

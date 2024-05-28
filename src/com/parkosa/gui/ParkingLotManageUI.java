@@ -16,7 +16,7 @@ import com.parkosa.dao.AccountDAO;
 import com.parkosa.dao.CarDAO;
 import com.parkosa.dto.RegisteredCarDTO;
 
-public class parkinglotManageUI extends UI {
+public class ParkingLotManageUI extends UI {
     
     public void placeComponents() {
         setLayout(null);
