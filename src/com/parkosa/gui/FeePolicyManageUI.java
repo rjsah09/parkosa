@@ -44,7 +44,6 @@ public class FeePolicyManageUI extends UI {
         };
 
         JTable innerTable = new JTable(model);
-        innerTable.addMouseListener(new TableMouseAdaptor());
         innerTable.setFont(new Font("NanumGothic", Font.PLAIN, 16));
         innerTable.setRowHeight(20);
         innerTable.setShowVerticalLines(false);

@@ -76,6 +76,14 @@ public class MainScreenUI extends UI {
                 GUIController.changeUI(ui, new RegisteredCarsUI());
             }
         });
+        
+        parkingReserve.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GUIController.changeUI(ui, new RegisterReservationUI());
+			}
+		});
 
     }
 
