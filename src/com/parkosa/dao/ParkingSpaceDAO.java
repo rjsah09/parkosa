@@ -10,7 +10,6 @@ import java.util.List;
 import com.parkosa.connection.DBConnection;
 import com.parkosa.dto.InsertParkingSpaceDTO;
 import com.parkosa.dto.RegisteredParkingSpaceDTO;
-import com.parkosa.sign.SignedParkingLot;
 
 import oracle.jdbc.OracleTypes;
 
@@ -47,7 +46,7 @@ public class ParkingSpaceDAO {
             Connection conn = DBConnection.getConnection();
             CallableStatement callableStatement = conn.prepareCall(sql);
             //변수 할당
-            callableStatement.setint(1, );
+            //callableStatement.setint(1, SQl.);
             callableStatement.registerOutParameter(2, OracleTypes.CURSOR);
             callableStatement.execute();
 
@@ -63,7 +62,6 @@ public class ParkingSpaceDAO {
                 
                 registeredParkingSpaces.add(new RegisteredParkingSpaceDTO(description, incereaseMinute, increaseFee, maximumTime, carTypeName ));
             }
-
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
             e.printStackTrace();
@@ -72,6 +70,6 @@ public class ParkingSpaceDAO {
         } finally {
         }
 
-        return registeredCars;
+        return registeredParkingSpaces;
 	}
 }

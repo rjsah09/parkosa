@@ -1,14 +1,15 @@
 package com.parkosa.dao;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Types;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.parkosa.connection.DBConnection;
 import com.parkosa.dto.InsertFeePolicyDTO;
+import oracle.jdbc.OracleTypes;
 
 public class FeePolicyDAO {
+
     public void insertFeePolicy(InsertFeePolicyDTO feePolicyDTO) {
 
         String proc = "{ call fee_policy_pack.insert_fee_policy(?, ?, ?, ?, ?) }";
@@ -40,6 +41,42 @@ public class FeePolicyDAO {
 
     }
 
+    public List<InsertFeePolicyDTO> getListFeePolicy(int parkingLotId){
+        ArrayList<InsertFeePolicyDTO> listFeePolicy = new ArrayList<>();
+        String proc = "{call fee_policy_pack.list_fee_policy(?, ?)}";
 
+        try{
+            Connection conn = DBConnection.getConnection();
+            CallableStatement callableStatement = conn.prepareCall(proc);
+            callableStatement.setInt(1, parkingLotId);
+            callableStatement.registerOutParameter(2, OracleTypes.CURSOR);
+            callableStatement.execute();
 
+            ResultSet rs = (ResultSet) callableStatement.getObject(2);
+
+            while (rs.next()){
+                int increaseMinute= rs.getInt("INCREASE_MINUTE");
+                int increaseFee = rs.getInt("INCREASE_FEE");
+                int maximumTime = rs.getInt("MAXIMUM_TIME");
+                String carTypeName = rs.getString("CAR_TYPE_NAME");
+
+                listFeePolicy.add(new InsertFeePolicyDTO(increaseMinute, increaseFee, maximumTime, carTypeName));
+            }
+
+            return listFeePolicy;
+        }catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+
+        return new ArrayList<InsertFeePolicyDTO>();
+    }
 }
+
+
+
+

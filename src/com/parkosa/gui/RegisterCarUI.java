@@ -100,7 +100,6 @@ public class RegisterCarUI extends UI{
                     int carId = 0;
                     CarTypeDAO carTypeDAO = new CarTypeDAO();
                     carId = carTypeDAO.selectCarNo(selectedItem);
-                    System.out.println("ResgisterUI :" +carId);
 
                     CarVO CarVO = new CarVO(
                             carNumberField.getText(),

@@ -26,7 +26,5 @@ public class SignInDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	
 	
 }
