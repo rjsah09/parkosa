@@ -1,17 +1,22 @@
 package com.parkosa.gui;
 
-import com.parkosa.dao.AccountDAO;
-import com.parkosa.dao.CarDAO;
-import com.parkosa.dao.ParkingSpaceDAO;
-import com.parkosa.dto.InsertParkingSpaceDTO;
-import com.parkosa.dto.RegisteredCarDTO;
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import com.parkosa.dao.AccountDAO;
+import com.parkosa.dao.ParkingSpaceDAO;
+import com.parkosa.dto.InsertParkingSpaceDTO;
+import com.parkosa.dto.RegisteredCarDTO;
+import com.parkosa.dto.RegisteredParkingSpaceDTO;
 
 public class ParkingSpaceManageUI extends UI {
 
@@ -31,8 +36,8 @@ public class ParkingSpaceManageUI extends UI {
         cancelButton.setBounds(10, 10, 100, 25);
         add(cancelButton);
 
-        CarDAO carDAO = new CarDAO();
-        List<RegisteredCarDTO> registeredCars = carDAO.getRegisteredCars();
+        ParkingSpaceDAO parkingSpaceDAO = new ParkingSpaceDAO();
+        List <RegisteredParkingSpaceDTO> registeredParkingSpaces = parkingSpaceDAO.listParkingSpace();
         
         DefaultTableModel model = new DefaultTableModel(new String[] {"차종","단위시간", "단위시간당요금", "최대이용시간", "참고사항"}, 0) {
             public boolean isCellEditable(int row, int column) {
@@ -91,11 +96,14 @@ public class ParkingSpaceManageUI extends UI {
         add(deleteButton);
 
 
-        for (int i = 0; i < registeredCars.size(); i++) {
-            String[] row = new String[3];
-            row[0] = registeredCars.get(i).getCarCode();
-            row[1] = registeredCars.get(i).getCarTypeName();
-            row[2] = "삭제";
+        for (int i = 0; i < registeredParkingSpaces.size(); i++) {
+            String[] row = new String[5];
+            row[4] = registeredParkingSpaces.get(i).getCarTypeName();
+            row[1] = Integer.toString(registeredParkingSpaces.get(i).getIncereaseMinute());
+            row[2] = Integer.toString(registeredParkingSpaces.get(i).getIncreaseFee());
+            row[3] = Integer.toString(registeredParkingSpaces.get(i).getMaximumTime());
+            row[0] = registeredParkingSpaces.get(i).getDescription();
+            
             model.addRow(row);
         }
 
