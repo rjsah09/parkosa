@@ -1,10 +1,14 @@
 package com.parkosa.dao;
 
 import com.parkosa.connection.DBConnection;
+import com.parkosa.dto.GetAvailableParkingSpaceDTO;
 import com.parkosa.dto.InsertReservationDTO;
+import com.parkosa.dto.RegisteredParkingLotDTO;
+import oracle.jdbc.OracleTypes;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class ReservationDAO {
 /*    public static void main(String[] args) {
@@ -43,5 +47,40 @@ public class ReservationDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    //수정해야함.
+    public ArrayList<GetAvailableParkingSpaceDTO> getParkingSpacelist (String startTime, String endTime, String carCode, int locationId) {
+        ArrayList<GetAvailableParkingSpaceDTO> list = new ArrayList<>();
+        String sql = "{call list_available_reservation(?, ?)}";
+
+        try {
+            Connection conn = DBConnection.getConnection();
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            //변수 할당
+            callableStatement.setInt(1, locationId);
+            callableStatement.registerOutParameter(2, OracleTypes.CURSOR);
+            callableStatement.execute();
+
+            ResultSet rs = (ResultSet) callableStatement.getObject(2);
+
+            while (rs.next()) {
+                 String parkingLotName=rs.getString("");
+                 String locationName = rs.getString("");
+                 String parkingSpaceDescription = rs.getString("");
+                 int predictPrice = rs.getInt("");
+                list.add(new GetAvailableParkingSpaceDTO(parkingLotName, locationName, parkingSpaceDescription, predictPrice));
+            }
+
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        }
+
+        return list;
     }
 }
