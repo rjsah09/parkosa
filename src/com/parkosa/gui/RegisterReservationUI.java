@@ -1,117 +1,175 @@
 package com.parkosa.gui;
 
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class RegisterReservationUI extends UI{
-
-	
-	private JTextField inYearField, inMonthField, inDayField, inHourField, inMinuteField;
-	private JTextField outYearField, outMonthField, outDayField, outHourField, outMinuteField;
-	private JButton decideButton;
-	
+	private JTextField inYear, inMonth, inDay, inHour, inMinute;
+	private JTextField outYear, outMonth, outDay, outHour, outMinute;
+	private JButton searchButton;
+	private JTextArea resultArea;
+	private JComboBox<String> cityComboBox, districtComboBox, townComboBox;
+	private JTextField carSelectionField;
+	private JComboBox<String> carNumberComboBox;
 	@Override
 	public void placeComponents() {
-		
-//		//---입차시간 필드---//
-//		JLabel startTimeLabel = new JLabel("입차시간!", Label.LEFT);
-//        startTimeLabel.setBounds(10, 20, 400, 30);
-//        startTimeLabel.setOpaque(true);
-//        startTimeLabel.setBackground(Color.white);
-//        add(startTimeLabel);        
-//
-//        //입차 년도
-//        JTextField startYearField = new JTextField();
-//        startYearField.setBounds(50, 20, 200, 30);
-//        add(startYearField);
-//        
-//        JLabel startYearLabel = new JLabel("년", Label.CENTER);
-//        startYearLabel.setBounds(260, 50, 30, 30);
-//        startYearLabel.setOpaque(true);
-//        startYearLabel.setBackground(Color.white);
-//        add(startYearLabel);
+		GridBagConstraints gbc = new GridBagConstraints();
 
-	        setSize(400, 250);
+		// Create car selection
+		JLabel carLabel = new JLabel("차량선택");
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		add(carLabel, gbc);
 
-	        JPanel mainPanel = new JPanel();
-	        mainPanel.setLayout(new GridLayout(5, 3, 5, 5));
 
-	        mainPanel.add(new JLabel("입차시간"));
-	        
-	        inYearField = new JTextField(4);
-	        mainPanel.add(inYearField);
-	        mainPanel.add(new JLabel("년"));
-	        inMonthField = new JTextField(2);
-	        mainPanel.add(inMonthField);
-	        mainPanel.add(new JLabel("월"));
-	        inDayField = new JTextField(2);
-	        mainPanel.add(inDayField);
-	        mainPanel.add(new JLabel("일"));
-	        inHourField = new JTextField(2);
-	        mainPanel.add(inHourField);
-	        mainPanel.add(new JLabel("시"));
-	        inMinuteField = new JTextField(2);
-	        mainPanel.add(inMinuteField);
-	        mainPanel.add(new JLabel("분"));
+		String[] carNumbers = {"123가 4567", "789나 1011", "112다 1314"}; // 차량번호 예시 데이터
+		carNumberComboBox = new JComboBox<>(carNumbers);
+		gbc.gridx = 1;
+		gbc.gridwidth = 4;
+		add(carNumberComboBox, gbc);
 
-	        mainPanel.add(new JLabel("출차시간"));
-	        mainPanel.add(new JLabel());
-	        mainPanel.add(new JLabel());
+		// Create region selection
+		JLabel regionLabel = new JLabel("지역선택");
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		gbc.gridwidth = 1;
+		add(regionLabel, gbc);
 
-	        outYearField = new JTextField(4);
-	        mainPanel.add(outYearField);
-	        mainPanel.add(new JLabel("년"));
-	        outMonthField = new JTextField(2);
-	        mainPanel.add(outMonthField);
-	        mainPanel.add(new JLabel("월"));
-	        outDayField = new JTextField(2);
-	        mainPanel.add(outDayField);
-	        mainPanel.add(new JLabel("일"));
-	        outHourField = new JTextField(2);
-	        mainPanel.add(outHourField);
-	        mainPanel.add(new JLabel("시"));
-	        outMinuteField = new JTextField(2);
-	        mainPanel.add(outMinuteField);
-	        mainPanel.add(new JLabel("분"));
+		String[] cities = {"서울특별시", "부산광역시", "대구광역시"}; // 시/도 예시 데이터
+		String[] districts = {"강남구", "해운대구", "수성구"}; // 시/군/구 예시 데이터
+		String[] towns = {"압구정동", "중동", "범어동"}; // 읍/면/동 예시 데이터
 
-	        mainPanel.add(new JLabel());
-	        mainPanel.add(new JLabel());
-	        decideButton = new JButton("결정");
-	        //decideButton.addActionListener(this);
-	        mainPanel.add(decideButton);
+		cityComboBox = new JComboBox<>(cities);
+		districtComboBox = new JComboBox<>(districts);
+		townComboBox = new JComboBox<>(towns);
 
-	        add(mainPanel);
-	        setVisible(true);
+		gbc.gridx = 1;
+		gbc.gridwidth = 3;
+		add(cityComboBox, gbc);
+		gbc.gridx = 4;
+		gbc.gridwidth = 3;
+		add(districtComboBox, gbc);
+		gbc.gridx = 7;
+		gbc.gridwidth = 4;
+		add(townComboBox, gbc);
+
+		// Create input fields for entry time
+		JLabel inLabel = new JLabel("입차시간");
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		gbc.gridwidth = 1;
+		add(inLabel, gbc);
+
+		inYear = new JTextField(4);
+		inMonth = new JTextField(2);
+		inDay = new JTextField(2);
+		inHour = new JTextField(2);
+		inMinute = new JTextField(2);
+
+		gbc.gridx = 1;
+		add(inYear, gbc);
+		gbc.gridx = 2;
+		add(new JLabel("년"), gbc);
+		gbc.gridx = 3;
+		add(inMonth, gbc);
+		gbc.gridx = 4;
+		add(new JLabel("월"), gbc);
+		gbc.gridx = 5;
+		add(inDay, gbc);
+		gbc.gridx = 6;
+		add(new JLabel("일"), gbc);
+		gbc.gridx = 7;
+		add(inHour, gbc);
+		gbc.gridx = 8;
+		add(new JLabel("시"), gbc);
+		gbc.gridx = 9;
+		add(inMinute, gbc);
+		gbc.gridx = 10;
+		add(new JLabel("분"), gbc);
+
+		// Create input fields for exit time
+		JLabel outLabel = new JLabel("출차시간");
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		add(outLabel, gbc);
+
+		outYear = new JTextField(4);
+		outMonth = new JTextField(2);
+		outDay = new JTextField(2);
+		outHour = new JTextField(2);
+		outMinute = new JTextField(2);
+
+		gbc.gridx = 1;
+		add(outYear, gbc);
+		gbc.gridx = 2;
+		add(new JLabel("년"), gbc);
+		gbc.gridx = 3;
+		add(outMonth, gbc);
+		gbc.gridx = 4;
+		add(new JLabel("월"), gbc);
+		gbc.gridx = 5;
+		add(outDay, gbc);
+		gbc.gridx = 6;
+		add(new JLabel("일"), gbc);
+		gbc.gridx = 7;
+		add(outHour, gbc);
+		gbc.gridx = 8;
+		add(new JLabel("시"), gbc);
+		gbc.gridx = 9;
+		add(outMinute, gbc);
+		gbc.gridx = 10;
+		add(new JLabel("분"), gbc);
+
+		// Create search button
+		searchButton = new JButton("검색버튼");
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		gbc.gridwidth = 11;
+		add(searchButton, gbc);
+
+		// Create result area
+		resultArea = new JTextArea(20, 30);
+		resultArea.setEditable(false);
+		JScrollPane scrollPane = new JScrollPane(resultArea);
+		gbc.gridx = 0;
+		gbc.gridy = 5;
+		gbc.gridwidth = 11;
+		gbc.fill = GridBagConstraints.BOTH;
+		add(scrollPane, gbc);
+
+		// Add action listener to the search button
+		searchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				disableInputFields();
+				displayResults();
+			}
+		});
 	}
 
-	    /*public void actionPerformed(ActionEvent e) {
-	        // '결정' 버튼 클릭 시 수행할 동작 구현
-	        // 입력된 값들을 가져와서 처리할 수 있어
-	        String inYear = inYearField.getText();
-	        String inMonth = inMonthField.getText();
-	        String inDay = inDayField.getText();
-	        String inHour = inHourField.getText();
-	        String inMinute = inMinuteField.getText();
+	private void disableInputFields() {
+		carNumberComboBox.setEnabled(false);
+		cityComboBox.setEnabled(false);
+		districtComboBox.setEnabled(false);
+		townComboBox.setEnabled(false);
+		inYear.setEnabled(false);
+		inMonth.setEnabled(false);
+		inDay.setEnabled(false);
+		inHour.setEnabled(false);
+		inMinute.setEnabled(false);
+		outYear.setEnabled(false);
+		outMonth.setEnabled(false);
+		outDay.setEnabled(false);
+		outHour.setEnabled(false);
+		outMinute.setEnabled(false);
+	}
 
-	        String outYear = outYearField.getText();
-	        String outMonth = outMonthField.getText();
-	        String outDay = outDayField.getText();
-	        String outHour = outHourField.getText();
-	        String outMinute = outMinuteField.getText();
-
-	        // 여기서 필요한 처리를 수행하면 돼
-	        // 예를 들면 입력된 값을 이용하여 계산하거나 다른 작업을 수행할 수 있어
-	    }*/
-
-        
-
-	
-	
+	private void displayResults() {
+		// Here you can fetch and display the data. This is just a sample.
+		resultArea.setText("Displaying results for the given time period and region...");
+	}
 
 }

@@ -55,12 +55,14 @@ public class FeePolicyDAO {
             ResultSet rs = (ResultSet) callableStatement.getObject(2);
 
             while (rs.next()){
+            	int id = rs.getInt("ID");
                 int increaseMinute= rs.getInt("INCREASE_MINUTE");
                 int increaseFee = rs.getInt("INCREASE_FEE");
                 int maximumTime = rs.getInt("MAXIMUM_TIME");
                 String carTypeName = rs.getString("CAR_TYPE_NAME");
 
-                listFeePolicy.add(new InsertFeePolicyDTO(increaseMinute, increaseFee, maximumTime, carTypeName));
+                listFeePolicy.add(new InsertFeePolicyDTO(id, increaseMinute, increaseFee, maximumTime, carTypeName));
+                System.out.println("feePolicyId = " + id);
             }
 
             return listFeePolicy;
