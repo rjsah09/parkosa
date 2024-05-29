@@ -1,8 +1,5 @@
 package com.parkosa.dto;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-
 public class InsertReservationDTO {
 	
 	private String startTime;
