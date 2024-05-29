@@ -13,17 +13,25 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import com.parkosa.dao.AccountDAO;
+import com.parkosa.dao.CarDAO;
 import com.parkosa.dao.LocationDAO;
+import com.parkosa.dao.ReservationDAO;
+import com.parkosa.dto.GetAvailableParkingSpaceDTO;
+import com.parkosa.dto.InsertReservationDTO;
+import com.parkosa.dto.RegisteredCarDTO;
 import com.parkosa.dto.getLocationDTO;
 
 	public class RegisterReservationUI extends UI{
 
-		int provinceId, cityId, townId;
+		int provinceId, cityId, townId, parkingLotId;
+		String carCode, startTime, endTime;
+		
 		
 		public void placeComponents() {
 			
 			setLayout(null);
-				
+			
 	        JButton cancelButton = new JButton("뒤로가기");
 	        cancelButton.setBounds(10, 10, 100, 25);
 	        add(cancelButton);
@@ -31,10 +39,6 @@ import com.parkosa.dto.getLocationDTO;
 			JLabel carTypeLabel = new JLabel("차량");
 			carTypeLabel.setBounds(10,40,50,25);
 			add(carTypeLabel);
-			
-			JComboBox<String> carBox = new JComboBox<>();
-			carBox.setBounds(70,40,90,25);
-			add(carBox);
 			
 			JLabel selectRegionLabel = new JLabel("지역");
 			selectRegionLabel.setBounds(10,70,50,25);
@@ -132,7 +136,28 @@ import com.parkosa.dto.getLocationDTO;
 			serchButton.setBounds(10,160,365,25);
 			add(serchButton);
 			
-	        DefaultTableModel model = new DefaultTableModel(new String[] {"차종","단위시간(분)", "증가액", "최대시간", "주차구역"}, 0) {
+			AccountDAO accountDAO = new AccountDAO();
+	        String name = accountDAO.getName();
+	        
+			CarDAO carDAO = new CarDAO();
+	    	List <RegisteredCarDTO> registeredCars = carDAO.getRegisteredCars();
+			String[] carItems = new String[registeredCars.size()];
+			
+	    	for (int i = 0 ; i < registeredCars.size() ; i++) {
+	    		carItems[i] =registeredCars.get(i).getCarCode();
+	    	}
+	    	
+			JComboBox<String> carBox = new JComboBox<>(carItems);
+			carBox.setBounds(70,40,90,25);
+			add(carBox);
+			
+			carBox.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					carCode = carBox.getSelectedItem().toString();
+				}
+			});
+			
+	        DefaultTableModel model = new DefaultTableModel(new String[] {"주차장","위치", "주차공간", "최종금액","보기"}, 0) {
 	            public boolean isCellEditable(int row, int column) {
 	                return false;
 	            }
@@ -148,12 +173,59 @@ import com.parkosa.dto.getLocationDTO;
 	        JScrollPane jsp = new JScrollPane(innerTable,
 	                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 	                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	        jsp.setBounds(10, 200, 365, 350);
+	        jsp.setBounds(10, 200, 365, 320);
 	        add(jsp);
+	        
+	        JButton reserveButton = new JButton("예약하기");
+	        reserveButton.setBounds(10,530,365,25);
+	        add(reserveButton);
 				
-			
+	        serchButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					startTime = entryYearField.getText()+"-"+entryMonthField.getText()+"-"+
+						    	entryDayField.getText()+" "+entryHourField.getText()+":"+
+						    	entryMinuteField.getText()+":"+"00";
+					endTime = exitYearField.getText()+"-"+exitMonthField.getText()+"-"+
+							  exitDayField.getText()+" "+exitHourField.getText()+":"+
+							  exitMinuteField.getText()+":"+"00";
+					System.out.println(startTime+" "+endTime);
+					
+					ReservationDAO reservationDAO = new ReservationDAO();
+					List <GetAvailableParkingSpaceDTO> availableSpaceList = reservationDAO.getParkingSpaceList(startTime, endTime, carCode,townId);
+					for (int i = 0; i < availableSpaceList.size(); i++) {
+						String[] row = new String[5];
+						row[0] = availableSpaceList.get(i).getParkingLotName();
+						row[1] = availableSpaceList.get(i).getLocationName();
+						row[2] = availableSpaceList.get(i).getParkingSpaceDescription();
+						row[3] = Integer.toString(availableSpaceList.get(i).getPredictPrice());
+						row[4] = "이미지 파일";								
+						model.addRow(row);
+					}
+					
+					//GUIController.changeUI(ui, new MainScreenUI());
+				}
+			});
 			cancelButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					GUIController.changeUI(ui, new MainScreenUI());
+				}
+			});
+			
+			reserveButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					int idx = innerTable.getSelectedRow();
+					
+					startTime = entryYearField.getText()+"-"+entryMonthField.getText()+"-"+
+							    entryDayField.getText()+" "+entryHourField.getText()+":"+
+							    entryMinuteField.getText()+":"+"00";
+					endTime = exitYearField.getText()+"-"+exitMonthField.getText()+"-"+
+						      exitDayField.getText()+" "+exitHourField.getText()+":"+
+						      exitMinuteField.getText()+":"+"00";
+					
+					InsertReservationDTO insertReservationDTO = new InsertReservationDTO(startTime, endTime, carCode, parkingLotId);
+					ReservationDAO reservationDAO = new ReservationDAO();
+					reservationDAO.insertReservation(insertReservationDTO);
+					
 					GUIController.changeUI(ui, new MainScreenUI());
 				}
 			});
@@ -227,10 +299,12 @@ import com.parkosa.dto.getLocationDTO;
 						if (index >= 0) {
 							List<getLocationDTO> townList = locationDAO.getLocations(cityId);
 							townId = townList.get(index).getId();
+							System.out.println(townId);
 						}
 					}
 				}
 			});
 		}
-	}
+				
+}
 
