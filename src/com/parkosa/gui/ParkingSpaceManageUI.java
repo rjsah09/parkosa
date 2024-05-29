@@ -14,10 +14,14 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import com.parkosa.dao.AccountDAO;
+import com.parkosa.dao.CarTypeDAO;
+import com.parkosa.dao.FeePolicyDAO;
 import com.parkosa.dao.ParkingSpaceDAO;
+import com.parkosa.dto.InsertFeePolicyDTO;
 import com.parkosa.dto.InsertParkingSpaceDTO;
 import com.parkosa.dto.RegisteredCarDTO;
 import com.parkosa.dto.RegisteredParkingSpaceDTO;
+import com.parkosa.vo.CarTypeVO;
 
 public class ParkingSpaceManageUI extends UI {
 
@@ -40,7 +44,20 @@ public class ParkingSpaceManageUI extends UI {
         ParkingSpaceDAO parkingSpaceDAO = new ParkingSpaceDAO();
         List <RegisteredParkingSpaceDTO> registeredParkingSpaces = parkingSpaceDAO.listParkingSpace(parkingLotId);
         
-        DefaultTableModel model = new DefaultTableModel(new String[] {"차종","단위시간", "단위시간당요금", "최대이용시간", "주차구역"}, 0) {
+        FeePolicyDAO dao = new FeePolicyDAO();
+        List<InsertFeePolicyDTO> dtos = dao.getListFeePolicy(parkingLotId);
+        
+        CarTypeDAO carTypeDAO = new CarTypeDAO();
+        List<CarTypeVO> list = carTypeDAO.carTypeList();
+        String[] items = new String[list.size() + 1];
+        
+        for (int i = 0; i < list.size(); i++) {
+            items[i] = list.get(i).getName();
+        }
+        
+        items[list.size()] = "모든 차종";
+        
+        DefaultTableModel model = new DefaultTableModel(new String[] {"차종","단위시간(분)", "증가액", "최대시간", "주차구역"}, 0) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -59,7 +76,13 @@ public class ParkingSpaceManageUI extends UI {
         jsp1.setBounds(10, 50, 365, 170);
         add(jsp1);
         
-        JTable innerTable2 = new JTable();
+        DefaultTableModel model2 = new DefaultTableModel(new String[] {"단위시간(분)","최대시간", "증가액", "차종"}, 0) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };       
+        
+        JTable innerTable2 = new JTable(model2);
         innerTable2.addMouseListener(new TableMouseAdaptor());
         innerTable2.setFont(new Font("NanumGothic", Font.PLAIN, 16));
         innerTable2.setRowHeight(20);
@@ -110,6 +133,19 @@ public class ParkingSpaceManageUI extends UI {
             row[0] = registeredParkingSpaces.get(i).getDescription();
             
             model.addRow(row);
+        }
+        
+        for (int i = 0; i < dtos.size(); i++) {
+            String[] row = new String[4];
+            row[0] = Integer.toString(dtos.get(i).getIncreaseMinute());
+            row[1] = Integer.toString(dtos.get(i).getMaximumTime());
+            row[2] = Integer.toString(dtos.get(i).getIncreaseFee());
+            if (dtos.get(i).getCarTypeName() == null) {
+            	row[3] = "모든 차종";            	
+            } else {
+            	row[3] = dtos.get(i).getCarTypeName();
+            }
+            model2.addRow(row);
         }
 
         // Event listener for the cancel button
