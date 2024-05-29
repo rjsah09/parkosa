@@ -4,28 +4,37 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.parkosa.connection.DBConnection;
+import com.parkosa.dto.GetAvailableParkingSpaceDTO;
 import com.parkosa.dto.InsertReservationDTO;
 import com.parkosa.dto.RegisteredReservationDTO;
-import com.parkosa.sign.SignedAccount;
 
 import oracle.jdbc.OracleTypes;
 
 public class ReservationDAO {
 
+	//예약 생성 메서드
     public void insertReservation(InsertReservationDTO insertReservationDTO) {
         String proc = "{ call RESERVATION_PACK.insert_reservation (?,?,?,?) }";
 
         try {
             Connection conn = DBConnection.getConnection();
             CallableStatement callableStatement = conn.prepareCall(proc);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            java.util.Date startParseDate = dateFormat.parse(insertReservationDTO.getStartTime());
+            java.util.Date endParseDate = dateFormat.parse(insertReservationDTO.getEndTime());
 
-            callableStatement.setDate(1, insertReservationDTO.getStartTime());
-            callableStatement.setDate(2, insertReservationDTO.getEndTime());
+            // java.util.Date를 java.sql.Timestamp로 변환
+            Timestamp startTime = new Timestamp(startParseDate.getTime());
+            Timestamp endTime = new Timestamp(endParseDate.getTime());
+
+            callableStatement.setTimestamp(1, startTime);
+            callableStatement.setTimestamp(2, endTime);
             callableStatement.setString(3, insertReservationDTO.getCarCode());
             callableStatement.setInt(4, insertReservationDTO.getParkingLotId());
 
@@ -37,33 +46,29 @@ public class ReservationDAO {
             e.printStackTrace();
         }
     }
-    
-    public List<RegisteredReservationDTO> getReservations() {
-    	String proc = "{ call RESERVATION_PACK.get_reservation (?,?) }";
-    	List<RegisteredReservationDTO> list = new ArrayList<>();
+
+    //예약 가능한 ParkingSpace 조회 메서드
+    public ArrayList<GetAvailableParkingSpaceDTO> getParkingSpaceList (String startTime, String endTime, String carCode, int locationId) {
+        ArrayList<GetAvailableParkingSpaceDTO> list = new ArrayList<>();
+        String sql = "{call list_available_reservation(?, ?)}";
 
         try {
             Connection conn = DBConnection.getConnection();
-            CallableStatement callableStatement = conn.prepareCall(proc);
-            
+            CallableStatement callableStatement = conn.prepareCall(sql);
             //변수 할당
-            callableStatement.setString(2, SignedAccount.getPhoneNumber());
+            callableStatement.setInt(1, locationId);
             callableStatement.registerOutParameter(2, OracleTypes.CURSOR);
             callableStatement.execute();
 
             ResultSet rs = (ResultSet) callableStatement.getObject(2);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
 
             while (rs.next()) {
-                String parkingLotName = rs.getString("parking_lot_name");
-                String parkingSpaceDescription = rs.getString("parking_space_description");
-                String startTime = dateFormat.format(rs.getDate("start_time"));
-                String endTime = dateFormat.format(rs.getDate("end_time"));               
-                int totalAmont = rs.getInt("total_amount");
-                
-                list.add(new RegisteredReservationDTO(parkingLotName, parkingSpaceDescription, startTime, endTime, totalAmont));
+                 String parkingLotName=rs.getString("");
+                 String locationName = rs.getString("");
+                 String parkingSpaceDescription = rs.getString("");
+                 int predictPrice = rs.getInt("");
+                list.add(new GetAvailableParkingSpaceDTO(parkingLotName, locationName, parkingSpaceDescription, predictPrice));
             }
-
 
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
@@ -75,4 +80,6 @@ public class ReservationDAO {
         
         return list;
     }
+    
+    //예약 내역 조회 메서드
 }
