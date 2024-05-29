@@ -37,9 +37,9 @@ public class ParkingSpaceManageUI extends UI {
         add(cancelButton);
 
         ParkingSpaceDAO parkingSpaceDAO = new ParkingSpaceDAO();
-        List <RegisteredParkingSpaceDTO> registeredParkingSpaces = parkingSpaceDAO.listParkingSpace();
+        List <RegisteredParkingSpaceDTO> registeredParkingSpaces = parkingSpaceDAO.listParkingSpace(parkingLotId);
         
-        DefaultTableModel model = new DefaultTableModel(new String[] {"차종","단위시간", "단위시간당요금", "최대이용시간", "참고사항"}, 0) {
+        DefaultTableModel model = new DefaultTableModel(new String[] {"차종","단위시간", "단위시간당요금", "최대이용시간", "주차구역"}, 0) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -113,6 +113,8 @@ public class ParkingSpaceManageUI extends UI {
                 InsertParkingSpaceDTO insertParkingSpaceDTO = new InsertParkingSpaceDTO(Integer.valueOf(parkingLotIdfield.getText()), descriptionfield.getText(), Integer.valueOf(feePolicyIdField.getText()));
                 ParkingSpaceDAO parkingSpaceDAO = new ParkingSpaceDAO();
                 parkingSpaceDAO.insertFeePolicy(insertParkingSpaceDTO);
+                
+                
             }
 
         });
