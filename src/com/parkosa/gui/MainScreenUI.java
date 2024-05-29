@@ -84,6 +84,14 @@ public class MainScreenUI extends UI {
 				GUIController.changeUI(ui, new RegisterReservationUI());
 			}
 		});
+        
+        checkReserve.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GUIController.changeUI(ui, new ReservationHistoryUI());
+			}
+		});
 
     }
 

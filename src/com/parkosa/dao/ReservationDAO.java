@@ -13,6 +13,7 @@ import com.parkosa.connection.DBConnection;
 import com.parkosa.dto.GetAvailableParkingSpaceDTO;
 import com.parkosa.dto.InsertReservationDTO;
 import com.parkosa.dto.RegisteredReservationDTO;
+import com.parkosa.sign.SignedAccount;
 
 import oracle.jdbc.OracleTypes;
 
@@ -82,4 +83,39 @@ public class ReservationDAO {
     }
     
     //예약 내역 조회 메서드
+    public ArrayList<RegisteredReservationDTO> getReservations() {
+    	
+    	ArrayList<RegisteredReservationDTO> list = new ArrayList<>();
+        String sql = "{call reservation_pack.get_reservations(?, ?)}";
+        System.out.println("메서드는 돌아감");
+        try {
+            Connection conn = DBConnection.getConnection();
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            //변수 할당
+            callableStatement.setString(1, SignedAccount.getPhoneNumber());
+            callableStatement.registerOutParameter(2, OracleTypes.CURSOR);
+            callableStatement.execute();
+
+            ResultSet rs = (ResultSet) callableStatement.getObject(2);
+
+            while (rs.next()) {
+            	String parkingLotname = rs.getString("pl_name");
+            	String parkingSpaceDescription = rs.getString("ps_description");
+            	String startTime = rs.getString("r_start_time");
+            	String endTime = rs.getString("r_end_time");
+            	int totalAmount = rs.getInt("r_total_amount");
+            	
+                list.add(new RegisteredReservationDTO(parkingLotname, parkingSpaceDescription, startTime, endTime, totalAmount));
+            }
+
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        }
+        
+        return list;
+    }
 }
