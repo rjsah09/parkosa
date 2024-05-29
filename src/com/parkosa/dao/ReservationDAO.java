@@ -119,13 +119,14 @@ public class ReservationDAO {
 			ResultSet rs = (ResultSet) callableStatement.getObject(2);
 
 			while (rs.next()) {
+				int reservationId = rs.getInt("resrvation_id");
 				String parkingLotName = rs.getString("name");
 				String parkingSpaceDescription = rs.getString("decription");
 				String startTime = rs.getString("start_time");
 				String endTime = rs.getString("end_time");
 				int totalAmount = rs.getInt("total_amount");
 
-				list.add(new RegisteredReservationDTO(parkingLotName, parkingSpaceDescription, startTime, endTime,
+				list.add(new RegisteredReservationDTO(reservationId, parkingLotName, parkingSpaceDescription, startTime, endTime,
 						totalAmount));
 			}
 
