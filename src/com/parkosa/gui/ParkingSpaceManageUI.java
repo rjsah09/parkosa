@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -45,26 +46,31 @@ public class ParkingSpaceManageUI extends UI {
             }
         };
 
-        JTable innerTable = new JTable(model);
-        innerTable.addMouseListener(new TableMouseAdaptor());
-        innerTable.setFont(new Font("NanumGothic", Font.PLAIN, 16));
-        innerTable.setRowHeight(20);
-        innerTable.setShowVerticalLines(false);
-        innerTable.setShowHorizontalLines(false);
+        JTable innerTable1 = new JTable(model);
+        innerTable1.addMouseListener(new TableMouseAdaptor());
+        innerTable1.setFont(new Font("NanumGothic", Font.PLAIN, 16));
+        innerTable1.setRowHeight(20);
+        innerTable1.setShowVerticalLines(false);
+        innerTable1.setShowHorizontalLines(false);
 
-        JScrollPane jsp = new JScrollPane(innerTable,
+        JScrollPane jsp1 = new JScrollPane(innerTable1,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        jsp.setBounds(10, 50, 365, 330);
-        add(jsp);
+        jsp1.setBounds(10, 50, 365, 170);
+        add(jsp1);
+        
+        JTable innerTable2 = new JTable();
+        innerTable2.addMouseListener(new TableMouseAdaptor());
+        innerTable2.setFont(new Font("NanumGothic", Font.PLAIN, 16));
+        innerTable2.setRowHeight(20);
+        innerTable2.setShowVerticalLines(false);
+        innerTable2.setShowHorizontalLines(false);
 
-        JLabel parkingLotIdLabel = new JLabel("주차장ID");
-        parkingLotIdLabel.setBounds(10, 390, 60, 25);
-        add(parkingLotIdLabel);
-
-        JTextField parkingLotIdfield = new JTextField();
-        parkingLotIdfield.setBounds(100, 390, 275, 25);
-        add(parkingLotIdfield);
+        JScrollPane jsp2 = new JScrollPane(innerTable2,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jsp2.setBounds(10, 240, 365, 170);
+        add(jsp2);
 
         JLabel descriptionLabel = new JLabel("주차구역");
         descriptionLabel.setBounds(10, 430, 60, 25);
@@ -74,7 +80,7 @@ public class ParkingSpaceManageUI extends UI {
         descriptionfield.setBounds(100, 430, 275, 25);
         add(descriptionfield);
 
-        JLabel feePolicyIdLabel = new JLabel("요금정책");
+        JLabel feePolicyIdLabel = new JLabel("요금정책ID");
         feePolicyIdLabel.setBounds(10, 470, 60, 25);
         add(feePolicyIdLabel);
 
@@ -95,7 +101,6 @@ public class ParkingSpaceManageUI extends UI {
         deleteButton.setBounds(275, 510, 100, 30);
         add(deleteButton);
 
-
         for (int i = 0; i < registeredParkingSpaces.size(); i++) {
             String[] row = new String[5];
             row[4] = registeredParkingSpaces.get(i).getCarTypeName();
@@ -110,11 +115,27 @@ public class ParkingSpaceManageUI extends UI {
         // Event listener for the cancel button
         insertButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                InsertParkingSpaceDTO insertParkingSpaceDTO = new InsertParkingSpaceDTO(Integer.valueOf(parkingLotIdfield.getText()), descriptionfield.getText(), Integer.valueOf(feePolicyIdField.getText()));
+                InsertParkingSpaceDTO insertParkingSpaceDTO = new InsertParkingSpaceDTO(parkingLotId, descriptionfield.getText(), Integer.valueOf(feePolicyIdField.getText()));
                 ParkingSpaceDAO parkingSpaceDAO = new ParkingSpaceDAO();
-                parkingSpaceDAO.insertFeePolicy(insertParkingSpaceDTO);
                 
+                int result = parkingSpaceDAO.insertFeePolicy(insertParkingSpaceDTO);
+                String output = result == 1? "등록되었습니다." :"등록에 실패했습니다,";
+                JOptionPane.showMessageDialog(null, output);
                 
+                if (result == 1) {
+					model.setNumRows(0);
+					List <RegisteredParkingSpaceDTO> registeredParkingSpaces = parkingSpaceDAO.listParkingSpace(parkingLotId);
+					for (int i = 0; i < registeredParkingSpaces.size(); i++) {
+			            String[] row = new String[5];
+			            row[0] = registeredParkingSpaces.get(i).getDescription();
+			            row[1] = Integer.toString(registeredParkingSpaces.get(i).getIncereaseMinute());
+			            row[2] = Integer.toString(registeredParkingSpaces.get(i).getIncreaseFee());
+			            row[3] = Integer.toString(registeredParkingSpaces.get(i).getMaximumTime());			            
+			            row[4] = registeredParkingSpaces.get(i).getCarTypeName();
+			            model.addRow(row);
+			        }
+					
+                }
             }
 
         });

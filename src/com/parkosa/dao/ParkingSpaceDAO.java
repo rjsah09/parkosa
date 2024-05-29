@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.parkosa.connection.DBConnection;
 import com.parkosa.dto.InsertParkingSpaceDTO;
@@ -14,7 +13,7 @@ import com.parkosa.dto.RegisteredParkingSpaceDTO;
 import oracle.jdbc.OracleTypes;
 
 public class ParkingSpaceDAO {
-    public void insertFeePolicy(InsertParkingSpaceDTO insertParkingSpaceDTO) {
+    public int insertFeePolicy(InsertParkingSpaceDTO insertParkingSpaceDTO) {
 
         String proc = "{ call parking_space_pack.insert_parking_space(?, ?, ?) }";
 
@@ -27,6 +26,9 @@ public class ParkingSpaceDAO {
             callableStatement.setString(2, insertParkingSpaceDTO.getDescription());
             callableStatement.setInt(3, insertParkingSpaceDTO.getFeePolicyId());
             callableStatement.executeUpdate();
+            
+            return 1;
+            
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
             e.printStackTrace();
@@ -35,7 +37,7 @@ public class ParkingSpaceDAO {
         } finally {
 
         }
-
+        return 0;
     }
     
     public ArrayList<RegisteredParkingSpaceDTO> listParkingSpace(int parkingLotId) {
