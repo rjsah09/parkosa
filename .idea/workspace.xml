@@ -7,6 +7,7 @@
     <list default="true" id="43b43bea-ce0f-434a-8548-32293257c0f1" name="변경" comment="CarDataUi 삭제 &#10;삭제 이유. RegisterCarUI와 중복">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/parkosa/dao/ReservationDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/dao/ReservationDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/parkosa/gui/ReservationHistoryUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/gui/ReservationHistoryUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +92,7 @@
     "애플리케이션.ParkingApp.executor": "Run",
     "애플리케이션.ParkingLotDAO.executor": "Run",
     "애플리케이션.ParkingSpaceDAO.executor": "Run",
+    "애플리케이션.ParkingTableExample.executor": "Run",
     "애플리케이션.ReservationDAO.executor": "Run",
     "애플리케이션.Test.executor": "Run"
   }
@@ -133,7 +135,7 @@
       <workItem from="1716533506733" duration="540000" />
       <workItem from="1716541402733" duration="23000" />
       <workItem from="1716768070646" duration="8198000" />
-      <workItem from="1716947850667" duration="11940000" />
+      <workItem from="1716947850667" duration="15762000" />
     </task>
     <task id="LOCAL-00001" summary="CarDataUi 삭제 &#10;삭제 이유. RegisterCarUI와 중복">
       <option name="closed" value="true" />

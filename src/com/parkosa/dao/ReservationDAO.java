@@ -47,6 +47,7 @@ public class ReservationDAO {
         }
     }
 
+
     //예약 가능한 ParkingSpace 조회 메서드
     public ArrayList<GetAvailableParkingSpaceDTO> getParkingSpaceList (String startTime, String endTime, String carCode, int locationId) {
         ArrayList<GetAvailableParkingSpaceDTO> list = new ArrayList<>();
@@ -98,12 +99,12 @@ public class ReservationDAO {
 
         return list;
     }
-    
+
     //예약 내역 조회 메서드
     public ArrayList<RegisteredReservationDTO> getReservations() {
     	
     	ArrayList<RegisteredReservationDTO> list = new ArrayList<>();
-        String sql = "{call reservation_pack.get_reservations(?, ?)}";
+        String sql = "{call RESERVATION_PACK.get_reservations(?, ?)}";
         System.out.println("메서드는 돌아감");
         try {
             Connection conn = DBConnection.getConnection();
@@ -116,13 +117,13 @@ public class ReservationDAO {
             ResultSet rs = (ResultSet) callableStatement.getObject(2);
 
             while (rs.next()) {
-            	String parkingLotname = rs.getString("pl_name");
-            	String parkingSpaceDescription = rs.getString("ps_description");
-            	String startTime = rs.getString("r_start_time");
-            	String endTime = rs.getString("r_end_time");
-            	int totalAmount = rs.getInt("r_total_amount");
+            	String parkingLotName = rs.getString("name");
+            	String parkingSpaceDescription = rs.getString("decription");
+            	String startTime = rs.getString("start_time");
+            	String endTime = rs.getString("end_time");
+            	int totalAmount = rs.getInt("total_amount");
             	
-                list.add(new RegisteredReservationDTO(parkingLotname, parkingSpaceDescription, startTime, endTime, totalAmount));
+                list.add(new RegisteredReservationDTO(parkingLotName, parkingSpaceDescription, startTime, endTime, totalAmount));
             }
 
         } catch (SQLException e) {
