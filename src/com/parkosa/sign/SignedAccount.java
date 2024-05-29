@@ -4,8 +4,7 @@ public class SignedAccount {
 	private static SignedAccount account;
 	private static String phoneNumber;
 	
-	private SignedAccount() {}
-	
+
 	public static SignedAccount getInstance() {
 		if (account == null) {
             account = new SignedAccount();

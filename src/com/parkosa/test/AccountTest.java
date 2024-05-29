@@ -1,32 +1,14 @@
 package com.parkosa.test;
 
-import java.time.LocalDate;
-
-import com.parkosa.dao.AccountDAO;
-import com.parkosa.vo.AccountVO;
+import com.parkosa.dao.ParkingLotDAO;
+import com.parkosa.dto.InsertParkingLotDTO;
 
 public class AccountTest {
-	
+	int a = 1;
 	public static void main(String[] args) {
-		//accountTest();
-		dupTest();
+		System.out.println("g00d");
+		ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
+		InsertParkingLotDTO dto = new InsertParkingLotDTO("A주차장", "02-123-456", 40, "서울시 종로구 대명길40 주차타워", "이미지링크");
+		parkingLotDAO.insertParkLot(dto);
 	}
-	
-	public static void accountTest() {
-		AccountVO man1 = new AccountVO("01012345678", "12345", "aaa", "abcd@naver.com", LocalDate.now());
-		AccountVO man2 = new AccountVO("01012345679", "0000", "bbb", "ad@naver.com", LocalDate.now());
-		
-		AccountDAO accountDAO = new AccountDAO();
-		accountDAO.insertAccount(man1);
-		accountDAO.insertAccount(man2);
-	}
-	
-	public static void dupTest() {
-		AccountDAO accountDAO = new AccountDAO();
-		boolean dup1 = accountDAO.checkPhoneNumberDuplicated("01000000000");
-		System.out.println(dup1);
-		boolean dup2 = accountDAO.checkPhoneNumberDuplicated("01000");
-		System.out.println(dup2);
-	}
-	
 }

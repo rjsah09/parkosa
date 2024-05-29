@@ -2,57 +2,59 @@ package com.parkosa.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import com.parkosa.dao.AccountDAO;
 import com.parkosa.dto.SignInDTO;
 import com.parkosa.sign.SignedAccount;
-import com.parkosa.vo.AccountVO;
 
-public class SignInUI {
-	public static void placeComponents(JPanel panel) {
-        panel.setLayout(null);
-
-        //-- 버튼, 입력 칸 생성 --//
+public class SignInUI extends UI {
+	public void placeComponents() {
+        setLayout(null);
+      //-- 버튼, 입력 칸 생성 --//
         JLabel phoneNumberLabel = new JLabel("전화번호");
         phoneNumberLabel.setBounds(40, 20, 80, 25);
-        panel.add(phoneNumberLabel);
+        add(phoneNumberLabel);
 
         JTextField phoneNumberField = new JTextField();
         phoneNumberField.setBounds(40, 50, 295, 25);
-        panel.add(phoneNumberField);
+        add(phoneNumberField);
         
         JLabel passwordLabel = new JLabel("비밀번호");
         passwordLabel.setBounds(40, 110, 80, 25);
-        panel.add(passwordLabel);
+        add(passwordLabel);
         
-        JTextField passwordField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
         passwordField.setBounds(40, 140, 295, 25);
-        panel.add(passwordField);
+        passwordField.setEchoChar('*');
+        add(passwordField);
         
         JButton cancelButton = new JButton("뒤로가기");
-        cancelButton.setBounds(215, 350, 100, 25);
-        panel.add(cancelButton);
+        cancelButton.setBounds(60, 350, 100, 25);
+        add(cancelButton);
 
         JButton signInButton = new JButton("로그인");
-        signInButton.setBounds(60, 350, 100, 25);
-        panel.add(signInButton);
+        signInButton.setBounds(215, 350, 100, 25);
+        add(signInButton);
+        
+        JButton adminButton = new JButton("관리자");
+        adminButton.setBounds(310, 530, 70, 25);
+        add(adminButton);
         
         //-- 이벤트 발생 --//
-        
         //취소 버튼 이벤트
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	GUIController.changeUI(ui, new ParkKosaUI());
             }
         });
         
-        //회원가입 버튼 이벤트
+        //로그인 버튼 이벤트
         signInButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	
@@ -67,15 +69,25 @@ public class SignInUI {
                 	 signInDTO.setPassword(passwordField.getText());
             	
                 	 AccountDAO accountDAO = new AccountDAO();
+                	 boolean duplicated = accountDAO.checkPhoneNumberDuplicated(phoneNumberField.getText());
                 	 String result = accountDAO.signIn(signInDTO);
-                	 if (result == null || result.equals("12")) {
+                	 if (!duplicated){
                 		 JOptionPane.showMessageDialog(null, "일치하는 회원 정보가 없습니다.");
+                	 } else if (result == null || result.equals("12")) {
+                		 JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
                 	 } else {
-                		 SignedAccount.getInstance().signIn(result);
-                		 System.out.println(SignedAccount.getPhoneNumber());
+                		 SignedAccount.signIn(result);
+                		 GUIController.changeUI(ui, new MainScreenUI());
                 	 }
                 	 
                 }
+            }
+        });
+        
+        //관리자 버튼 이벤트
+        adminButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	GUIController.changeUI(ui, new ParkingLotManageUI());
             }
         });
         

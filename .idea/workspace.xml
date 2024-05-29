@@ -4,18 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43b43bea-ce0f-434a-8548-32293257c0f1" name="변경" comment="">
+    <list default="true" id="43b43bea-ce0f-434a-8548-32293257c0f1" name="변경" comment="CarDataUi 삭제 &#10;삭제 이유. RegisterCarUI와 중복">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parkosa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/parkosa.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/parkosa/dao/CarDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/dao/CarDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/parkosa/dao/CarTypeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/dao/CarTypeDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/parkosa/vo/CarTypeVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/vo/CarTypeVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/parkosa/vo/CarVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/vo/CarVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/parkosa/dao/ReservationDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/dao/ReservationDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <excluded-from-favorite>
@@ -37,7 +40,7 @@
           <entry type="REMOTE">
             <value>
               <list>
-                <branch-info repo="$PROJECT_DIR$" source="origin/develop" />
+                <branch-info repo="$PROJECT_DIR$" source="origin/gaeng" />
               </list>
             </value>
           </entry>
@@ -79,9 +82,24 @@
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true",
     "애플리케이션.CarDAO.executor": "Run",
-    "애플리케이션.Main.executor": "Run"
+    "애플리케이션.CarDataUI.executor": "Run",
+    "애플리케이션.CarTypeDAO.executor": "Run",
+    "애플리케이션.FeePolicyDAO.executor": "Run",
+    "애플리케이션.LocationDAO.executor": "Run",
+    "애플리케이션.Main.executor": "Run",
+    "애플리케이션.ParkKosaUI.executor": "Run",
+    "애플리케이션.ParkingApp.executor": "Run",
+    "애플리케이션.ParkingLotDAO.executor": "Run",
+    "애플리케이션.ParkingSpaceDAO.executor": "Run",
+    "애플리케이션.ReservationDAO.executor": "Run",
+    "애플리케이션.Test.executor": "Run"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.parkosa.gui" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
@@ -113,10 +131,26 @@
       <updated>1716443153267</updated>
       <workItem from="1716443154350" duration="3049000" />
       <workItem from="1716533506733" duration="540000" />
+      <workItem from="1716541402733" duration="23000" />
+      <workItem from="1716768070646" duration="8198000" />
+      <workItem from="1716947850667" duration="11940000" />
     </task>
+    <task id="LOCAL-00001" summary="CarDataUi 삭제 &#10;삭제 이유. RegisterCarUI와 중복">
+      <option name="closed" value="true" />
+      <created>1716776769096</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1716776769096</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="CarDataUi 삭제 &#10;삭제 이유. RegisterCarUI와 중복" />
+    <option name="LAST_COMMIT_MESSAGE" value="CarDataUi 삭제 &#10;삭제 이유. RegisterCarUI와 중복" />
   </component>
 </project>

@@ -25,7 +25,9 @@ public class CarTypeVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-	
+
+
+
+
+
 }

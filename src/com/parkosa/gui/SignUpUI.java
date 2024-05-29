@@ -6,75 +6,78 @@ import java.time.LocalDate;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import com.parkosa.dao.AccountDAO;
 import com.parkosa.vo.AccountVO;
 
-public class SignupUI {
+public class SignUpUI extends UI {
 
-    public static void placeComponents(JPanel panel) {
-        panel.setLayout(null);
+	public void placeComponents() {
+        setLayout(null);
 
         //-- 버튼, 입력 칸 생성 --//
         JLabel phoneNumberLabel = new JLabel("전화번호");
         phoneNumberLabel.setBounds(40, 20, 80, 25);
-        panel.add(phoneNumberLabel);
+        add(phoneNumberLabel);
 
         JTextField phoneNumberField = new JTextField();
         phoneNumberField.setBounds(40, 50, 295, 25);
-        panel.add(phoneNumberField);
+        add(phoneNumberField);
         
         JButton phoneNumberValidateButton = new JButton("중복확인");
         phoneNumberValidateButton.setBounds(40, 80, 295, 25);
-        panel.add(phoneNumberValidateButton);
+        add(phoneNumberValidateButton);
         
         JLabel passwordLabel = new JLabel("비밀번호");
         passwordLabel.setBounds(40, 110, 80, 25);
-        panel.add(passwordLabel);
+        add(passwordLabel);
         
-        JTextField passwordField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
         passwordField.setBounds(40, 140, 295, 25);
-        panel.add(passwordField);
+        passwordField.setEchoChar('*');
+        add(passwordField);
         
         JLabel checkPasswordLabel = new JLabel("비밀번호 확인");
         checkPasswordLabel.setBounds(40, 170, 80, 25);
-        panel.add(checkPasswordLabel);
+        add(checkPasswordLabel);
         
-        JTextField checkPasswordField = new JTextField();
+        JPasswordField checkPasswordField = new JPasswordField();
         checkPasswordField.setBounds(40, 200, 295, 25);
-        panel.add(checkPasswordField);
+        passwordField.setEchoChar('*');
+        add(checkPasswordField);
 
         JLabel nameLabel = new JLabel("이름");
         nameLabel.setBounds(40, 230, 80, 25);
-        panel.add(nameLabel);
+        add(nameLabel);
 
         JTextField nameField = new JTextField();
         nameField.setBounds(40, 260, 295, 25);
-        panel.add(nameField);
+        add(nameField);
 
         JLabel emailLabel = new JLabel("이메일");
         emailLabel.setBounds(40, 290, 80, 25);
-        panel.add(emailLabel);
+        add(emailLabel);
 
         JTextField emailField = new JTextField();
         emailField.setBounds(40, 320, 295, 25);
-        panel.add(emailField);
+        add(emailField);
 
         JButton cancelButton = new JButton("뒤로가기");
-        cancelButton.setBounds(215, 350, 100, 25);
-        panel.add(cancelButton);
+        cancelButton.setBounds(60, 350, 100, 25);
+        add(cancelButton);
 
         JButton reserveButton = new JButton("회원가입");
-        reserveButton.setBounds(60, 350, 100, 25);
-        panel.add(reserveButton);
+        reserveButton.setBounds(215, 350, 100, 25);
+        add(reserveButton);
         
         //-- 이벤트 발생 --//
         
         //취소 버튼 이벤트
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	GUIController.changeUI(ui, new ParkKosaUI());
             }
         });
         
@@ -106,6 +109,8 @@ public class SignupUI {
             	
                 	 AccountDAO accountDAO = new AccountDAO();
                 	 accountDAO.insertAccount(accountVO);
+                	 
+                	 GUIController.changeUI(ui, new ParkKosaUI());
                 }
             }
         });
@@ -114,21 +119,30 @@ public class SignupUI {
         phoneNumberValidateButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	AccountDAO accountDAO = new AccountDAO();
-            	boolean duplicated = accountDAO.checkPhoneNumberDuplicated(phoneNumberField.getText());
+            	if (phoneNumberField.isEditable()==false) {
+            		phoneNumberField.setEditable(true);
+            		phoneNumberField.setText("");
+            		phoneNumberValidateButton.setText("중복확인");
+            	} else if (phoneNumberField.isEditable()&!(phoneNumberField.getText().equals(""))) {	
+            		boolean duplicated = accountDAO.checkPhoneNumberDuplicated(phoneNumberField.getText());
+	            	
+	            	if (phoneNumberField == null || phoneNumberField.getText().equals("")) {
+	            		JOptionPane.showMessageDialog(null, "전화번호를 입력해주세요.");
+	            		return;
+	            	}
+	            	String result = !duplicated ? "사용 가능한 전화번호입니다." : "사용 불가능한 번호입니다.";
+
+	            	JOptionPane.showMessageDialog(null, result);
+	            	if (!duplicated) {
+	            		phoneNumberField.setEditable(false);
+	            		phoneNumberValidateButton.setText("다시 입력하려면 클릭해주세요.");
+
+	            	}
             	
-            	if (phoneNumberField == null || phoneNumberField.getText().equals("")) {
-            		JOptionPane.showMessageDialog(null, "전화번호를 입력해주세요.");
-            		return;
-            	}
-            	
-            	String result = !duplicated ? "사용 가능한 전화번호입니다." : "사용 불가능한 번호입니다.";
-            	
-            	JOptionPane.showMessageDialog(null, result);
-            	if (!duplicated) {
-            		phoneNumberField.setEditable(false);
             	}
             }
         });
+
     }
         
 }

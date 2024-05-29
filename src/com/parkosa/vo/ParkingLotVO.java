@@ -4,20 +4,20 @@ public class ParkingLotVO {
 	
 	private int id;
 	private String name;
-	private String phoneNumber;
-	private String addresss;
-	private boolean availablePark;
-	private String locationId;
-	
-	public ParkingLotVO(int id, String name, String phoneNumber, String addresss, boolean availablePark,
-			String locationId) {
-		super();
+	private String telNumber;
+	private String address;
+	private int availablePark;
+	private int locationId;
+	private String imageLink;
+
+	public ParkingLotVO(int id, String name, String telNumber, String address, int availablePark, int locationId, String imageLink) {
 		this.id = id;
 		this.name = name;
-		this.phoneNumber = phoneNumber;
-		this.addresss = addresss;
+		this.telNumber = telNumber;
+		this.address = address;
 		this.availablePark = availablePark;
 		this.locationId = locationId;
+		this.imageLink = imageLink;
 	}
 
 	public int getId() {
@@ -36,36 +36,43 @@ public class ParkingLotVO {
 		this.name = name;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getTelNumber() {
+		return telNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setTelNumber(String telNumber) {
+		this.telNumber = telNumber;
 	}
 
-	public String getAddresss() {
-		return addresss;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAddresss(String addresss) {
-		this.addresss = addresss;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public boolean isAvailablePark() {
+	public int getAvailablePark() {
 		return availablePark;
 	}
 
-	public void setAvailablePark(boolean availablePark) {
+	public void setAvailablePark(int availablePark) {
 		this.availablePark = availablePark;
 	}
 
-	public String getLocationId() {
+	public int getLocationId() {
 		return locationId;
 	}
 
-	public void setLocationId(String locationId) {
+	public void setLocationId(int locationId) {
 		this.locationId = locationId;
 	}
-	
+
+	public String getImageLink() {
+		return imageLink;
+	}
+
+	public void setImageLink(String imageLink) {
+		this.imageLink = imageLink;
+	}
 }

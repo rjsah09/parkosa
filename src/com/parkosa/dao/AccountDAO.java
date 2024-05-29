@@ -3,11 +3,16 @@ package com.parkosa.dao;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLType;
 
 import com.parkosa.connection.DBConnection;
 import com.parkosa.dto.SignInDTO;
+import com.parkosa.sign.SignedAccount;
 import com.parkosa.vo.AccountVO;
+
+import oracle.jdbc.OracleTypes;
 
 
 public class AccountDAO {
@@ -85,6 +90,31 @@ public class AccountDAO {
 			
 			return phoneNumber;
 			
+		} catch (SQLException e) {
+			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		
+		return null;
+	}
+	
+	public String getName() {
+		
+		String function = "{ ? = call account_pack.fn_get_name(?) }";
+		
+		try {
+			Connection conn = DBConnection.getConnection();
+			CallableStatement callableStatement = conn.prepareCall(function);
+			
+			//변수 할당
+			callableStatement.registerOutParameter(1, java.sql.Types.VARCHAR);
+			callableStatement.setString(2, SignedAccount.getPhoneNumber());
+			callableStatement.executeQuery();
+			
+			return callableStatement.getString(1);
 		} catch (SQLException e) {
 			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
 			e.printStackTrace();
