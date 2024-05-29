@@ -51,7 +51,7 @@ public class ReservationDAO {
 
 
     //수정해야함.
-    public ArrayList<GetAvailableParkingSpaceDTO> getParkingSpacelist (String startTime, String endTime, String carCode, int locationId) {
+    public ArrayList<GetAvailableParkingSpaceDTO> getParkingSpaceList (String startTime, String endTime, String carCode, int locationId) {
         ArrayList<GetAvailableParkingSpaceDTO> list = new ArrayList<>();
         String sql = "{call list_available_reservation(?, ?)}";
 
