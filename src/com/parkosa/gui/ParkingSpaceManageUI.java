@@ -34,7 +34,7 @@ public class ParkingSpaceManageUI extends UI {
         CarDAO carDAO = new CarDAO();
         List<RegisteredCarDTO> registeredCars = carDAO.getRegisteredCars();
         
-        DefaultTableModel model = new DefaultTableModel(new String[] {"주차장ID", "주차구역", "요금정책", "삭제"}, 0) {
+        DefaultTableModel model = new DefaultTableModel(new String[] {"차종","단위시간", "단위시간당요금", "최대이용시간", "참고사항"}, 0) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
