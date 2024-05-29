@@ -1,38 +1,37 @@
 package com.parkosa.dto;
 
-import oracle.sql.DATE;
-
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class InsertReservationDTO {
 	
-	private Date startTime;
-	private Date endTime;
+	private String startTime;
+	private String endTime;
 	private int totalAmount;
 	private String carCode;
 	private int parkingSpaceId;
 	private int parkingLotId;
 
-	public InsertReservationDTO(Date startTime, Date endTime, String carCode, int parkingLotId) {
+	public InsertReservationDTO(String startTime, String endTime, String carCode, int parkingLotId) {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.carCode = carCode;
 		this.parkingLotId = parkingLotId;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 
