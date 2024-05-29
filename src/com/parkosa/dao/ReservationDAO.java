@@ -36,7 +36,7 @@ public class ReservationDAO {
 			callableStatement.setTimestamp(1, startTime);
 			callableStatement.setTimestamp(2, endTime);
 			callableStatement.setString(3, insertReservationDTO.getCarCode());
-			callableStatement.setInt(4, insertReservationDTO.getParkingLotId());
+			callableStatement.setInt(4, insertReservationDTO.getParkingSpaceId());
 
 			callableStatement.executeUpdate();
 		} catch (SQLException e) {

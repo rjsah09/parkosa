@@ -9,11 +9,11 @@ public class InsertReservationDTO {
 	private int parkingSpaceId;
 	private int parkingLotId;
 
-	public InsertReservationDTO(String startTime, String endTime, String carCode, int parkingLotId) {
+	public InsertReservationDTO(String startTime, String endTime, String carCode, int parkingSpaceId) {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.carCode = carCode;
-		this.parkingLotId = parkingLotId;
+		this.parkingSpaceId = parkingSpaceId;
 	}
 
 	public String getStartTime() {
