@@ -41,7 +41,6 @@ public class ReservationHistoryUI extends UI{
 		};
 
 		JTable innerTable = new JTable(model);
-		innerTable.addMouseListener(new TableMouseAdaptor());
 		innerTable.setFont(new Font("NanumGothic", Font.PLAIN, 16));
 		innerTable.setRowHeight(20);
 		innerTable.setShowVerticalLines(false);
@@ -52,6 +51,7 @@ public class ReservationHistoryUI extends UI{
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jsp.setBounds(10, 50, 365, 500);
 		add(jsp);
+		
 		for (int i = 0 ; i < list.size() ; i++) {
 			String[] row = new String[5];
 			row[0] = list.get(i).getParkingLotname();

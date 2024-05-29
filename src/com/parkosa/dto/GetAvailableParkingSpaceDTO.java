@@ -1,17 +1,25 @@
 package com.parkosa.dto;
 
+import oracle.net.aso.r;
+
 public class GetAvailableParkingSpaceDTO {
 
+	private int parkingLotId;
     private String parkingLotName;
     private String locationName;
     private String parkingSpaceDescription;
     private int predictPrice;
 
-    public GetAvailableParkingSpaceDTO(String parkingLotName, String locationName, String parkingSpaceDescription, int predictPrice) {
+    public GetAvailableParkingSpaceDTO(int parkingLotId, String parkingLotName, String locationName, String parkingSpaceDescription, int predictPrice) {
+    	this.parkingLotId = parkingLotId;
         this.parkingLotName = parkingLotName;
         this.locationName = locationName;
         this.parkingSpaceDescription = parkingSpaceDescription;
         this.predictPrice = predictPrice;
+    }
+    
+    public int getParkingLotId() {
+    	return parkingLotId;
     }
 
     public String getParkingLotName() {
