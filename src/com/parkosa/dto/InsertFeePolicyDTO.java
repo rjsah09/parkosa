@@ -12,7 +12,6 @@ public class InsertFeePolicyDTO {
 	
 	public InsertFeePolicyDTO(int id, int increaseMinute, int increaseFee, int maximumTime, int carTypeId,
 			int parkingLotId, String carTypeName) {
-		super();
 		this.id = id;
 		this.increaseMinute = increaseMinute;
 		this.increaseFee = increaseFee;
@@ -35,6 +34,18 @@ public class InsertFeePolicyDTO {
 		this.increaseFee = increaseFee;
 		this.maximumTime = maximumTime;
 		this.carTypeName = carTypeName;
+	}
+	
+	public InsertFeePolicyDTO(int id, int increaseMinute, int increaseFee, int maximumTime, String carTypeName) {
+		this.id = id;
+		this.increaseMinute = increaseMinute;
+		this.increaseFee = increaseFee;
+		this.maximumTime = maximumTime;
+		this.carTypeName = carTypeName;
+	}
+	
+	public int getId() {
+		return id;
 	}
 
 	public int getIncreaseMinute() {

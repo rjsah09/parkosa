@@ -3,6 +3,8 @@ package com.parkosa.gui;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -26,6 +28,7 @@ import com.parkosa.vo.CarTypeVO;
 public class ParkingSpaceManageUI extends UI {
 
 	int parkingLotId;
+	int feePolicyId;
 
     public ParkingSpaceManageUI(int parkingLotId) {
     	this.parkingLotId = parkingLotId;
@@ -34,96 +37,34 @@ public class ParkingSpaceManageUI extends UI {
     public void placeComponents() {
         setLayout(null);
 
-        AccountDAO accountDAO = new AccountDAO();
-        String name = accountDAO.getName();
-
         JButton cancelButton = new JButton("뒤로가기");
         cancelButton.setBounds(10, 10, 100, 25);
         add(cancelButton);
-
+        
+        
+        //-------주차공간-----//
         ParkingSpaceDAO parkingSpaceDAO = new ParkingSpaceDAO();
         List <RegisteredParkingSpaceDTO> registeredParkingSpaces = parkingSpaceDAO.listParkingSpace(parkingLotId);
         
-        FeePolicyDAO dao = new FeePolicyDAO();
-        List<InsertFeePolicyDTO> dtos = dao.getListFeePolicy(parkingLotId);
-        
-        CarTypeDAO carTypeDAO = new CarTypeDAO();
-        List<CarTypeVO> list = carTypeDAO.carTypeList();
-        String[] items = new String[list.size() + 1];
-        
-        for (int i = 0; i < list.size(); i++) {
-            items[i] = list.get(i).getName();
-        }
-        
-        items[list.size()] = "모든 차종";
-        
-        DefaultTableModel model = new DefaultTableModel(new String[] {"차종","단위시간(분)", "증가액", "최대시간", "주차구역"}, 0) {
+        DefaultTableModel parkingSpaceModel = new DefaultTableModel(new String[] {"차종","단위시간(분)", "증가액", "최대시간", "주차구역"}, 0) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
-        JTable innerTable1 = new JTable(model);
-        innerTable1.addMouseListener(new TableMouseAdaptor());
-        innerTable1.setFont(new Font("NanumGothic", Font.PLAIN, 16));
-        innerTable1.setRowHeight(20);
-        innerTable1.setShowVerticalLines(false);
-        innerTable1.setShowHorizontalLines(false);
+        JTable parkingSpaceTable = new JTable(parkingSpaceModel);
+        parkingSpaceTable.setFont(new Font("NanumGothic", Font.PLAIN, 16));
+        parkingSpaceTable.setRowHeight(20);
+        parkingSpaceTable.setShowVerticalLines(false);
+        parkingSpaceTable.setShowHorizontalLines(false);
 
-        JScrollPane jsp1 = new JScrollPane(innerTable1,
+        JScrollPane parkingSpacePane = new JScrollPane(parkingSpaceTable,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        jsp1.setBounds(10, 50, 365, 170);
-        add(jsp1);
         
-        DefaultTableModel model2 = new DefaultTableModel(new String[] {"단위시간(분)","최대시간", "증가액", "차종"}, 0) {
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };       
+        parkingSpacePane.setBounds(10, 50, 365, 170);
+        add(parkingSpacePane);
         
-        JTable innerTable2 = new JTable(model2);
-        innerTable2.addMouseListener(new TableMouseAdaptor());
-        innerTable2.setFont(new Font("NanumGothic", Font.PLAIN, 16));
-        innerTable2.setRowHeight(20);
-        innerTable2.setShowVerticalLines(false);
-        innerTable2.setShowHorizontalLines(false);
-
-        JScrollPane jsp2 = new JScrollPane(innerTable2,
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        jsp2.setBounds(10, 240, 365, 170);
-        add(jsp2);
-
-        JLabel descriptionLabel = new JLabel("주차구역");
-        descriptionLabel.setBounds(10, 430, 60, 25);
-        add(descriptionLabel);
-
-        JTextField descriptionfield = new JTextField();
-        descriptionfield.setBounds(100, 430, 275, 25);
-        add(descriptionfield);
-
-        JLabel feePolicyIdLabel = new JLabel("요금정책ID");
-        feePolicyIdLabel.setBounds(10, 470, 60, 25);
-        add(feePolicyIdLabel);
-
-        JTextField feePolicyIdField = new JTextField();
-        feePolicyIdField.setText("10");
-        feePolicyIdField.setBounds(100, 470, 275, 25);
-        add(feePolicyIdField);
-
-        JButton insertButton = new JButton("생성");
-        insertButton.setBounds(10, 510, 100, 30);
-        add(insertButton);
-
-        JButton modifyButton = new JButton("수정");
-        modifyButton.setBounds(140, 510, 100, 30);
-        add(modifyButton);
-
-        JButton deleteButton = new JButton("삭제");
-        deleteButton.setBounds(275, 510, 100, 30);
-        add(deleteButton);
-
         for (int i = 0; i < registeredParkingSpaces.size(); i++) {
             String[] row = new String[5];
             row[4] = registeredParkingSpaces.get(i).getCarTypeName();
@@ -132,26 +73,70 @@ public class ParkingSpaceManageUI extends UI {
             row[3] = Integer.toString(registeredParkingSpaces.get(i).getMaximumTime());
             row[0] = registeredParkingSpaces.get(i).getDescription();
             
-            model.addRow(row);
+            parkingSpaceModel.addRow(row);
         }
         
-        for (int i = 0; i < dtos.size(); i++) {
-            String[] row = new String[4];
-            row[0] = Integer.toString(dtos.get(i).getIncreaseMinute());
-            row[1] = Integer.toString(dtos.get(i).getMaximumTime());
-            row[2] = Integer.toString(dtos.get(i).getIncreaseFee());
-            if (dtos.get(i).getCarTypeName() == null) {
-            	row[3] = "모든 차종";            	
-            } else {
-            	row[3] = dtos.get(i).getCarTypeName();
+        //-----주차 공간 끝-----//
+        
+        
+        //-----요금 정책----//
+        FeePolicyDAO feePolicyDAO = new FeePolicyDAO();
+        List<InsertFeePolicyDTO> feePolicies = feePolicyDAO.getListFeePolicy(parkingLotId);
+        
+        DefaultTableModel feePolicyModel = new DefaultTableModel(new String[] {"요금정책ID", "단위시간(분)","최대시간", "증가액", "차종"}, 0) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
             }
-            model2.addRow(row);
+        };
+        
+        JTable feePolicyTable = new JTable(feePolicyModel);
+        feePolicyTable.addMouseListener(new feePolicyAdaptor());
+        feePolicyTable.setFont(new Font("NanumGothic", Font.PLAIN, 16));
+        feePolicyTable.setRowHeight(20);
+        feePolicyTable.setShowVerticalLines(false);
+        feePolicyTable.setShowHorizontalLines(false);
+
+        JScrollPane feePolicyPane = new JScrollPane(feePolicyTable,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        
+        feePolicyPane.setBounds(10, 240, 365, 170);
+        add(feePolicyPane);
+        
+        for (int i = 0; i < feePolicies.size(); i++) {
+            String[] row = new String[5];
+            row[0] = Integer.toString(feePolicies.get(i).getId());
+            row[1] = Integer.toString(feePolicies.get(i).getIncreaseMinute());
+            row[2] = Integer.toString(feePolicies.get(i).getMaximumTime());
+            row[3] = Integer.toString(feePolicies.get(i).getIncreaseFee());
+            if (feePolicies.get(i).getCarTypeName() == null) {
+            	row[4] = "모든 차종";            	
+            } else {
+            	row[4] = feePolicies.get(i).getCarTypeName();
+            }
+            feePolicyModel.addRow(row);
         }
+        
+        //-----요금 정책 끝-----//
+
+        JLabel descriptionLabel = new JLabel("주차공간명");
+        descriptionLabel.setBounds(10, 430, 60, 25);
+        add(descriptionLabel);
+
+        JTextField descriptionfield = new JTextField();
+        descriptionfield.setBounds(100, 430, 275, 25);
+        add(descriptionfield);
+
+		
+
+        JButton insertButton = new JButton("생성");
+        insertButton.setBounds(10, 510, 100, 30);
+        add(insertButton);
 
         // Event listener for the cancel button
         insertButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                InsertParkingSpaceDTO insertParkingSpaceDTO = new InsertParkingSpaceDTO(parkingLotId, descriptionfield.getText(), Integer.valueOf(feePolicyIdField.getText()));
+                InsertParkingSpaceDTO insertParkingSpaceDTO = new InsertParkingSpaceDTO(parkingLotId, descriptionfield.getText(), feePolicyId);
                 ParkingSpaceDAO parkingSpaceDAO = new ParkingSpaceDAO();
                 
                 int result = parkingSpaceDAO.insertFeePolicy(insertParkingSpaceDTO);
@@ -159,7 +144,7 @@ public class ParkingSpaceManageUI extends UI {
                 JOptionPane.showMessageDialog(null, output);
                 
                 if (result == 1) {
-					model.setNumRows(0);
+					parkingSpaceModel.setNumRows(0);
 					List <RegisteredParkingSpaceDTO> registeredParkingSpaces = parkingSpaceDAO.listParkingSpace(parkingLotId);
 					for (int i = 0; i < registeredParkingSpaces.size(); i++) {
 			            String[] row = new String[5];
@@ -168,24 +153,12 @@ public class ParkingSpaceManageUI extends UI {
 			            row[2] = Integer.toString(registeredParkingSpaces.get(i).getIncreaseFee());
 			            row[3] = Integer.toString(registeredParkingSpaces.get(i).getMaximumTime());			            
 			            row[4] = registeredParkingSpaces.get(i).getCarTypeName();
-			            model.addRow(row);
+			            parkingSpaceModel.addRow(row);
 			        }
 					
                 }
             }
 
-        });
-
-        modifyButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        deleteButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-            }
         });
 
         cancelButton.addActionListener(new ActionListener() {
@@ -195,4 +168,34 @@ public class ParkingSpaceManageUI extends UI {
         });
 
     }
+    
+    class feePolicyAdaptor implements MouseListener {
+		public void mouseClicked(MouseEvent e) {
+			JTable table = (JTable) e.getSource();
+			int row = table.getSelectedRow();
+			System.out.println("id = " + (String) table.getValueAt(row, 0));
+			feePolicyId = Integer.parseInt((String) table.getValueAt(row, 0));
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+		}
+	}
 }
