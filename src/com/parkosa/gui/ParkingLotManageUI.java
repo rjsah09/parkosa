@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.lang.foreign.ValueLayout;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -204,26 +205,32 @@ public class ParkingLotManageUI extends UI {
 		// 등록 버튼
 		insertButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+			
 				InsertParkingLotDTO insertParkingLotDTO = new InsertParkingLotDTO(nameField.getText(),
 						telNumberField.getText(), townId, addressField.getText(), imageFilePathField.getText());
-
-				ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
-				int result = parkingLotDAO.insertParkLot(insertParkingLotDTO);
-				String output = result == 1 ? "등록되었습니다" : "등록에 실패했습니다";
-				JOptionPane.showMessageDialog(null, output);
-				if (result == 1) {
-					model.setNumRows(0);
-					List<RegisteredParkingLotDTO> registeredparkingLots = parkingLotDAO.listParkingLot();
-					for (int i = 0; i < registeredparkingLots.size(); i++) {
-						String[] row = new String[5];
-						row[0] = Integer.toString(registeredparkingLots.get(i).getId());
-						row[1] = registeredparkingLots.get(i).getName();
-						row[2] = registeredparkingLots.get(i).getAddress();
-						row[3] = "요금정책";
-						row[4] = "주차구역";
-						model.addRow(row);
+				
+				String validateResult = doValidate(insertParkingLotDTO);
+				
+				if (validateResult.equals("")) {
+					ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
+					int result = parkingLotDAO.insertParkLot(insertParkingLotDTO);
+					String output = result == 1 ? "등록되었습니다" : "등록에 실패했습니다";
+					JOptionPane.showMessageDialog(null, output);
+					if (result == 1) {
+						model.setNumRows(0);
+						List<RegisteredParkingLotDTO> registeredparkingLots = parkingLotDAO.listParkingLot();
+						for (int i = 0; i < registeredparkingLots.size(); i++) {
+							String[] row = new String[5];
+							row[0] = Integer.toString(registeredparkingLots.get(i).getId());
+							row[1] = registeredparkingLots.get(i).getName();
+							row[2] = registeredparkingLots.get(i).getAddress();
+							row[3] = "요금정책";
+							row[4] = "주차구역";
+							model.addRow(row);
+						}
 					}
+				} else {
+					JOptionPane.showMessageDialog(null, validateResult);
 				}
 			}
 		});
@@ -292,8 +299,10 @@ public class ParkingLotManageUI extends UI {
 		
 		if (dto.getName().isEmpty() || dto.getName() == null) {
 			return "주차장 이름을 입력해주세요.";
-		} else if (dto.getTelNumber().isEmpty() || dto.getTelNumber() == null || !(isInteger(dto.getTelNumber()))) {
-			return "주차장 연락처를 입력해 주세요 ";
+		} else if (dto.getTelNumber().isEmpty() || dto.getTelNumber() == null) {
+			return "주차장 연락처를 입력해 주세요.";
+		} else if (!isInteger(dto.getTelNumber())) {
+			return "연락처를 숫자로만 입력해 주세요.";
 		} else if (dto.getImageLink().isEmpty() || dto.getImageLink() == null) {
 			return "이미지를 등록해주세요.";
 		} else if (dto.getAddress().isEmpty() || dto.getAddress() == null) {
