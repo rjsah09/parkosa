@@ -134,7 +134,6 @@ public class ParkingLotManageUI extends UI {
 		JButton insertButton = new JButton("생성");
 		insertButton.setBounds(305, 510, 100, 30);
 		add(insertButton);
-		System.out.println(provinceId);
 		
 		for (int i = 0; i < registeredparkingLots.size(); i++) {
 			String[] row = new String[5];
@@ -163,7 +162,6 @@ public class ParkingLotManageUI extends UI {
 						cityBox.addItem(city.getName());
 					}
 				}
-			System.out.println(provinceId);
 			}
 		});
 
