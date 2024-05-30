@@ -100,7 +100,7 @@ public class SignUpUI extends UI {
                 	JOptionPane.showMessageDialog(null, "이름을 입력해주세요.");
                 } else if (emailField == null || emailField.getText().equals("")) {                	  
                 	JOptionPane.showMessageDialog(null, "이메일을 입력해주세요.");
-                }else if (!(emailField.getText().contains("@"))){
+                }else if (!emailField.getText().contains("@")){
                 	JOptionPane.showMessageDialog(null, "정확한 이메일 주소를 입력해주세요.");                	
                 }else { 
             	
