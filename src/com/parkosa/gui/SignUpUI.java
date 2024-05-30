@@ -116,6 +116,7 @@ public class SignUpUI extends UI {
                 	 AccountDAO accountDAO = new AccountDAO();
                 	 accountDAO.insertAccount(accountVO);
                 	 
+                	 JOptionPane.showMessageDialog(null, "회원 가입되었습니다.");
                 	 GUIController.changeUI(ui, new ParkKosaUI());
                 }
             }
