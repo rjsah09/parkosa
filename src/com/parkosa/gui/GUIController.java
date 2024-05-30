@@ -7,8 +7,8 @@ public class GUIController {
     static JFrame frame;
 
     public static void drawScreen() {
-        frame = new JFrame("Parkosa");
-        frame.setSize(400, 600);
+        frame = new JFrame("Parkosa" );
+        frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         UI parkKosaUI = new ParkKosaUI();
@@ -25,4 +25,4 @@ public class GUIController {
 
         frame.setVisible(true);
     }
-}
+} 
