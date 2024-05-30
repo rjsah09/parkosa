@@ -28,7 +28,7 @@ public class PastReservationHistoryUI extends UI{
 
 		ReservationDAO reservationDAO = new ReservationDAO();
 		JButton cancelButton = new JButton("뒤로가기");
-		cancelButton.setBounds(10, 10, 100, 25);
+		cancelButton.setBounds(10, 530, 100, 25);
 		add(cancelButton);
 
 		CarDAO carDAO = new CarDAO();
@@ -49,7 +49,7 @@ public class PastReservationHistoryUI extends UI{
 		JScrollPane jsp = new JScrollPane(innerTable,
 				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		jsp.setBounds(10, 50, 365, 500);
+		jsp.setBounds(10, 10, 768, 510);
 		add(jsp);
 		
 		for (int i = 0 ; i < list.size() ; i++) {
