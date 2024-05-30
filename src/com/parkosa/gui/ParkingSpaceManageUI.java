@@ -24,6 +24,7 @@ import com.parkosa.dto.InsertParkingSpaceDTO;
 import com.parkosa.dto.RegisteredCarDTO;
 import com.parkosa.dto.RegisteredParkingSpaceDTO;
 import com.parkosa.vo.CarTypeVO;
+import com.parkosa.vo.ParkingSpaceVO;
 
 public class ParkingSpaceManageUI extends UI {
 
@@ -198,4 +199,16 @@ public class ParkingSpaceManageUI extends UI {
 			// TODO Auto-generated method stub
 		}
 	}
+
+    public String doValidate(InsertParkingSpaceDTO dto){
+        int feePolicyNo = dto.getParkingLotId();
+        if(feePolicyNo==0 || (Integer)feePolicyNo==null ){
+            return "요금정책이 선택되지 않았음.";
+        }else if(dto.getDescription()==null || dto.getDescription().equals(" ")){
+            return "주차공간명을 입력하시오.";
+        }else {
+            return "Success";
+        }
+
+    }
 }
