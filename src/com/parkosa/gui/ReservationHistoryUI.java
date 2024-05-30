@@ -34,7 +34,7 @@ public class ReservationHistoryUI extends UI{
 		CarDAO carDAO = new CarDAO();
 		ArrayList<RegisteredReservationDTO> list = reservationDAO.getReservations();
 
-		DefaultTableModel model = new DefaultTableModel(new String[] {"주차장이름", "주차공간", "입차시간", "출차시간", "최종요금"}, 0) {
+		DefaultTableModel model = new DefaultTableModel(new String[] {"주차장이름", "주차공간", "입차시간", "출차시간", "주차비", "상태"}, 0) {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			};
@@ -53,12 +53,13 @@ public class ReservationHistoryUI extends UI{
 		add(jsp);
 		
 		for (int i = 0 ; i < list.size() ; i++) {
-			String[] row = new String[5];
+			String[] row = new String[6];
 			row[0] = list.get(i).getParkingLotname();
 			row[1] = list.get(i).getParkingSpaceDescription();
 			row[2] = list.get(i).getStartTime();
 			row[3] = list.get(i).getEndTime();
 			row[4] = String.valueOf(list.get(i).getTotalAmount());
+			row[5] = list.get(i).getStatus();
 			model.addRow(row);
 		}
 

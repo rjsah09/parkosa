@@ -1,27 +1,28 @@
 package com.parkosa.dto;
 
-import oracle.net.aso.r;
-
 public class GetAvailableParkingSpaceDTO {
 
-	private int parkingLotId;
+	private int parkingSpaceId;
     private String parkingLotName;
     private String locationName;
     private String parkingSpaceDescription;
     private int predictPrice;
+    private String imageLink;
 
-    public GetAvailableParkingSpaceDTO(int parkingLotId, String parkingLotName, String locationName, String parkingSpaceDescription, int predictPrice) {
-    	this.parkingLotId = parkingLotId;
+    public GetAvailableParkingSpaceDTO(int parkingSpaceId, String parkingLotName
+    		, String locationName, String parkingSpaceDescription, int predictPrice, String imageLink) {
+    	this.parkingSpaceId = parkingSpaceId;
         this.parkingLotName = parkingLotName;
         this.locationName = locationName;
         this.parkingSpaceDescription = parkingSpaceDescription;
         this.predictPrice = predictPrice;
-    }
-    
-    public int getParkingLotId() {
-    	return parkingLotId;
+        this.imageLink = imageLink;
     }
 
+    public int getParkingSpaceId() {
+    	return parkingSpaceId;
+    }
+    
     public String getParkingLotName() {
         return parkingLotName;
     }
@@ -52,5 +53,9 @@ public class GetAvailableParkingSpaceDTO {
 
     public void setPredictPrice(int predictPrice) {
         this.predictPrice = predictPrice;
+    }
+    
+    public String getImageLink() {
+    	return imageLink;
     }
 }

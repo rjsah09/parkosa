@@ -9,15 +9,17 @@ public class RegisteredReservationDTO {
 	private String startTime;
 	private String endTime;
 	private int totalAmount;
+	private String status;
 	
 	public RegisteredReservationDTO(int reservationId, String parkingLotname, String parkingSpaceDescription, String startTime,
-			String endTime, int totalAmount) {
+			String endTime, int totalAmount, String status) {
 		this.reservationId = reservationId;
 		this.parkingLotname = parkingLotname;
 		this.parkingSpaceDescription = parkingSpaceDescription;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.totalAmount = totalAmount;
+		this.status = status;
 	}
 	
 	public int getReservationId() {
@@ -43,6 +45,10 @@ public class RegisteredReservationDTO {
 
 	public int getTotalAmount() {
 		return totalAmount;
+	}
+	
+	public String getStatus() {
+		return status;
 	}
 
 }

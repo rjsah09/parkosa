@@ -18,7 +18,7 @@ import oracle.jdbc.OracleTypes;
 
 public class ReservationDAO {
 
-	// 예약 생성 메서드
+	// 예약 생성 메서드 (o)
 	public void insertReservation(InsertReservationDTO insertReservationDTO) {
 		String proc = "{ call RESERVATION_PACK.insert_reservation (?,?,?,?) }";
 
@@ -47,7 +47,7 @@ public class ReservationDAO {
 		}
 	}
 
-	// 예약 가능한 ParkingSpace 조회 메서드
+	// 예약 가능한 ParkingSpace 조회 메서드 (o)
 	public ArrayList<GetAvailableParkingSpaceDTO> getParkingSpaceList(String startTime, String endTime, String carCode,
 			int locationId) {
 		ArrayList<GetAvailableParkingSpaceDTO> list = new ArrayList<>();
@@ -75,14 +75,17 @@ public class ReservationDAO {
 			ResultSet rs = (ResultSet) callableStatement.getObject(5);
 
 			while (rs.next()) {
-				int parkingLotId = rs.getInt("parking_lot_id");
+				int parkingSpaceId = rs.getInt("parking_space_id");
 				String parkingLotName = rs.getString("parking_lot_name");
 				String locationName = rs.getString("location_name");
 				String parkingSpaceDescription = rs.getString("parking_space_description");
 				int predictPrice = rs.getInt("Predict_price");
-				list.add(new GetAvailableParkingSpaceDTO(parkingLotId, parkingLotName, locationName, parkingSpaceDescription,
-						predictPrice));
+				String imageLink = rs.getString("image_link");
+				
+				list.add(new GetAvailableParkingSpaceDTO(parkingSpaceId, parkingLotName, locationName, parkingSpaceDescription,
+						predictPrice, imageLink));
 			}
+			
 			for (int i = 0; i < list.size(); i++) {
 				System.out.println(list.get(i).getLocationName());
 				System.out.println(list.get(i).getParkingLotName());
@@ -119,15 +122,16 @@ public class ReservationDAO {
 			ResultSet rs = (ResultSet) callableStatement.getObject(2);
 
 			while (rs.next()) {
-				int reservationId = rs.getInt("resrvation_id");
+				int reservationId = rs.getInt("reservation_id");
 				String parkingLotName = rs.getString("name");
-				String parkingSpaceDescription = rs.getString("decription");
+				String parkingSpaceDescription = rs.getString("description");
 				String startTime = rs.getString("start_time");
 				String endTime = rs.getString("end_time");
 				int totalAmount = rs.getInt("total_amount");
+				String status = rs.getString("status");
 
 				list.add(new RegisteredReservationDTO(reservationId, parkingLotName, parkingSpaceDescription, startTime, endTime,
-						totalAmount));
+						totalAmount, status));
 			}
 
 		} catch (SQLException e) {
