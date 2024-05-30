@@ -185,6 +185,7 @@ public class ReservationDAO {
 		return list;
 	}
 	
+	//예약 취소
 	public boolean cancelReservation(int reservationId) {
         String sql = "{ ? = call reservation_pack.delete_reservation(?) }";
         
