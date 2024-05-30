@@ -38,7 +38,7 @@ public class ParkingSpaceManageUI extends UI {
         setLayout(null);
 
         JButton cancelButton = new JButton("뒤로가기");
-        cancelButton.setBounds(10, 10, 100, 25);
+        cancelButton.setBounds(10, 530, 100, 25);
         add(cancelButton);
         
         
@@ -62,7 +62,7 @@ public class ParkingSpaceManageUI extends UI {
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
-        parkingSpacePane.setBounds(10, 50, 365, 170);
+        parkingSpacePane.setBounds(10, 10, 768, 220);
         add(parkingSpacePane);
         
         for (int i = 0; i < registeredParkingSpaces.size(); i++) {
@@ -100,7 +100,7 @@ public class ParkingSpaceManageUI extends UI {
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
-        feePolicyPane.setBounds(10, 240, 365, 170);
+        feePolicyPane.setBounds(10, 240, 768, 220);
         add(feePolicyPane);
         
         for (int i = 0; i < feePolicies.size(); i++) {
@@ -120,17 +120,17 @@ public class ParkingSpaceManageUI extends UI {
         //-----요금 정책 끝-----//
 
         JLabel descriptionLabel = new JLabel("주차공간명");
-        descriptionLabel.setBounds(10, 430, 60, 25);
+        descriptionLabel.setBounds(10+200, 470, 60, 25);
         add(descriptionLabel);
 
         JTextField descriptionfield = new JTextField();
-        descriptionfield.setBounds(100, 430, 275, 25);
+        descriptionfield.setBounds(100+200, 470, 275, 25);
         add(descriptionfield);
 
 		
 
         JButton insertButton = new JButton("생성");
-        insertButton.setBounds(10, 510, 100, 30);
+        insertButton.setBounds(350, 500, 100, 30);
         add(insertButton);
 
         // Event listener for the cancel button

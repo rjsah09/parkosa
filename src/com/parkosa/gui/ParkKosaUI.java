@@ -30,11 +30,11 @@ public class ParkKosaUI extends UI {
         JLabel titleLabel = new JLabel("ParKosa", JLabel.CENTER);
         titleLabel.setHorizontalTextPosition(JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 25));
-        titleLabel.setBounds(100, 10, 200, 50);
+        titleLabel.setBounds(100, 10, 600, 50);
         add(titleLabel);
 
         JLabel imageLabel = new JLabel();
-        imageLabel.setBounds(50, 70, 300, 400);
+        imageLabel.setBounds(50, 70, 700, 400);
         add(imageLabel);
 
         // 버튼 패널
@@ -47,8 +47,8 @@ public class ParkKosaUI extends UI {
         Dimension buttonSize = new Dimension(100, 30);
         signupButton.setPreferredSize(buttonSize);
         loginButton.setPreferredSize(buttonSize);
-        signupButton.setBounds(100, 500, 100, 30);
-        loginButton.setBounds(200, 500, 100, 30);
+        signupButton.setBounds(300-40, 500, 100, 30);
+        loginButton.setBounds(400+40, 500, 100, 30);
 
         // 초기 이미지 표시
         showImage(0, imageLabel);

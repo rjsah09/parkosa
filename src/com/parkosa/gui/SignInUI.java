@@ -1,8 +1,10 @@
 package com.parkosa.gui;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,33 +19,42 @@ public class SignInUI extends UI {
 	public void placeComponents() {
         setLayout(null);
       //-- 버튼, 입력 칸 생성 --//
+        JLabel imageLabel = new JLabel(new ImageIcon(".\\resources\\images\\logo.png"));
+        imageLabel.setBounds(260, 10, 300, 307);
+        add(imageLabel);
+        
+        JLabel commentLabel = new JLabel("ㅡ ㅡ 고객 정보를 입력해주세요. ㅡ ㅡ");
+        commentLabel.setBounds(300,300,300,25);
+        commentLabel.setForeground(Color.blue);
+        add(commentLabel);
+        
         JLabel phoneNumberLabel = new JLabel("전화번호");
-        phoneNumberLabel.setBounds(40, 20, 80, 25);
+        phoneNumberLabel.setBounds(260, 350, 80, 25);
         add(phoneNumberLabel);
 
         JTextField phoneNumberField = new JTextField();
-        phoneNumberField.setBounds(40, 50, 295, 25);
+        phoneNumberField.setBounds(320, 350, 200, 25);
         add(phoneNumberField);
         
         JLabel passwordLabel = new JLabel("비밀번호");
-        passwordLabel.setBounds(40, 110, 80, 25);
+        passwordLabel.setBounds(260, 400, 80, 25);
         add(passwordLabel);
         
         JPasswordField passwordField = new JPasswordField();
-        passwordField.setBounds(40, 140, 295, 25);
+        passwordField.setBounds(320, 400, 200, 25);
         passwordField.setEchoChar('*');
         add(passwordField);
         
         JButton cancelButton = new JButton("뒤로가기");
-        cancelButton.setBounds(60, 350, 100, 25);
+        cancelButton.setBounds(10, 530, 100, 25);
         add(cancelButton);
 
         JButton signInButton = new JButton("로그인");
-        signInButton.setBounds(215, 350, 100, 25);
+        signInButton.setBounds(350, 450, 100, 25);
         add(signInButton);
         
         JButton adminButton = new JButton("관리자");
-        adminButton.setBounds(310, 530, 70, 25);
+        adminButton.setBounds(710, 530, 70, 25);
         add(adminButton);
         
         //-- 이벤트 발생 --//

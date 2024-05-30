@@ -19,58 +19,59 @@ public class SignUpUI extends UI {
 
         //-- 버튼, 입력 칸 생성 --//
         JLabel phoneNumberLabel = new JLabel("전화번호");
-        phoneNumberLabel.setBounds(40, 20, 80, 25);
+        phoneNumberLabel.setBounds(255, 20, 80, 25);
         add(phoneNumberLabel);
 
         JTextField phoneNumberField = new JTextField();
-        phoneNumberField.setBounds(40, 50, 295, 25);
+        phoneNumberField.setBounds(255, 50, 290, 25);
         add(phoneNumberField);
         
         JButton phoneNumberValidateButton = new JButton("중복확인");
-        phoneNumberValidateButton.setBounds(40, 80, 295, 25);
+        phoneNumberValidateButton.setBounds(255, 80, 290, 25);
         add(phoneNumberValidateButton);
         
         JLabel passwordLabel = new JLabel("비밀번호");
-        passwordLabel.setBounds(40, 110, 80, 25);
+        passwordLabel.setBounds(255, 130, 80, 25);
         add(passwordLabel);
         
         JPasswordField passwordField = new JPasswordField();
-        passwordField.setBounds(40, 140, 295, 25);
+        passwordField.setBounds(255, 160, 290, 25);
         passwordField.setEchoChar('*');
         add(passwordField);
         
         JLabel checkPasswordLabel = new JLabel("비밀번호 확인");
-        checkPasswordLabel.setBounds(40, 170, 80, 25);
+        checkPasswordLabel.setBounds(255, 210, 80, 25);
         add(checkPasswordLabel);
         
         JPasswordField checkPasswordField = new JPasswordField();
-        checkPasswordField.setBounds(40, 200, 295, 25);
+        checkPasswordField.setBounds(255, 240, 290, 25);
         passwordField.setEchoChar('*');
         add(checkPasswordField);
 
         JLabel nameLabel = new JLabel("이름");
-        nameLabel.setBounds(40, 230, 80, 25);
+        nameLabel.setBounds(255, 290, 80, 25);
         add(nameLabel);
 
         JTextField nameField = new JTextField();
-        nameField.setBounds(40, 260, 295, 25);
+        nameField.setBounds(255, 320, 290, 25);
         add(nameField);
 
         JLabel emailLabel = new JLabel("이메일");
-        emailLabel.setBounds(40, 290, 80, 25);
+        emailLabel.setBounds(255, 370, 80, 25);
         add(emailLabel);
 
         JTextField emailField = new JTextField();
-        emailField.setBounds(40, 320, 295, 25);
+        emailField.setBounds(255, 400, 290, 25);
         add(emailField);
 
-        JButton cancelButton = new JButton("뒤로가기");
-        cancelButton.setBounds(60, 350, 100, 25);
-        add(cancelButton);
 
         JButton reserveButton = new JButton("회원가입");
-        reserveButton.setBounds(215, 350, 100, 25);
+        reserveButton.setBounds(350, 450, 100, 25);
         add(reserveButton);
+
+        JButton cancelButton = new JButton("뒤로가기");
+        cancelButton.setBounds(10, 530, 100, 25);
+        add(cancelButton);
         
         //-- 이벤트 발생 --//
         

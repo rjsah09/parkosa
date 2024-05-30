@@ -22,19 +22,19 @@ public class RegisterCarUI extends UI{
 
         //-- 버튼, 입력 칸 생성 --//
         JLabel carNumberLabel = new JLabel("자동차 번호를 입력하세요");
-        carNumberLabel.setBounds(40, 20, 150, 25);
+        carNumberLabel.setBounds(250, 260-100, 150, 25);
         add(carNumberLabel);
 
         JTextField carNumberField = new JTextField();
-        carNumberField.setBounds(40, 50, 295, 25);
+        carNumberField.setBounds(250, 290-100, 300, 25);
         add(carNumberField);
 
         JButton carNumberValidateButton = new JButton("중복확인");
-        carNumberValidateButton.setBounds(40, 80, 295, 25);
+        carNumberValidateButton.setBounds(250, 320-100, 300, 25);
         add(carNumberValidateButton);
 
         JLabel carSelectBox = new JLabel("자동차 종류를 선택하세요");
-        carSelectBox.setBounds(40, 110, 150, 25);
+        carSelectBox.setBounds(250, 370-100, 150, 25);
         add(carSelectBox);
 
         CarTypeDAO carTypeDAO = new CarTypeDAO();
@@ -44,17 +44,17 @@ public class RegisterCarUI extends UI{
         }
 
         JComboBox<String> comboSelectCarBox = new JComboBox<>(items);
-        comboSelectCarBox.setBounds(40, 140, 295, 25);
+        comboSelectCarBox.setBounds(250, 400-100, 300, 25);
         add(comboSelectCarBox);
 
-        JButton cancelButton = new JButton("뒤로가기");
-        cancelButton.setBounds(215, 350, 100, 25);
-        add(cancelButton);
 
         JButton reserveButton = new JButton("차량등록");
-        reserveButton.setBounds(60, 350, 100, 25);
+        reserveButton.setBounds(350, 450-100, 100, 25);
         add(reserveButton);
 
+        JButton cancelButton = new JButton("뒤로가기");
+        cancelButton.setBounds(10, 530, 100, 25);
+        add(cancelButton);
 
         //취소 버튼 이벤트
         cancelButton.addActionListener(new ActionListener() {
