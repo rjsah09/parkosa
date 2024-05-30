@@ -130,6 +130,9 @@ public class ReservationDAO {
 				String endTime = rs.getString("end_time");
 				int totalAmount = rs.getInt("total_amount");
 				String status = rs.getString("status");
+				
+				startTime = startTime.substring(0, startTime.length() - 3);
+				endTime = startTime.substring(0, endTime.length() - 3);
 
 				list.add(new RegisteredReservationDTO(reservationId, parkingLotName, parkingSpaceDescription, startTime, endTime,
 						totalAmount, status));
@@ -169,6 +172,9 @@ public class ReservationDAO {
 				String endTime = rs.getString("end_time");
 				int totalAmount = rs.getInt("total_amount");
 				String status = rs.getString("status");
+				
+				startTime = startTime.substring(0, startTime.length() - 3);
+				endTime = startTime.substring(0, endTime.length() - 3);
 
 				list.add(new RegisteredReservationDTO(reservationId, parkingLotName, parkingSpaceDescription, startTime, endTime,
 						totalAmount, status));
