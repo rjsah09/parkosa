@@ -1,5 +1,6 @@
 package com.parkosa.gui;
 
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 import com.parkosa.dao.CarDAO;
 import com.parkosa.dao.ReservationDAO;
@@ -66,7 +69,8 @@ public class ReservationHistoryUI extends UI{
 			}
 			model.addRow(row);
 		}
-
+		resizeColumnWidth(innerTable);
+		
 		//버튼 이벤트
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -139,5 +143,16 @@ public class ReservationHistoryUI extends UI{
 		}
 	}
 	
-
+	public void resizeColumnWidth(JTable table) {
+	    final TableColumnModel columnModel = table.getColumnModel();
+	    for (int column = 0; column < table.getColumnCount(); column++) {
+	        int width = 50; // Min width
+	        for (int row = 0; row < table.getRowCount(); row++) {
+	            TableCellRenderer renderer = table.getCellRenderer(row, column);
+	            Component comp = table.prepareRenderer(renderer, row, column);
+	            width = Math.max(comp.getPreferredSize().width +1 , width);
+	        }
+	        columnModel.getColumn(column).setPreferredWidth(width);
+	    }
+	}
 }
