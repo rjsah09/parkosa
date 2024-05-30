@@ -243,9 +243,9 @@ public class RegisterReservationUI extends UI {
 				InsertReservationDTO insertReservationDTO = new InsertReservationDTO(startTime, endTime, carCode,
 						parkingSpaceId);
 
-<<<<<<< HEAD
+
 				GUIController.changeUI(ui, new MainScreenUI());
-=======
+
 				String validateResult = doValidate(insertReservationDTO);
 				if (validateResult.equals("")) {
 					ReservationDAO reservationDAO = new ReservationDAO();
@@ -254,8 +254,9 @@ public class RegisterReservationUI extends UI {
 					GUIController.changeUI(ui, new MainScreenUI());
 				} else {
 					JOptionPane.showMessageDialog(null, validateResult);
->>>>>>> branch 'rjsah09' of https://github.com/rjsah09/parkosa.git
+
 				}
+			}
 			}
 		});
 
