@@ -19,40 +19,40 @@ public class MainScreenUI extends UI {
         AccountDAO accountDAO = new AccountDAO();
         String name = accountDAO.getName();
 
-        JLabel nameLabel = new JLabel(name + "님", JLabel.CENTER);
+        JLabel nameLabel = new JLabel(name + "님 환영합니다.", JLabel.CENTER);
         nameLabel.setHorizontalTextPosition(JLabel.CENTER);
-        nameLabel.setBounds(100, 10, 200, 50);
+        nameLabel.setBounds(300, 10, 200, 50);
         nameLabel.setFont(new Font("NanumGothic", Font.BOLD, 18));
         add(nameLabel);
 
         JButton parkingReserve = new JButton("주차 예약");
         customizeButton(parkingReserve);
-        parkingReserve.setBounds(40, 100, 295, 50);
+        parkingReserve.setBounds(250, 100, 300, 50);
         add(parkingReserve);
 
         JButton checkReserve = new JButton("예약 확인");
         customizeButton(checkReserve);
-        checkReserve.setBounds(40, 170, 295, 50);
+        checkReserve.setBounds(250, 170, 300, 50);
         add(checkReserve);
 
         JButton accountModify = new JButton("회원정보 수정");
         customizeButton(accountModify);
-        accountModify.setBounds(40, 240, 295, 50);
+        accountModify.setBounds(250, 240, 300, 50);
         add(accountModify);
 
         JButton carModify = new JButton("차량 등록");
         customizeButton(carModify);
-        carModify.setBounds(40, 310, 295, 50);
+        carModify.setBounds(250, 310, 300, 50);
         add(carModify);
 
         JButton carList = new JButton("등록 차량 관리");
         customizeButton(carList);
-        carList.setBounds(40, 380, 295, 50);
+        carList.setBounds(250, 380, 300, 50);
         add(carList);
 
         JButton cancelButton = new JButton("로그아웃");
         customizeButton(cancelButton);
-        cancelButton.setBounds(40, 450, 295, 50);
+        cancelButton.setBounds(250, 450, 300, 50);
         add(cancelButton);
 
         //-- 이벤트 발생 --//

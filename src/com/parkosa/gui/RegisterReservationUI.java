@@ -45,103 +45,103 @@ public class RegisterReservationUI extends UI {
 		add(cancelButton);
 
 		JLabel carTypeLabel = new JLabel("차량");
-		carTypeLabel.setBounds(10, 40, 50, 25);
+		carTypeLabel.setBounds(10+200, 40, 50, 25);
 		add(carTypeLabel);
 
 		JLabel selectRegionLabel = new JLabel("지역");
-		selectRegionLabel.setBounds(10, 70, 50, 25);
+		selectRegionLabel.setBounds(10+200, 70, 50, 25);
 		add(selectRegionLabel);
 
 		JLabel entryLabel = new JLabel("입차시간");
-		entryLabel.setBounds(10, 100, 50, 25);
+		entryLabel.setBounds(10+200, 100, 50, 25);
 		add(entryLabel);
 
 		JTextField entryYearField = new JTextField();
-		entryYearField.setBounds(70, 100, 40, 25);
+		entryYearField.setBounds(70+200, 100, 40, 25);
 		add(entryYearField);
 
 		JLabel entryYearLabel = new JLabel("년");
-		entryYearLabel.setBounds(110, 100, 20, 25);
+		entryYearLabel.setBounds(110+200, 100, 20, 25);
 		add(entryYearLabel);
 
 		JTextField entryMonthField = new JTextField();
-		entryMonthField.setBounds(130, 100, 40, 25);
+		entryMonthField.setBounds(130+200, 100, 40, 25);
 		add(entryMonthField);
 
 		JLabel entryMonthLabel = new JLabel("월");
-		entryMonthLabel.setBounds(170, 100, 20, 25);
+		entryMonthLabel.setBounds(170+200, 100, 20, 25);
 		add(entryMonthLabel);
 
 		JTextField entryDayField = new JTextField();
-		entryDayField.setBounds(190, 100, 40, 25);
+		entryDayField.setBounds(190+200, 100, 40, 25);
 		add(entryDayField);
 
 		JLabel entryDayLabel = new JLabel("일");
-		entryDayLabel.setBounds(230, 100, 20, 25);
+		entryDayLabel.setBounds(230+200, 100, 20, 25);
 		add(entryDayLabel);
 
 		JTextField entryHourField = new JTextField();
-		entryHourField.setBounds(250, 100, 40, 25);
+		entryHourField.setBounds(250+200, 100, 40, 25);
 		add(entryHourField);
 
 		JLabel entryHourLabel = new JLabel("시");
-		entryHourLabel.setBounds(290, 100, 20, 25);
+		entryHourLabel.setBounds(290+200, 100, 20, 25);
 		add(entryHourLabel);
 
 		JTextField entryMinuteField = new JTextField();
-		entryMinuteField.setBounds(310, 100, 40, 25);
+		entryMinuteField.setBounds(310+200, 100, 40, 25);
 		add(entryMinuteField);
 
 		JLabel entryMinuteLabel = new JLabel("분");
-		entryMinuteLabel.setBounds(350, 100, 20, 25);
+		entryMinuteLabel.setBounds(350+200, 100, 20, 25);
 		add(entryMinuteLabel);
 
 		JLabel exitLabel = new JLabel("출차시간");
-		exitLabel.setBounds(10, 130, 60, 25);
+		exitLabel.setBounds(10+200, 130, 60, 25);
 		add(exitLabel);
 
 		JTextField exitYearField = new JTextField();
-		exitYearField.setBounds(70, 130, 40, 25);
+		exitYearField.setBounds(70+200, 130, 40, 25);
 		add(exitYearField);
 
 		JLabel exitYearLabel = new JLabel("년");
-		exitYearLabel.setBounds(110, 130, 20, 25);
+		exitYearLabel.setBounds(110+200, 130, 20, 25);
 		add(exitYearLabel);
 
 		JTextField exitMonthField = new JTextField();
-		exitMonthField.setBounds(130, 130, 40, 25);
+		exitMonthField.setBounds(130+200, 130, 40, 25);
 		add(exitMonthField);
 
 		JLabel exitMonthLabel = new JLabel("월");
-		exitMonthLabel.setBounds(170, 130, 20, 25);
+		exitMonthLabel.setBounds(170+200, 130, 20, 25);
 		add(exitMonthLabel);
 
 		JTextField exitDayField = new JTextField();
-		exitDayField.setBounds(190, 130, 40, 25);
+		exitDayField.setBounds(190+200, 130, 40, 25);
 		add(exitDayField);
 
 		JLabel exitDayLabel = new JLabel("일");
-		exitDayLabel.setBounds(230, 130, 20, 25);
+		exitDayLabel.setBounds(230+200, 130, 20, 25);
 		add(exitDayLabel);
 
 		JTextField exitHourField = new JTextField();
-		exitHourField.setBounds(250, 130, 40, 25);
+		exitHourField.setBounds(250+200, 130, 40, 25);
 		add(exitHourField);
 
 		JLabel exitHourLabel = new JLabel("시");
-		exitHourLabel.setBounds(290, 130, 20, 25);
+		exitHourLabel.setBounds(290+200, 130, 20, 25);
 		add(exitHourLabel);
 
 		JTextField exitMinuteField = new JTextField();
-		exitMinuteField.setBounds(310, 130, 40, 25);
+		exitMinuteField.setBounds(310+200, 130, 40, 25);
 		add(exitMinuteField);
 
 		JLabel exitMinuteLabel = new JLabel("분");
-		exitMinuteLabel.setBounds(350, 130, 20, 25);
+		exitMinuteLabel.setBounds(350+200, 130, 20, 25);
 		add(exitMinuteLabel);
 
 		JButton serchButton = new JButton("주차장 검색");
-		serchButton.setBounds(10, 160, 365, 25);
+		serchButton.setBounds(10+200, 160, 365, 25);
 		add(serchButton);
 
 		AccountDAO accountDAO = new AccountDAO();
@@ -156,7 +156,7 @@ public class RegisterReservationUI extends UI {
 		}
 
 		JComboBox<String> carBox = new JComboBox<>(carItems);
-		carBox.setBounds(70, 40, 90, 25);
+		carBox.setBounds(70+200, 40, 90, 25);
 		add(carBox);
 
 		carBox.addActionListener(new ActionListener() {
@@ -180,11 +180,11 @@ public class RegisterReservationUI extends UI {
 
 		JScrollPane jsp = new JScrollPane(innerTable, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		jsp.setBounds(10, 200, 365, 320);
+		jsp.setBounds(45, 200, 700, 320);
 		add(jsp);
 
 		JButton reserveButton = new JButton("예약하기");
-		reserveButton.setBounds(10, 530, 365, 25);
+		reserveButton.setBounds(10+200, 530, 365, 25);
 		add(reserveButton);
 
 		serchButton.addActionListener(new ActionListener() {
@@ -243,15 +243,15 @@ public class RegisterReservationUI extends UI {
 		}
 
 		JComboBox<String> provinceBox = new JComboBox<>(provinceItems);
-		provinceBox.setBounds(70, 70, 90, 25);
+		provinceBox.setBounds(70+200, 70, 90, 25);
 		add(provinceBox);
 
 		JComboBox<String> cityBox = new JComboBox<>();
-		cityBox.setBounds(170, 70, 90, 25);
+		cityBox.setBounds(170+200, 70, 90, 25);
 		add(cityBox);
 
 		JComboBox<String> townBox = new JComboBox<>();
-		townBox.setBounds(270, 70, 90, 25);
+		townBox.setBounds(270+200, 70, 90, 25);
 		add(townBox);
 
 		provinceBox.addActionListener(new ActionListener() {

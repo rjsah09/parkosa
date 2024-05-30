@@ -31,7 +31,7 @@ public class FeePolicyManageUI extends UI {
         String name = accountDAO.getName();
 
         JButton cancelButton = new JButton("뒤로가기");
-        cancelButton.setBounds(10, 10, 100, 25);
+        cancelButton.setBounds(10, 530, 100, 25);
         add(cancelButton);
 
         FeePolicyDAO dao = new FeePolicyDAO();
@@ -52,35 +52,35 @@ public class FeePolicyManageUI extends UI {
         JScrollPane jsp = new JScrollPane(innerTable,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        jsp.setBounds(10, 50, 365, 250);
+        jsp.setBounds(70, 10, 650, 280);
         add(jsp);
 
         JLabel increaseMinuteLabel = new JLabel("기본 증가시간");
-        increaseMinuteLabel.setBounds(10, 310, 100, 25);
+        increaseMinuteLabel.setBounds(10+200, 310, 100, 25);
         add(increaseMinuteLabel);
 
         JTextField increaseMinuteField = new JTextField("10");
-        increaseMinuteField.setBounds(120, 310, 255, 25);
+        increaseMinuteField.setBounds(120+200, 310, 255, 25);
         add(increaseMinuteField);
 
         JLabel increaseFeeLabel = new JLabel("단위시간당 이용료");
-        increaseFeeLabel.setBounds(10, 350, 100, 25);
+        increaseFeeLabel.setBounds(10+200, 350, 100, 25);
         add(increaseFeeLabel);
 
         JTextField increaseFeeField = new JTextField();
-        increaseFeeField.setBounds(120, 350, 255, 25);
+        increaseFeeField.setBounds(120+200, 350, 255, 25);
         add(increaseFeeField);
 
         JLabel maximumTimeLabel = new JLabel("최대 이용시간");
-        maximumTimeLabel.setBounds(10, 390, 100, 25);
+        maximumTimeLabel.setBounds(10+200, 390, 100, 25);
         add(maximumTimeLabel);
 
         JTextField maximumTimeField = new JTextField();
-        maximumTimeField.setBounds(120, 390, 255, 25);
+        maximumTimeField.setBounds(120+200, 390, 255, 25);
         add(maximumTimeField);
 
         JLabel carTypeIdLabel = new JLabel("차종ID");
-        carTypeIdLabel.setBounds(10, 430, 100, 25);
+        carTypeIdLabel.setBounds(10+200, 430, 100, 25);
         add(carTypeIdLabel);
 
         CarTypeDAO carTypeDAO = new CarTypeDAO();
@@ -94,15 +94,16 @@ public class FeePolicyManageUI extends UI {
         items[list.size()] = "모든 차종";
 
         JComboBox<String> comboSelectCarBox = new JComboBox<>(items);
-        comboSelectCarBox.setBounds(120, 430, 255, 25);
+        comboSelectCarBox.setBounds(120+200, 430, 255, 25);
         add(comboSelectCarBox);
-
-        JComboBox<String> comboBox = new JComboBox<>();
-        comboBox.setBounds(40, 140, 295, 25);
-        add(comboBox);
+        
+        // 미상
+        /*JComboBox<String> comboBox = new JComboBox<>();
+        comboBox.setBounds(40+200, 140, 295, 25);
+        add(comboBox);*/
         
         JButton insertButton = new JButton("생성");
-        insertButton.setBounds(10, 510, 100, 30);
+        insertButton.setBounds(350, 480, 100, 30);
         add(insertButton);
 
         //"단위시간(분)", "최대시간", "증가액", "차종"

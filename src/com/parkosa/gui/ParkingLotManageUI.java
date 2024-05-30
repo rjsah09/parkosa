@@ -43,7 +43,7 @@ public class ParkingLotManageUI extends UI {
         String name = accountDAO.getName();
         
         JButton cancelButton = new JButton("뒤로가기");
-        cancelButton.setBounds(10, 10, 100, 25);
+        cancelButton.setBounds(10, 530, 100, 25);
         add(cancelButton);
      
         ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
@@ -64,51 +64,51 @@ public class ParkingLotManageUI extends UI {
 
 		JScrollPane jsp = new JScrollPane(innerTable, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		jsp.setBounds(10, 50, 365, 200);
+		jsp.setBounds(10, 10, 770, 250);
 		add(jsp);
 
 		JLabel nameLabel = new JLabel("주차장 명");
-		nameLabel.setBounds(10, 270, 60, 25);
+		nameLabel.setBounds(175, 270, 60, 25);
 		add(nameLabel);
 
 		JTextField nameField = new JTextField();
-		nameField.setBounds(100, 270, 275, 25);
+		nameField.setBounds(265, 270, 270, 25);
 		add(nameField);
 
 		JLabel telNumberLabel = new JLabel("연락처");
-		telNumberLabel.setBounds(10, 310, 60, 25);
+		telNumberLabel.setBounds(175, 310, 60, 25);
 		add(telNumberLabel);
 
 		JTextField telNumberField = new JTextField();
-		telNumberField.setBounds(100, 310, 275, 25);
+		telNumberField.setBounds(265, 310, 270, 25);
 		add(telNumberField);
 
 		JLabel imageFileLabel = new JLabel("주자창 배치도");
-		imageFileLabel.setBounds(10, 350, 80, 25);
+		imageFileLabel.setBounds(175, 350, 80, 25);
 		add(imageFileLabel);
 
 		JButton imageFileField = new JButton("파일 찾기");
-		imageFileField.setBounds(100, 350, 275, 25);
+		imageFileField.setBounds(265, 350, 270, 25);
 		add(imageFileField);
 
 		JLabel imageFilePathLabel = new JLabel("파일 경로");
-		imageFilePathLabel.setBounds(10, 390, 80, 25);
+		imageFilePathLabel.setBounds(175, 390, 80, 25);
 		add(imageFilePathLabel);
 
 		JTextField imageFilePathField = new JTextField();
-		imageFilePathField.setBounds(100, 390, 275, 25);
+		imageFilePathField.setBounds(265, 390, 270, 25);
 		add(imageFilePathField);
 
 		JLabel addressLabel = new JLabel("실제 주소");
-		addressLabel.setBounds(10, 430, 60, 25);
+		addressLabel.setBounds(175, 430, 60, 25);
 		add(addressLabel);
 
 		JTextField addressField = new JTextField();
-		addressField.setBounds(100, 430, 275, 25);
+		addressField.setBounds(265, 430, 270, 25);
 		add(addressField);
 
 		JLabel locationIdLabel = new JLabel("단위 주소");
-		locationIdLabel.setBounds(10, 470, 60, 25);
+		locationIdLabel.setBounds(175, 470, 60, 25);
 		add(locationIdLabel);
 
 		LocationDAO locationDAO = new LocationDAO();
@@ -119,28 +119,20 @@ public class ParkingLotManageUI extends UI {
 		}
 
 		provinceBox = new JComboBox<>(provinceItems);
-		provinceBox.setBounds(100, 470, 92, 25);
+		provinceBox.setBounds(265, 470, 86, 25);
 		add(provinceBox);
 
 		cityBox = new JComboBox<>();
-		cityBox.setBounds(192, 470, 92, 25);
+		cityBox.setBounds(356, 470, 86, 25);
 		add(cityBox);
 
 		townBox = new JComboBox<>();
-		townBox.setBounds(284, 470, 92, 25);
+		townBox.setBounds(448, 470, 86, 25);
 		add(townBox);
 
 		JButton insertButton = new JButton("생성");
-		insertButton.setBounds(10, 510, 100, 30);
+		insertButton.setBounds(305, 510, 100, 30);
 		add(insertButton);
-
-		JButton modifyButton = new JButton("수정");
-		modifyButton.setBounds(140, 510, 100, 30);
-		add(modifyButton);
-
-		JButton deleteButton = new JButton("삭제");
-		deleteButton.setBounds(275, 510, 100, 30);
-		add(deleteButton);
 
 		for (int i = 0; i < registeredparkingLots.size(); i++) {
 			String[] row = new String[5];
