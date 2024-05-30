@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="43b43bea-ce0f-434a-8548-32293257c0f1" name="변경" comment="CarDataUi 삭제 &#10;삭제 이유. RegisterCarUI와 중복">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/parkosa/gui/ParkingSpaceManageUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/gui/ParkingSpaceManageUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/parkosa/gui/ParkingLotManageUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/gui/ParkingLotManageUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +53,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
   </component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -149,6 +150,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="CarDataUi 삭제 &#10;삭제 이유. RegisterCarUI와 중복" />
