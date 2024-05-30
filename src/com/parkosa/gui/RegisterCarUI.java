@@ -94,8 +94,10 @@ public class RegisterCarUI extends UI{
             public void actionPerformed(ActionEvent e) {
 
                 if (carNumberField == null || carNumberField.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "차 번호를 입력해주세요..");
-                } else {
+                    JOptionPane.showMessageDialog(null, "차 번호를 입력해주세요.");
+                } else if (carNumberField.isEditable()) {
+                	JOptionPane.showMessageDialog(null, "중복 확인을 먼저 해주세요.");
+                }else {
                     String selectedItem = (String) comboSelectCarBox.getSelectedItem();
                     int carId = 0;
                     CarTypeDAO carTypeDAO = new CarTypeDAO();
