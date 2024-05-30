@@ -216,11 +216,17 @@ public class RegisterReservationUI extends UI {
 				GUIController.changeUI(ui, new MainScreenUI());
 			}
 		});
-
+		
+		
+		
 		reserveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int idx = innerTable.getSelectedRow();
-
+				
+				if (idx == -1) {
+					JOptionPane.showMessageDialog(null, "주차장을 선택하지 않았습니다. 주차장을 선택해주세요.");
+				} else {
+				
 				startTime = entryYearField.getText() + "-" + entryMonthField.getText() + "-" + entryDayField.getText()
 						+ " " + entryHourField.getText() + ":" + entryMinuteField.getText() + ":" + "00";
 				endTime = exitYearField.getText() + "-" + exitMonthField.getText() + "-" + exitDayField.getText() + " "
@@ -232,6 +238,7 @@ public class RegisterReservationUI extends UI {
 				reservationDAO.insertReservation(insertReservationDTO);
 
 				GUIController.changeUI(ui, new MainScreenUI());
+				}
 			}
 		});
 
