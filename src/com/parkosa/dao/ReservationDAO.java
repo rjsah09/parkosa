@@ -7,10 +7,12 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.parkosa.connection.DBConnection;
 import com.parkosa.dto.GetAvailableParkingSpaceDTO;
 import com.parkosa.dto.InsertReservationDTO;
+import com.parkosa.dto.RegisteredCarDTO;
 import com.parkosa.dto.RegisteredReservationDTO;
 import com.parkosa.sign.SignedAccount;
 
@@ -143,5 +145,33 @@ public class ReservationDAO {
 		}
 
 		return list;
+	}
+	
+	public boolean cancelReservation(int reservationId) {
+        String sql = "{ ? = call reservation_pack.delete_reservation(?) }";
+        
+        try {
+            Connection conn = DBConnection.getConnection();
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            //변수 할당
+            callableStatement.registerOutParameter(1, java.sql.Types.NUMERIC);
+            callableStatement.setInt(2, reservationId);
+            callableStatement.executeUpdate();
+            
+            int succeed = callableStatement.getInt(1);
+			boolean result = succeed == 1 ? true : false;
+			
+			return result;
+
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        	
+        }
+        
+        return false;
 	}
 }
