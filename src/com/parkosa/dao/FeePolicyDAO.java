@@ -62,7 +62,6 @@ public class FeePolicyDAO {
                 String carTypeName = rs.getString("CAR_TYPE_NAME");
 
                 listFeePolicy.add(new InsertFeePolicyDTO(id, increaseMinute, increaseFee, maximumTime, carTypeName));
-                System.out.println("feePolicyId = " + id);
             }
 
             return listFeePolicy;

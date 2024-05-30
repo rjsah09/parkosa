@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="43b43bea-ce0f-434a-8548-32293257c0f1" name="변경" comment="CarDataUi 삭제 &#10;삭제 이유. RegisterCarUI와 중복">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/parkosa/dao/ReservationDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/dao/ReservationDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/parkosa/gui/ReservationHistoryUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/gui/ReservationHistoryUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/parkosa/gui/ParkingSpaceManageUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/parkosa/gui/ParkingSpaceManageUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,37 +65,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "gaeng",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/gaeng/Documents/KOSA/parkosa",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "라이브러리",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true",
-    "애플리케이션.CarDAO.executor": "Run",
-    "애플리케이션.CarDataUI.executor": "Run",
-    "애플리케이션.CarTypeDAO.executor": "Run",
-    "애플리케이션.FeePolicyDAO.executor": "Run",
-    "애플리케이션.LocationDAO.executor": "Run",
-    "애플리케이션.Main.executor": "Run",
-    "애플리케이션.ParkKosaUI.executor": "Run",
-    "애플리케이션.ParkingApp.executor": "Run",
-    "애플리케이션.ParkingLotDAO.executor": "Run",
-    "애플리케이션.ParkingSpaceDAO.executor": "Run",
-    "애플리케이션.ParkingTableExample.executor": "Run",
-    "애플리케이션.ReservationDAO.executor": "Run",
-    "애플리케이션.Test.executor": "Run"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;gaeng&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gaeng/Documents/KOSA/parkosa&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;라이브러리&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
+    &quot;애플리케이션.CarDAO.executor&quot;: &quot;Run&quot;,
+    &quot;애플리케이션.CarDataUI.executor&quot;: &quot;Run&quot;,
+    &quot;애플리케이션.CarTypeDAO.executor&quot;: &quot;Run&quot;,
+    &quot;애플리케이션.FeePolicyDAO.executor&quot;: &quot;Run&quot;,
+    &quot;애플리케이션.LocationDAO.executor&quot;: &quot;Run&quot;,
+    &quot;애플리케이션.Main.executor&quot;: &quot;Run&quot;,
+    &quot;애플리케이션.ParkKosaUI.executor&quot;: &quot;Run&quot;,
+    &quot;애플리케이션.ParkingApp.executor&quot;: &quot;Run&quot;,
+    &quot;애플리케이션.ParkingLotDAO.executor&quot;: &quot;Run&quot;,
+    &quot;애플리케이션.ParkingSpaceDAO.executor&quot;: &quot;Run&quot;,
+    &quot;애플리케이션.ParkingTableExample.executor&quot;: &quot;Run&quot;,
+    &quot;애플리케이션.ReservationDAO.executor&quot;: &quot;Run&quot;,
+    &quot;애플리케이션.Test.executor&quot;: &quot;Run&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.parkosa.gui" />

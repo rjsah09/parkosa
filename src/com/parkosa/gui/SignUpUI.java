@@ -1,4 +1,5 @@
 package com.parkosa.gui;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -88,6 +89,8 @@ public class SignUpUI extends UI {
             	
             	if (phoneNumberField == null || phoneNumberField.getText().equals("")) {
             		JOptionPane.showMessageDialog(null, "전화번호를 입력해주세요.");
+            	} else if (!isNumeric(phoneNumberField.getText())) {
+            		JOptionPane.showMessageDialog(null, "전화번호를 숫자만 사용해 입력해주세요.");
             	} else if (phoneNumberField.isEditable()){
                     JOptionPane.showMessageDialog(null, "전화번호 중복확인을 먼저 해주세요.");
                 } else if (passwordField == null || passwordField.getText().equals("")) {
@@ -99,8 +102,10 @@ public class SignUpUI extends UI {
                 } else if (nameField == null || nameField.getText().equals("")) {
                 	JOptionPane.showMessageDialog(null, "이름을 입력해주세요.");
                 } else if (emailField == null || emailField.getText().equals("")) {                	  
-                	JOptionPane.showMessageDialog(null, "이름을 입력해주세요.");
-                } else { 
+                	JOptionPane.showMessageDialog(null, "이메일을 입력해주세요.");
+                }else if (!emailField.getText().contains("@")){
+                	JOptionPane.showMessageDialog(null, "정확한 이메일 주소를 입력해주세요.");                	
+                }else { 
             	
                 	 AccountVO accountVO = new AccountVO(phoneNumberField.getText()
                 			 , passwordField.getText()
@@ -111,6 +116,7 @@ public class SignUpUI extends UI {
                 	 AccountDAO accountDAO = new AccountDAO();
                 	 accountDAO.insertAccount(accountVO);
                 	 
+                	 JOptionPane.showMessageDialog(null, "회원 가입되었습니다.");
                 	 GUIController.changeUI(ui, new ParkKosaUI());
                 }
             }
@@ -130,6 +136,9 @@ public class SignUpUI extends UI {
 	            	if (phoneNumberField == null || phoneNumberField.getText().equals("")) {
 	            		JOptionPane.showMessageDialog(null, "전화번호를 입력해주세요.");
 	            		return;
+	            	} else if (!isNumeric(phoneNumberField.getText())) {
+	            		JOptionPane.showMessageDialog(null, "전화번호를 숫자만 사용해 입력해주세요.");
+	            		return;
 	            	}
 	            	String result = !duplicated ? "사용 가능한 전화번호입니다." : "사용 불가능한 번호입니다.";
 
@@ -145,5 +154,14 @@ public class SignUpUI extends UI {
         });
 
     }
-        
+
+	boolean isNumeric(String target) {
+		try {
+			Integer.parseInt(target);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
 }
