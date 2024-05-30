@@ -112,7 +112,45 @@ public class ReservationDAO {
 
 		ArrayList<RegisteredReservationDTO> list = new ArrayList<>();
 		String sql = "{call RESERVATION_PACK.get_reservations(?, ?)}";
-		System.out.println("메서드는 돌아감");
+		try {
+			Connection conn = DBConnection.getConnection();
+			CallableStatement callableStatement = conn.prepareCall(sql);
+			// 변수 할당
+			callableStatement.setString(1, SignedAccount.getPhoneNumber());
+			callableStatement.registerOutParameter(2, OracleTypes.CURSOR);
+			callableStatement.execute();
+
+			ResultSet rs = (ResultSet) callableStatement.getObject(2);
+
+			while (rs.next()) {
+				int reservationId = rs.getInt("reservation_id");
+				String parkingLotName = rs.getString("name");
+				String parkingSpaceDescription = rs.getString("description");
+				String startTime = rs.getString("start_time");
+				String endTime = rs.getString("end_time");
+				int totalAmount = rs.getInt("total_amount");
+				String status = rs.getString("status");
+
+				list.add(new RegisteredReservationDTO(reservationId, parkingLotName, parkingSpaceDescription, startTime, endTime,
+						totalAmount, status));
+			}
+
+		} catch (SQLException e) {
+			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+
+		return list;
+	}
+	
+	//끝난 내역 조회
+	public ArrayList<RegisteredReservationDTO> getPastReservations() {
+
+		ArrayList<RegisteredReservationDTO> list = new ArrayList<>();
+		String sql = "{call RESERVATION_PACK.get_past_reservations(?, ?)}";
 		try {
 			Connection conn = DBConnection.getConnection();
 			CallableStatement callableStatement = conn.prepareCall(sql);

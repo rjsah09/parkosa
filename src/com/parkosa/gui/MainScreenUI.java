@@ -35,10 +35,10 @@ public class MainScreenUI extends UI {
         checkReserve.setBounds(40, 170, 295, 50);
         add(checkReserve);
 
-        JButton accountModify = new JButton("회원정보 수정");
-        customizeButton(accountModify);
-        accountModify.setBounds(40, 240, 295, 50);
-        add(accountModify);
+        JButton	checkPast = new JButton("지난 예약 내역");
+        customizeButton(checkPast);
+        checkPast.setBounds(40, 240, 295, 50);
+        add(checkPast);
 
         JButton carModify = new JButton("차량 등록");
         customizeButton(carModify);
@@ -90,6 +90,14 @@ public class MainScreenUI extends UI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GUIController.changeUI(ui, new ReservationHistoryUI());
+			}
+		});
+        
+        checkPast.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GUIController.changeUI(ui, new PastReservationHistoryUI());
 			}
 		});
 
