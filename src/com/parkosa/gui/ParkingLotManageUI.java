@@ -110,7 +110,7 @@ public class ParkingLotManageUI extends UI {
 		JLabel locationIdLabel = new JLabel("단위 주소");
 		locationIdLabel.setBounds(175, 470, 60, 25);
 		add(locationIdLabel);
-
+		
 		LocationDAO locationDAO = new LocationDAO();
 		List<getLocationDTO> provinceList = locationDAO.getLocations(null);
 		String[] provinceItems = new String[provinceList.size()];
@@ -133,7 +133,8 @@ public class ParkingLotManageUI extends UI {
 		JButton insertButton = new JButton("생성");
 		insertButton.setBounds(305, 510, 100, 30);
 		add(insertButton);
-
+		System.out.println(provinceId);
+		
 		for (int i = 0; i < registeredparkingLots.size(); i++) {
 			String[] row = new String[5];
 			row[0] = Integer.toString(registeredparkingLots.get(i).getId());
@@ -161,6 +162,7 @@ public class ParkingLotManageUI extends UI {
 						cityBox.addItem(city.getName());
 					}
 				}
+			System.out.println(provinceId);
 			}
 		});
 
@@ -199,7 +201,8 @@ public class ParkingLotManageUI extends UI {
 				}
 			}
 		});
-
+		
+		
 		// 등록 버튼
 		insertButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -286,5 +289,33 @@ public class ParkingLotManageUI extends UI {
 			// TODO Auto-generated method stub
 		}
 	}
-
+	
+	public String doValidate(InsertParkingLotDTO dto) {
+		
+		if (dto.getName().isEmpty() || dto.getName() == null) {
+			return "주차장 이름을 입력해주세요.";
+		} else if (dto.getTelNumber().isEmpty() || dto.getTelNumber() == null || !(isInteger(dto.getTelNumber()))) {
+			return "주차장 연락처를 입력해 주세요 ";
+		} else if (dto.getImageLink().isEmpty() || dto.getImageLink() == null) {
+			return "이미지를 등록해주세요.";
+		} else if (dto.getAddress().isEmpty() || dto.getAddress() == null) {
+			return "주소를 입력해주세요.";
+		} else if (townId == 0) {
+			return "위치를 선택해주새요.";
+		}
+		return "";
+	}
+	
+	public static boolean isInteger(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }
+
