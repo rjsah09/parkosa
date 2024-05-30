@@ -5,6 +5,7 @@ import com.parkosa.dao.CarDAO;
 import com.parkosa.dao.CarTypeDAO;
 import com.parkosa.dao.FeePolicyDAO;
 import com.parkosa.dto.InsertFeePolicyDTO;
+import com.parkosa.dto.InsertReservationDTO;
 import com.parkosa.dto.RegisteredCarDTO;
 import com.parkosa.dto.RegisteredParkingLotDTO;
 import com.parkosa.vo.CarTypeVO;
@@ -36,7 +37,7 @@ public class FeePolicyManageUI extends UI {
 
         FeePolicyDAO dao = new FeePolicyDAO();
         List<InsertFeePolicyDTO> dtos = dao.getListFeePolicy(parkingLotId);
-        
+
         DefaultTableModel model = new DefaultTableModel(new String[]{"단위시간(분)", "최대시간", "증가액", "차종"}, 0) {
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -86,22 +87,22 @@ public class FeePolicyManageUI extends UI {
         CarTypeDAO carTypeDAO = new CarTypeDAO();
         List<CarTypeVO> list = carTypeDAO.carTypeList();
         String[] items = new String[list.size() + 1];
-        
+
         for (int i = 0; i < list.size(); i++) {
             items[i] = list.get(i).getName();
         }
-        
+
         items[list.size()] = "모든 차종";
 
         JComboBox<String> comboSelectCarBox = new JComboBox<>(items);
         comboSelectCarBox.setBounds(120+200, 430, 255, 25);
         add(comboSelectCarBox);
-        
+
         // 미상
         /*JComboBox<String> comboBox = new JComboBox<>();
         comboBox.setBounds(40+200, 140, 295, 25);
         add(comboBox);*/
-        
+
         JButton insertButton = new JButton("생성");
         insertButton.setBounds(350, 480, 100, 30);
         add(insertButton);
@@ -113,7 +114,7 @@ public class FeePolicyManageUI extends UI {
             row[1] = Integer.toString(dtos.get(i).getMaximumTime());
             row[2] = Integer.toString(dtos.get(i).getIncreaseFee());
             if (dtos.get(i).getCarTypeName() == null) {
-            	row[3] = "모든 차종";            	
+            	row[3] = "모든 차종";
             } else {
             	row[3] = dtos.get(i).getCarTypeName();
             }
@@ -125,22 +126,22 @@ public class FeePolicyManageUI extends UI {
             public void actionPerformed(ActionEvent e) {
                 String str = (String)(comboSelectCarBox.getSelectedItem());
                 int carTypeId = 0;
-                
+
                 if(str.equals("모든 차종 가능")){
                     carTypeId = 0;
                 } else {
                     carTypeId = carTypeDAO.selectCarNo(str);
                 }
-             
+
                 InsertFeePolicyDTO insertFeePolicyDTO = new InsertFeePolicyDTO(Integer.valueOf(increaseMinuteField.getText()),
                         Integer.valueOf(increaseFeeField.getText()),
                         Integer.valueOf(maximumTimeField.getText()),
                         Integer.valueOf(carTypeId),
                         parkingLotId);
-                
+
                 FeePolicyDAO feePolicyDAO = new FeePolicyDAO();
                 feePolicyDAO.insertFeePolicy(insertFeePolicyDTO);
-                
+
                 //새로고침 코드
                 JOptionPane.showMessageDialog(null, "등록되었습니다.");
                 model.setNumRows(0);
@@ -151,7 +152,7 @@ public class FeePolicyManageUI extends UI {
 		            row[1] = Integer.toString(dtos.get(i).getMaximumTime());
 		            row[2] = Integer.toString(dtos.get(i).getIncreaseFee());
 		            if (dtos.get(i).getCarTypeName() == null) {
-		            	row[3] = "모든 차종";            	
+		            	row[3] = "모든 차종";
 		            } else {
 		            	row[3] = dtos.get(i).getCarTypeName();
 		            }
@@ -159,12 +160,41 @@ public class FeePolicyManageUI extends UI {
 		        }
             }
         });
-
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 GUIController.changeUI(ui, new ParkingLotManageUI());
             }
         });
 
+
     }
+
+    public String doValidate(InsertFeePolicyDTO dto){
+        final String REGEX = "[0-9]+";
+        String min = String.valueOf(dto.getIncreaseMinute());
+        String fee = String.valueOf(dto.getIncreaseFee());
+        String max = String.valueOf(dto.getMaximumTime());
+
+               if(min==null || min.trim().isEmpty()){
+                   return "기본 증가시간을 입력해주세요.";
+               }else if(fee==null || fee.trim().isEmpty()){
+                   return "기본 요금을 입력해주세요.";
+               }else if(max==null || max.trim().isEmpty()){
+                   return "최대시간을 입력해주세요.";
+               }
+               if(min.matches(REGEX)){
+                   if(fee.matches(REGEX)){
+                       if (max.matches(REGEX)){
+                           return "true";
+                       }else{
+                           return "최대 시간이 숫자가 아닙니다.";
+                       }
+                   }else {
+                       return "기본 요금이 숫자가 아닙니다.";
+                   }
+               }else{
+                   return "기본 증가시간이 숫자가 아닙니다.";
+               }
+    }
+
 }
