@@ -33,6 +33,7 @@ public class LocationDAO {
 				locationList.add(new getLocationDTO(id, name));
 			}
 			
+			callableStatement.close();
 			return  locationList;
 		}catch (SQLException e) {
 			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());

@@ -28,6 +28,7 @@ public class CarDAO {
 			callableStatement.setInt(3, CarVO.getCarTypeId());
 
 			callableStatement.executeUpdate();
+			callableStatement.close();
 		} catch (SQLException e) {
 			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
 			e.printStackTrace();
@@ -52,6 +53,7 @@ public class CarDAO {
 			int duplicated = callableStatement.getInt(1);
 			boolean result = duplicated == 1 ? true : false;
 
+			callableStatement.close();
 			return result;
 		} catch (SQLException e) {
 			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
@@ -83,7 +85,8 @@ public class CarDAO {
                 String carTypeName = rs.getString("car_type_name");
                 registeredCars.add(new RegisteredCarDTO(carCode, carTypeName));
             }
-
+            
+            callableStatement.close();
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
             e.printStackTrace();
@@ -110,8 +113,8 @@ public class CarDAO {
             int succeed = callableStatement.getInt(1);
 			boolean result = succeed == 1 ? true : false;
 			
+			callableStatement.close();
 			return result;
-
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
             e.printStackTrace();

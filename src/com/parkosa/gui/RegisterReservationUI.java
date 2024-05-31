@@ -224,37 +224,33 @@ public class RegisterReservationUI extends UI {
 				GUIController.changeUI(ui, new MainScreenUI());
 			}
 		});
-		
-		
-		
+
 		reserveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int idx = innerTable.getSelectedRow();
-				
+
 				if (idx == -1) {
 					JOptionPane.showMessageDialog(null, "주차장을 선택하지 않았습니다. 주차장을 선택해주세요.");
 				} else {
-				
-				startTime = entryYearField.getText() + "-" + entryMonthField.getText() + "-" + entryDayField.getText()
-						+ " " + entryHourField.getText() + ":" + entryMinuteField.getText() + ":" + "00";
-				endTime = exitYearField.getText() + "-" + exitMonthField.getText() + "-" + exitDayField.getText() + " "
-						+ exitHourField.getText() + ":" + exitMinuteField.getText() + ":" + "00";
 
-				InsertReservationDTO insertReservationDTO = new InsertReservationDTO(startTime, endTime, carCode,
-						parkingSpaceId);
+					startTime = entryYearField.getText() + "-" + entryMonthField.getText() + "-"
+							+ entryDayField.getText() + " " + entryHourField.getText() + ":"
+							+ entryMinuteField.getText() + ":" + "00";
+					endTime = exitYearField.getText() + "-" + exitMonthField.getText() + "-" + exitDayField.getText()
+							+ " " + exitHourField.getText() + ":" + exitMinuteField.getText() + ":" + "00";
 
-<<<<<<< HEAD
-				GUIController.changeUI(ui, new MainScreenUI());
-=======
-				String validateResult = doValidate(insertReservationDTO);
-				if (validateResult.equals("")) {
-					ReservationDAO reservationDAO = new ReservationDAO();
-					reservationDAO.insertReservation(insertReservationDTO);
+					InsertReservationDTO insertReservationDTO = new InsertReservationDTO(startTime, endTime, carCode,
+							parkingSpaceId);
 
-					GUIController.changeUI(ui, new MainScreenUI());
-				} else {
-					JOptionPane.showMessageDialog(null, validateResult);
->>>>>>> branch 'rjsah09' of https://github.com/rjsah09/parkosa.git
+					String validateResult = doValidate(insertReservationDTO);
+					if (validateResult.equals("")) {
+						ReservationDAO reservationDAO = new ReservationDAO();
+						reservationDAO.insertReservation(insertReservationDTO);
+
+						GUIController.changeUI(ui, new MainScreenUI());
+					} else {
+						JOptionPane.showMessageDialog(null, validateResult);
+					}
 				}
 			}
 		});
@@ -367,7 +363,7 @@ public class RegisterReservationUI extends UI {
 		return "";
 	}
 
-// 이미지
+	// 이미지
 	class ParkingSpaceIdAdaptor implements MouseListener {
 		public void mouseClicked(MouseEvent e) {
 			JTable table = (JTable) e.getSource();

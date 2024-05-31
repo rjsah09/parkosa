@@ -69,6 +69,7 @@ public class ReservationHistoryUI extends UI{
 			}
 			model.addRow(row);
 		}
+		
 		resizeColumnWidth(innerTable);
 		
 		//버튼 이벤트

@@ -66,7 +66,6 @@ public class PastReservationHistoryUI extends UI{
 				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jsp.setBounds(10, 10, 768, 510);
-		add(jsp);
 		
 		for (int i = 0 ; i < list.size() ; i++) {
 			String[] row = new String[6];
@@ -79,6 +78,7 @@ public class PastReservationHistoryUI extends UI{
 		}
 		
 		resizeColumnWidth(innerTable);
+		add(jsp);
 		
 		//버튼 이벤트
 		cancelButton.addActionListener(new ActionListener() {

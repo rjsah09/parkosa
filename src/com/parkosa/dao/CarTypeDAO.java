@@ -29,6 +29,7 @@ public class CarTypeDAO {
             callableStatement.executeUpdate();
 
             int id = callableStatement.getInt(1);
+            callableStatement.close();
             return id;
 
         } catch (SQLException e) {
@@ -57,7 +58,8 @@ public class CarTypeDAO {
                 String name = rs.getString("name");
                 carTypeList.add(new CarTypeVO(id, name));
             }
-
+            
+            callableStatement.close();
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
             e.printStackTrace();

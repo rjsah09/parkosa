@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -40,8 +41,9 @@ public class ParkingLotDAO {
             callableStatement.setString(6, newImageLink);
 
             callableStatement.executeUpdate();
-            
-            return callableStatement.getInt(1);
+            int result = callableStatement.getInt(1);
+            callableStatement.close();
+            return result;
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
             e.printStackTrace();
@@ -74,7 +76,7 @@ public class ParkingLotDAO {
                 listParkingLot.add(new RegisteredParkingLotDTO(id, name, address));
             }
 
-
+            callableStatement.close();
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
             e.printStackTrace();
@@ -106,7 +108,7 @@ public class ParkingLotDAO {
                 listParkingLot.add(new RegisteredParkingLotDTO(id, name, address));
             }
 
-
+            callableStatement.close();
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
             e.printStackTrace();

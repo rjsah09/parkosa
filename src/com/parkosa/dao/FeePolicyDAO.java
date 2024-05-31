@@ -30,6 +30,7 @@ public class FeePolicyDAO {
             callableStatement.setInt(5, feePolicyDTO.getParkingLotId());
 
             callableStatement.executeUpdate();
+            callableStatement.close();
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
             e.printStackTrace();
@@ -64,6 +65,7 @@ public class FeePolicyDAO {
                 listFeePolicy.add(new InsertFeePolicyDTO(id, increaseMinute, increaseFee, maximumTime, carTypeName));
             }
 
+            callableStatement.close();
             return listFeePolicy;
         }catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());

@@ -33,13 +33,13 @@ public class AccountDAO {
 			callableStatement.setDate(5, Date.valueOf(accountVO.getRegisterDate()));
 			
 			callableStatement.executeUpdate();
+			callableStatement.close();
 		} catch (SQLException e) {
 			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			
 		}
 		
 	}
@@ -60,6 +60,7 @@ public class AccountDAO {
 			int duplicated = callableStatement.getInt(1);
 			boolean result = duplicated == 1 ? true : false;
 			
+			callableStatement.close();
 			return result;
 		} catch (SQLException e) {
 			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
@@ -88,6 +89,7 @@ public class AccountDAO {
 			
 			String phoneNumber = callableStatement.getString(1);
 			
+			callableStatement.close();
 			return phoneNumber;
 			
 		} catch (SQLException e) {

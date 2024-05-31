@@ -19,7 +19,7 @@ public class MainScreenUI extends UI {
         AccountDAO accountDAO = new AccountDAO();
         String name = accountDAO.getName();
 
-        JLabel nameLabel = new JLabel(name + "님 환영합니다.", JLabel.CENTER);
+        JLabel nameLabel = new JLabel(name + "님", JLabel.CENTER);
         nameLabel.setHorizontalTextPosition(JLabel.CENTER);
         nameLabel.setBounds(300, 10, 200, 50);
         nameLabel.setFont(new Font("NanumGothic", Font.BOLD, 18));

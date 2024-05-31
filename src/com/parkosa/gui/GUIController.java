@@ -19,10 +19,14 @@ public class GUIController {
     }
 
     public static void changeUI(UI oldUI, UI newUI) {
-        frame.remove(oldUI);
+//    	frame.remove(oldUI);
+    	frame.getContentPane().removeAll();
+
         frame.add(newUI);
         newUI.placeComponents();
+        frame.revalidate();     // 컨테이너 c의 재배치
+    	frame.repaint(); 
 
-        frame.setVisible(true);
+        //frame.setVisible(true);
     }
 } 

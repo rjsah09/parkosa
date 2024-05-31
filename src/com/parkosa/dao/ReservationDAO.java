@@ -41,6 +41,7 @@ public class ReservationDAO {
 			callableStatement.setInt(4, insertReservationDTO.getParkingSpaceId());
 
 			callableStatement.executeUpdate();
+			callableStatement.close();
 		} catch (SQLException e) {
 			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
 			e.printStackTrace();
@@ -88,14 +89,15 @@ public class ReservationDAO {
 						predictPrice, imageLink));
 			}
 			
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i).getLocationName());
-				System.out.println(list.get(i).getParkingLotName());
-				System.out.println(list.get(i).getParkingSpaceDescription());
-				System.out.println(list.get(i).getPredictPrice());
-				System.out.println();
-			}
-
+//			for (int i = 0; i < list.size(); i++) {
+//				System.out.println(list.get(i).getLocationName());
+//				System.out.println(list.get(i).getParkingLotName());
+//				System.out.println(list.get(i).getParkingSpaceDescription());
+//				System.out.println(list.get(i).getPredictPrice());
+//				System.out.println();
+//			}
+			
+			callableStatement.close();
 		} catch (SQLException e) {
 			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
 			e.printStackTrace();
@@ -137,7 +139,8 @@ public class ReservationDAO {
 				list.add(new RegisteredReservationDTO(reservationId, parkingLotName, parkingSpaceDescription, startTime, endTime,
 						totalAmount, status));
 			}
-
+			
+			callableStatement.close();
 		} catch (SQLException e) {
 			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
 			e.printStackTrace();
@@ -180,6 +183,7 @@ public class ReservationDAO {
 						totalAmount, status));
 			}
 
+			callableStatement.close();
 		} catch (SQLException e) {
 			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
 			e.printStackTrace();
@@ -206,6 +210,7 @@ public class ReservationDAO {
             int succeed = callableStatement.getInt(1);
 			boolean result = succeed == 1 ? true : false;
 			
+			callableStatement.close();
 			return result;
 
         } catch (SQLException e) {

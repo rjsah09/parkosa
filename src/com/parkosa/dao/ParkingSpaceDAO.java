@@ -26,7 +26,7 @@ public class ParkingSpaceDAO {
             callableStatement.setString(2, insertParkingSpaceDTO.getDescription());
             callableStatement.setInt(3, insertParkingSpaceDTO.getFeePolicyId());
             callableStatement.executeUpdate();
-            
+            callableStatement.close();
             return 1;
             
         } catch (SQLException e) {
@@ -63,7 +63,7 @@ public class ParkingSpaceDAO {
 				listParkingSpace.add(new RegisteredParkingSpaceDTO(name, increaseMinute, increaseFee, maximumTime, decription));
             }
             	
-
+            callableStatement.close();
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
             e.printStackTrace();
