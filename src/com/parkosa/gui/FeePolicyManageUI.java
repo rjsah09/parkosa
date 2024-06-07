@@ -55,7 +55,7 @@ public class FeePolicyManageUI extends UI {
 		jsp.setBounds(70, 10, 650, 280);
 		add(jsp);
 
-		JLabel increaseMinuteLabel = new JLabel("기본 증가시간");
+		JLabel increaseMinuteLabel = new JLabel("단위 시간(분)");
 		increaseMinuteLabel.setBounds(10 + 200, 310, 100, 25);
 		add(increaseMinuteLabel);
 
@@ -71,7 +71,7 @@ public class FeePolicyManageUI extends UI {
 		increaseFeeField.setBounds(120 + 200, 350, 255, 25);
 		add(increaseFeeField);
 
-		JLabel maximumTimeLabel = new JLabel("최대 이용시간");
+		JLabel maximumTimeLabel = new JLabel("최대 증가 시간");
 		maximumTimeLabel.setBounds(10 + 200, 390, 100, 25);
 		add(maximumTimeLabel);
 

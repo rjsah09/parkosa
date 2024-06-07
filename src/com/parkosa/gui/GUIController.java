@@ -24,7 +24,7 @@ public class GUIController {
 
         frame.add(newUI);
         newUI.placeComponents();
-        frame.revalidate();     // 컨테이너 c의 재배치
+        frame.revalidate();
     	frame.repaint(); 
 
         //frame.setVisible(true);

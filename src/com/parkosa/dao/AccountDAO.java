@@ -3,16 +3,12 @@ package com.parkosa.dao;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLType;
 
 import com.parkosa.connection.DBConnection;
 import com.parkosa.dto.SignInDTO;
 import com.parkosa.sign.SignedAccount;
 import com.parkosa.vo.AccountVO;
-
-import oracle.jdbc.OracleTypes;
 
 
 public class AccountDAO {

@@ -10,7 +10,6 @@ import java.util.List;
 import com.parkosa.connection.DBConnection;
 import com.parkosa.dto.RegisteredCarDTO;
 import com.parkosa.sign.SignedAccount;
-import com.parkosa.vo.CarTypeVO;
 import com.parkosa.vo.CarVO;
 
 import oracle.jdbc.OracleTypes;
